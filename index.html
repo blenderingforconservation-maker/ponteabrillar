@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponte a Brillar — Estudio de Perforación</title>
+    <meta name="description" content="Estudio de perforación corporal, diseño de oreja y perforación segura para bebés sin pistola. Titanio grado implante.">
+
+    <!-- Tipografía editorial: Cormorant Garamond + DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+           SISTEMA DE DISEÑO — PONTE A BRILLAR
+           ========================================================= */
+        :root {
+            --paper: #F7F4EE;
+            --paper-elevated: #FCFBF8;
+            --linen: #ECE6DA;
+            --ink: #241B16;
+            --ink-soft: #63574E;
+            --ink-faint: #96897E;
+            --brass: #9A6F37;
+            --brass-soft: #E5D7C0;
+            --sage-surface: #E9EFE6;
+            --sage-card: #F5F8F3;
+            --sage-ink: #334636;
+            --sage-line: rgba(51, 70, 54, 0.16);
+            --terracotta: #8C3F35;
+            --terracotta-bg: #F4E6E2;
+
+            --line: rgba(36, 27, 22, 0.12);
+            --line-strong: rgba(36, 27, 22, 0.24);
+
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            --radius-xs: 4px;
+            --radius-sm: 10px;
+            --radius-md: 18px;
+            --radius-pill: 999px;
+
+            --max-w: 1040px;
+            --header-h: 64px;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--paper);
+            color: var(--ink);
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            padding-bottom: 84px;
+            position: relative;
+        }
+
+        /* Textura orgánica sutil de papel algodón */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.028;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            line-height: 1.08;
+            letter-spacing: -0.015em;
+            color: var(--ink);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+
+        /* =========================================================
+           HEADER EDITORIAL SUPERIOR
+           ========================================================= */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            height: var(--header-h);
+            background: rgba(247, 244, 238, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .header-inner {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .brand-name {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+
+        .brand-sub {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--ink-faint);
+            margin-top: 2px;
+        }
+
+        .desktop-nav {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .desktop-nav a {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            position: relative;
+            padding: 0.25rem 0;
+            transition: color 0.25s ease;
+        }
+
+        .desktop-nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 1px;
+            background: var(--brass);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.35s var(--ease);
+        }
+
+        .desktop-nav a:hover,
+        .desktop-nav a.active {
+            color: var(--ink);
+        }
+
+        .desktop-nav a.active::after,
+        .desktop-nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .btn-cta-sm {
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 0.55rem 1.1rem;
+            border-radius: var(--radius-pill);
+            background: var(--ink);
+            color: var(--paper-elevated);
+            transition: background 0.25s ease, transform 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-cta-sm:hover {
+            background: var(--brass);
+        }
+
+        /* =========================================================
+           HERO — MANIFIESTO EDITORIAL
+           ========================================================= */
+        .hero {
+            padding: 4rem 0 3.25rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--brass);
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 24px;
+            height: 1px;
+            background: var(--brass);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.75rem, 8.5vw, 5rem);
+            font-weight: 400;
+            max-width: 14ch;
+            margin-bottom: 1.4rem;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--brass);
+            font-weight: 400;
+        }
+
+        .hero-grid {
+            display: grid;
+            gap: 2rem;
+            align-items: end;
+        }
+
+        .hero-lead {
+            font-size: 1.02rem;
+            color: var(--ink-soft);
+            max-width: 46ch;
+            font-weight: 300;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            margin-top: 1.75rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 1.5rem;
+            border-radius: var(--radius-pill);
+            background: var(--ink);
+            color: var(--paper-elevated);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: background 0.3s var(--ease);
+        }
+
+        .btn-primary:hover {
+            background: var(--brass);
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.35rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--line-strong);
+            color: var(--ink);
+            font-size: 0.88rem;
+            transition: border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--ink);
+            background: var(--paper-elevated);
+        }
+
+        /* Banda arquitectónica de estándares (reemplaza pills con emojis) */
+        .standards-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid var(--line);
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            gap: 1rem;
+        }
+
+        .standard-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .standard-label {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--ink-faint);
+        }
+
+        .standard-value {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            color: var(--ink);
+            line-height: 1.2;
+        }
+
+        /* =========================================================
+           ESTRUCTURA DE SECCIONES
+           ========================================================= */
+        .section {
+            padding: 4.25rem 0;
+            scroll-margin-top: calc(var(--header-h) + 12px);
+        }
+
+        .section-top {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-index {
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--brass);
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: clamp(2.1rem, 5.5vw, 3.2rem);
+            font-weight: 400;
+        }
+
+        .section-desc {
+            color: var(--ink-soft);
+            font-size: 0.95rem;
+            max-width: 52ch;
+            font-weight: 300;
+        }
+
+        /* =========================================================
+           01 · CATÁLOGO DE PERFORACIONES (Carta Interactiva)
+           ========================================================= */
+        .catalog-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+            padding: 1.15rem;
+            background: var(--paper-elevated);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            margin-bottom: 1.75rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+        }
+
+        .control-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--ink-faint);
+        }
+
+        /* Selector de material (Acero vs Titanio) */
+        .material-switch {
+            display: inline-grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--linen);
+            padding: 3px;
+            border-radius: var(--radius-pill);
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .material-btn {
+            padding: 0.55rem 0.9rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            transition: all 0.25s var(--ease);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .material-btn strong {
+            font-weight: 500;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .material-btn.active {
+            background: var(--paper-elevated);
+            color: var(--ink);
+            box-shadow: 0 1px 4px rgba(36, 27, 22, 0.08);
+        }
+
+        /* Filtros por zona */
+        .zone-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }
+
+        .filter-chip {
+            padding: 0.4rem 0.85rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--line);
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            background: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .filter-chip:hover {
+            border-color: var(--line-strong);
+            color: var(--ink);
+        }
+
+        .filter-chip.active {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: var(--paper-elevated);
+        }
+
+        /* Lista arquitectónica de perforaciones */
+        .catalog-list {
+            border-top: 1px solid var(--line-strong);
+        }
+
+        .piercing-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem 1.25rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--line);
+            align-items: center;
+            transition: background 0.25s ease;
+        }
+
+        .piercing-main {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .piercing-title-line {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .piercing-name {
+            font-family: var(--font-serif);
+            font-size: 1.65rem;
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .piercing-zone {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--brass);
+        }
+
+        .piercing-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.35rem;
+            margin-top: 0.4rem;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+
+        .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .meta-item span.k {
+            color: var(--ink-faint);
+        }
+
+        /* Indicador visual sutil de dolor */
+        .pain-dots {
+            display: inline-flex;
+            gap: 3px;
+            align-items: center;
+            margin-left: 2px;
+        }
+
+        .pain-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--linen);
+            border: 1px solid rgba(36, 27, 22, 0.18);
+        }
+
+        .pain-dot.filled {
+            background: var(--brass);
+            border-color: var(--brass);
+        }
+
+        .piercing-action {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.45rem;
+            text-align: right;
+        }
+
+        .price-tag {
+            font-family: var(--font-serif);
+            font-size: 1.65rem;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            line-height: 1;
+            color: var(--ink);
+        }
+
+        .price-note {
+            font-size: 0.72rem;
+            color: var(--ink-faint);
+        }
+
+        .btn-book-inline {
+            margin-top: 0.2rem;
+            font-size: 0.76rem;
+            font-weight: 500;
+            color: var(--brass);
+            border-bottom: 1px solid transparent;
+            padding-bottom: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .btn-book-inline:hover {
+            color: var(--ink);
+            border-bottom-color: var(--ink);
+        }
+
+        .catalog-footnote {
+            margin-top: 1.25rem;
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        /* =========================================================
+           02 · DISEÑO DE OREJA (Dossier Curated by Vanya G.)
+           ========================================================= */
+        .design-band {
+            background: var(--paper-elevated);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .design-layout {
+            display: grid;
+            gap: 2.5rem;
+        }
+
+        .design-editorial {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1.75rem;
+        }
+
+        .curator-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--ink-soft);
+            border: 1px solid var(--brass-soft);
+            background: var(--paper);
+            padding: 0.35rem 0.8rem;
+            border-radius: var(--radius-pill);
+            width: fit-content;
+        }
+
+        .vanya-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: clamp(1.45rem, 3.6vw, 1.95rem);
+            line-height: 1.32;
+            color: var(--ink);
+            padding-left: 1.25rem;
+            border-left: 2px solid var(--brass);
+        }
+
+        .vanya-signature {
+            margin-top: 0.85rem;
+            padding-left: 1.25rem;
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            letter-spacing: 0.04em;
+        }
+
+        .dossier-box {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            padding: 1.75rem;
+        }
+
+        .dossier-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 0.5rem;
+        }
+
+        .dossier-header h3 {
+            font-size: 1.45rem;
+        }
+
+        .dossier-header span {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--brass);
+        }
+
+        .includes-list {
+            list-style: none;
+        }
+
+        .includes-list li {
+            display: grid;
+            grid-template-columns: 28px 1fr;
+            gap: 0.75rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.9rem;
+            color: var(--ink-soft);
+            align-items: baseline;
+        }
+
+        .includes-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0.25rem;
+        }
+
+        .includes-num {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--brass);
+        }
+
+        .includes-list strong {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        /* =========================================================
+           03 · BEBÉS (Clínico, Sereno y Transparente)
+           ========================================================= */
+        .babies-shell {
+            background: var(--sage-surface);
+            border: 1px solid var(--sage-line);
+            border-radius: var(--radius-md);
+            padding: clamp(1.75rem, 4.5vw, 3.25rem);
+            color: var(--sage-ink);
+        }
+
+        .babies-shell .section-index {
+            color: var(--sage-ink);
+            opacity: 0.75;
+        }
+
+        .babies-shell .section-title {
+            font-style: italic;
+            color: var(--sage-ink);
+        }
+
+        .babies-shell .section-desc {
+            color: rgba(51, 70, 54, 0.82);
+        }
+
+        .babies-header-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--sage-ink);
+        }
+
+        .babies-header-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .step-card {
+            background: var(--sage-card);
+            border: 1px solid var(--sage-line);
+            border-radius: var(--radius-sm);
+            padding: 1.35rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .step-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .step-num {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--sage-ink);
+            line-height: 1;
+        }
+
+        .step-time {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(51, 70, 54, 0.68);
+        }
+
+        .step-card h4 {
+            font-family: var(--font-sans);
+            font-size: 0.96rem;
+            font-weight: 500;
+            color: var(--sage-ink);
+            margin-top: 0.25rem;
+        }
+
+        .step-card p {
+            font-size: 0.86rem;
+            color: rgba(51, 70, 54, 0.82);
+            line-height: 1.55;
+        }
+
+        .protocol-callout {
+            margin-top: 1.5rem;
+            padding: 1.2rem 1.35rem;
+            border-radius: var(--radius-sm);
+            background: var(--terracotta-bg);
+            border-left: 3px solid var(--terracotta);
+            color: var(--terracotta);
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            font-size: 0.86rem;
+        }
+
+        .protocol-callout strong {
+            font-weight: 600;
+        }
+
+        .btn-sage {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.3rem;
+            border-radius: var(--radius-pill);
+            background: var(--sage-ink);
+            color: var(--sage-card);
+            font-size: 0.84rem;
+            font-weight: 500;
+            width: fit-content;
+            transition: opacity 0.25s ease;
+        }
+
+        .btn-sage:hover {
+            opacity: 0.9;
+        }
+
+        /* =========================================================
+           04 · SUCURSALES
+           ========================================================= */
+        .locations-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .location-card {
+            background: var(--paper-elevated);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1.25rem;
+            transition: border-color 0.25s ease;
+        }
+
+        .location-card:hover {
+            border-color: var(--brass);
+        }
+
+        .location-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .location-card h3 {
+            font-size: 1.55rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .location-status {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--brass);
+            padding: 0.25rem 0.6rem;
+            border: 1px solid var(--brass-soft);
+            border-radius: var(--radius-pill);
+            white-space: nowrap;
+        }
+
+        .location-address {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+
+        .location-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--line);
+            font-size: 0.82rem;
+            font-weight: 500;
+        }
+
+        .link-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: var(--ink);
+            transition: color 0.2s ease, gap 0.2s ease;
+        }
+
+        .link-arrow:hover {
+            color: var(--brass);
+            gap: 0.55rem;
+        }
+
+        /* =========================================================
+           FOOTER DISCRETO
+           ========================================================= */
+        .site-footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 2rem;
+            font-size: 0.8rem;
+            color: var(--ink-faint);
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        /* =========================================================
+           NAVEGACIÓN INFERIOR MÓVIL (Limpia, sin emojis)
+           ========================================================= */
+        .mobile-nav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 600;
+            background: rgba(252, 251, 248, 0.94);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-top: 1px solid var(--line);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 0.45rem 0.5rem calc(0.45rem + env(safe-area-inset-bottom));
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            padding: 0.4rem 0.25rem;
+            font-size: 0.68rem;
+            color: var(--ink-faint);
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .mobile-nav-item svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 1.4;
+            fill: none;
+        }
+
+        .mobile-nav-item.active {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        .mobile-nav-item.active::before {
+            content: "";
+            position: absolute;
+            top: -0.45rem;
+            width: 24px;
+            height: 2px;
+            background: var(--brass);
+        }
+
+        /* =========================================================
+           MODAL DE AGENDA RÁPIDA (WHATSAPP)
+           ========================================================= */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(36, 27, 22, 0.45);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .modal-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-sheet {
+            background: var(--paper-elevated);
+            width: 100%;
+            max-width: 480px;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            padding: 1.75rem 1.5rem calc(1.75rem + env(safe-area-inset-bottom));
+            transform: translateY(24px);
+            transition: transform 0.35s var(--ease);
+            border: 1px solid var(--line);
+        }
+
+        .modal-backdrop.open .modal-sheet {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.25rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.75rem;
+        }
+
+        .modal-close {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-soft);
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-field label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--ink-faint);
+        }
+
+        .form-field select,
+        .form-field input {
+            width: 100%;
+            padding: 0.75rem 0.9rem;
+            border: 1px solid var(--line-strong);
+            border-radius: var(--radius-xs);
+            background: var(--paper);
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+
+        .modal-submit {
+            width: 100%;
+            margin-top: 0.5rem;
+            padding: 0.9rem 1.25rem;
+            border-radius: var(--radius-pill);
+            background: var(--ink);
+            color: var(--paper-elevated);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.25s ease;
+        }
+
+        .modal-submit:hover {
+            background: var(--brass);
+        }
+
+        /* =========================================================
+           ANIMACIÓN SUTIL DE ENTRADA
+           ========================================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            html { scroll-behavior: auto; }
+        }
+
+        /* =========================================================
+           RESPONSIVE (TABLET & ESCRITORIO)
+           ========================================================= */
+        @media (min-width: 768px) {
+            body {
+                padding-bottom: 0;
+            }
+
+            .container {
+                padding: 0 2rem;
+            }
+
+            .desktop-nav {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 5.5rem 0 4rem;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1.2fr 0.8fr;
+            }
+
+            .catalog-controls {
+                flex-direction: row;
+                align-items: flex-end;
+                justify-content: space-between;
+                padding: 1.25rem 1.5rem;
+            }
+
+            .design-layout {
+                grid-template-columns: 0.95fr 1.05fr;
+                align-items: start;
+                gap: 3.5rem;
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .protocol-callout {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .locations-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .footer-inner {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .modal-backdrop {
+                align-items: center;
+                padding: 1rem;
+            }
+
+            .modal-sheet {
+                border-radius: var(--radius-md);
+                padding: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .steps-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER SUPERIOR -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#inicio" class="brand">
+                <span class="brand-name">Ponte a Brillar</span>
+                <span class="brand-sub">Estudio de Perforación</span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Navegación principal">
+                <a href="#catalogo" data-nav="catalogo">Catálogo</a>
+                <a href="#diseno" data-nav="diseno">Diseño de Oreja</a>
+                <a href="#bebes" data-nav="bebes">Bebés</a>
+                <a href="#sucursales" data-nav="sucursales">Sucursales</a>
+            </nav>
+
+            <button type="button" class="btn-cta-sm" data-open-booking="Consulta general">Agendar cita</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section id="inicio" class="hero">
+            <div class="container">
+                <span class="eyebrow">Ponte a Brillar Studio</span>
+                <h1>Arte y <em>precisión</em> en cada perforación.</h1>
+
+                <div class="hero-grid">
+                    <div>
+                        <p class="hero-lead">
+                            Un espacio seguro, estético y clínico guiado por especialistas en diseño corporal. Trabajamos exclusivamente con técnica de aguja estéril y joyería biocompatible.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="#catalogo" class="btn-primary">
+                                Explorar servicios
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </a>
+                            <a href="#diseno" class="btn-ghost">Diseño de Oreja</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="standards-strip" aria-label="Estándares del estudio">
+                    <div class="standard-item">
+                        <span class="standard-label">Biocompatibilidad</span>
+                        <span class="standard-value">Titanio grado implante</span>
+                    </div>
+                    <div class="standard-item">
+                        <span class="standard-label">Protocolo clínico</span>
+                        <span class="standard-value">Técnica sin pistola</span>
+                    </div>
+                    <div class="standard-item">
+                        <span class="standard-label">Trayectoria</span>
+                        <span class="standard-value">+8 años de experiencia</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 01 · CATÁLOGO BASE -->
+        <section id="catalogo" class="section reveal">
+            <div class="container">
+                <div class="section-top">
+                    <span class="section-index">01 — Perforaciones Individuales</span>
+                    <h2 class="section-title">Catálogo Base</h2>
+                    <p class="section-desc">
+                        Todas las perforaciones iniciales se realizan con joyería recta o poste para favorecer una cicatrización limpia. Elige el material para consultar el costo correspondiente.
+                    </p>
+                </div>
+
+                <div class="catalog-controls">
+                    <div class="control-group">
+                        <span class="control-label">Material de joyería inicial</span>
+                        <div class="material-switch" role="tablist" aria-label="Selector de material">
+                            <button type="button" class="material-btn active" data-material="acero" role="tab" aria-selected="true">
+                                Acero Q. <strong>$250</strong>
+                            </button>
+                            <button type="button" class="material-btn" data-material="titanio" role="tab" aria-selected="false">
+                                Titanio <strong>$350</strong>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <span class="control-label">Filtrar por zona</span>
+                        <div class="zone-filters" id="zone-filters">
+                            <button type="button" class="filter-chip active" data-zone="all">Todas</button>
+                            <button type="button" class="filter-chip" data-zone="baja">Baja</button>
+                            <button type="button" class="filter-chip" data-zone="media">Media / Alta</button>
+                            <button type="button" class="filter-chip" data-zone="externa">Externa</button>
+                            <button type="button" class="filter-chip" data-zone="interna">Interna</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="catalog-list" id="catalog-list" aria-live="polite">
+                    <!-- Renderizado por JS -->
+                </div>
+
+                <div class="catalog-footnote">
+                    <span>* Precio mostrado de joyería + costo de servicio en estudio.</span>
+                    <span>Joyería inicial: Recta / Poste en acero quirúrgico plateado o titanio grado implante.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 · DISEÑO DE OREJA -->
+        <section id="diseno" class="section design-band reveal">
+            <div class="container">
+                <div class="design-layout">
+                    <div class="design-editorial">
+                        <div>
+                            <span class="section-index">02 — Servicio Especializado</span>
+                            <h2 class="section-title" style="margin-top: 0.5rem; margin-bottom: 1rem;">Diseño de Oreja</h2>
+                            <span class="curator-tag">Curated by Vanya G.</span>
+                        </div>
+
+                        <div>
+                            <blockquote class="vanya-quote">
+                                “Con 8 años de experiencia y licenciatura en diseño, busco la armonía perfecta en tu oreja.”
+                            </blockquote>
+                            <p class="vanya-signature">— Vanya G., Diseñadora corporal</p>
+                        </div>
+
+                        <div>
+                            <button type="button" class="btn-primary" data-open-booking="Diseño de Oreja (Armonía Visual)">
+                                Agendar Diseño de Oreja
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="dossier-box">
+                        <div class="dossier-header">
+                            <h3>Armonía Visual</h3>
+                            <span>Paquete integral</span>
+                        </div>
+                        <ol class="includes-list">
+                            <li>
+                                <span class="includes-num">01</span>
+                                <div><strong>3 perforaciones estratégicas</strong> distribuidas en zona baja, media y alta según tu anatomía.</div>
+                            </li>
+                            <li>
+                                <span class="includes-num">02</span>
+                                <div><strong>3 joyas de diseño en Titanio grado implante</strong>, material 100% biocompatible.</div>
+                            </li>
+                            <li>
+                                <span class="includes-num">03</span>
+                                <div><strong>Asesoría personalizada</strong> de ubicación, proporciones y composición visual.</div>
+                            </li>
+                            <li>
+                                <span class="includes-num">04</span>
+                                <div><strong>Kit de limpieza para 3 meses</strong> acompañado de tarjeta física de cuidados.</div>
+                            </li>
+                            <li>
+                                <span class="includes-num">05</span>
+                                <div><strong>Garantía de 3 meses</strong> y 1 valoración de seguimiento post-piercing.</div>
+                            </li>
+                            <li>
+                                <span class="includes-num">06</span>
+                                <div><strong>Aretes de regalo</strong> para tus perforaciones de nacimiento.</div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 · PERFORACIONES PARA BEBÉS -->
+        <section id="bebes" class="section reveal">
+            <div class="container">
+                <div class="babies-shell">
+                    <div class="section-top" style="margin-bottom: 1.5rem;">
+                        <span class="section-index">03 — Primera Perforación</span>
+                        <h2 class="section-title">A un paso de brillar</h2>
+                        <p class="section-desc">
+                            Un protocolo diseñado para el bienestar de tu bebé, respetando sus tiempos y reduciendo la molestia hasta en un 90%.
+                        </p>
+                        <div class="babies-header-meta">
+                            <span>Duración aproximada: <strong>1 hora</strong></span>
+                            <span>·</span>
+                            <span>Atención exclusiva bajo cita</span>
+                        </div>
+                    </div>
+
+                    <div class="steps-grid">
+                        <article class="step-card">
+                            <div class="step-top">
+                                <span class="step-num">01</span>
+                                <span class="step-time">Inicio</span>
+                            </div>
+                            <h4>Presentación</h4>
+                            <p>Conoces a nuestra perforadora, resuelves cualquier duda y pasan con calma a la zona de trabajo.</p>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-top">
+                                <span class="step-num">02</span>
+                                <span class="step-time">Anestesia tópica</span>
+                            </div>
+                            <h4>Preparación</h4>
+                            <p>Limpieza profunda del lóbulo, aplicación de Lidocaína en spray y recubrimiento protector.</p>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-top">
+                                <span class="step-num">03</span>
+                                <span class="step-time">30 min</span>
+                            </div>
+                            <h4>Pausa activa</h4>
+                            <p>Tiempo de espera dando un paseo tranquilo por la plaza para lograr un procedimiento 90% menos doloroso.</p>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-top">
+                                <span class="step-num">04</span>
+                                <span class="step-time">+15 min pausa</span>
+                            </div>
+                            <h4>Perforación</h4>
+                            <p>Aplicación precisa con descanso de 15 minutos tras el primer arete para mantener al bebé tranquilo.</p>
+                        </article>
+                    </div>
+
+                    <div class="protocol-callout">
+                        <div>
+                            <strong>Método Sin Pistola.</strong> Utilizamos exclusivamente aguja o cánula estéril y desechable. Servicio disponible únicamente con cita previa.
+                        </div>
+                        <button type="button" class="btn-sage" data-open-booking="Perforación Segura para Bebés">
+                            Reservar cita bebé
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 · SUCURSALES -->
+        <section id="sucursales" class="section reveal">
+            <div class="container">
+                <div class="section-top">
+                    <span class="section-index">04 — Ubicaciones</span>
+                    <h2 class="section-title">Sucursales</h2>
+                    <p class="section-desc">Elige la sede más cercana para consultar agenda y horarios disponibles.</p>
+                </div>
+
+                <div class="locations-grid">
+                    <article class="location-card">
+                        <div>
+                            <div class="location-top">
+                                <h3>Carranza</h3>
+                                <span class="location-status">Sede principal</span>
+                            </div>
+                            <p class="location-address">Av. Venustiano Carranza 484, Zona Centro.</p>
+                        </div>
+                        <div class="location-actions">
+                            <a href="https://maps.google.com/?q=Av.+Venustiano+Carranza+484,+Centro,+San+Luis+Potosi" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                                Ver mapa
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                            </a>
+                            <button type="button" class="link-arrow" data-open-booking="Cita en Sucursal Carranza" data-branch="Carranza">
+                                Agendar
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="location-card">
+                        <div>
+                            <div class="location-top">
+                                <h3>El Dorado</h3>
+                                <span class="location-status">Bajo agenda</span>
+                            </div>
+                            <p class="location-address">Consulta horarios y disponibilidad directamente con nuestro equipo.</p>
+                        </div>
+                        <div class="location-actions">
+                            <button type="button" class="link-arrow" data-open-booking="Consulta de disponibilidad" data-branch="El Dorado">
+                                Consultar disponibilidad
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="location-card">
+                        <div>
+                            <div class="location-top">
+                                <h3>Ciudad Valles</h3>
+                                <span class="location-status">Bajo agenda</span>
+                            </div>
+                            <p class="location-address">Consulta fechas de atención y disponibilidad en redes o WhatsApp.</p>
+                        </div>
+                        <div class="location-actions">
+                            <button type="button" class="link-arrow" data-open-booking="Consulta de disponibilidad" data-branch="Ciudad Valles">
+                                Consultar disponibilidad
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <span>Ponte a Brillar — Estudio de Perforación</span>
+            <span>Titanio grado implante · Técnica estéril sin pistola</span>
+        </div>
+    </footer>
+
+    <!-- NAVEGACIÓN MÓVIL INFERIOR (Minimalista con SVG de línea fina) -->
+    <nav class="mobile-nav" aria-label="Navegación móvil">
+        <a href="#catalogo" class="mobile-nav-item active" data-nav="catalogo">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.2"/></svg>
+            <span>Catálogo</span>
+        </a>
+        <a href="#diseno" class="mobile-nav-item" data-nav="diseno">
+            <svg viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3z"/></svg>
+            <span>Diseño</span>
+        </a>
+        <a href="#bebes" class="mobile-nav-item" data-nav="bebes">
+            <svg viewBox="0 0 24 24"><path d="M12 20c4.5-2.6 7-5.8 7-9.8A4.2 4.2 0 0 0 12 7a4.2 4.2 0 0 0-7 3.2c0 4 2.5 7.2 7 9.8z"/></svg>
+            <span>Bebés</span>
+        </a>
+        <a href="#sucursales" class="mobile-nav-item" data-nav="sucursales">
+            <svg viewBox="0 0 24 24"><path d="M12 21s-6-5.2-6-10a6 6 0 1 1 12 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg>
+            <span>Sucursales</span>
+        </a>
+    </nav>
+
+    <!-- MODAL DE AGENDA RÁPIDA -->
+    <div class="modal-backdrop" id="booking-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-sheet">
+            <div class="modal-header">
+                <div>
+                    <span class="control-label">Solicitud de cita</span>
+                    <h3 id="modal-title">Agendar en estudio</h3>
+                </div>
+                <button type="button" class="modal-close" id="close-modal" aria-label="Cerrar">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <form id="booking-form">
+                <div class="form-field">
+                    <label for="booking-service">Servicio</label>
+                    <input type="text" id="booking-service" readonly>
+                </div>
+
+                <div class="form-field">
+                    <label for="booking-branch">Sucursal</label>
+                    <select id="booking-branch">
+                        <option value="Carranza">Carranza (Av. Venustiano Carranza 484)</option>
+                        <option value="El Dorado">El Dorado</option>
+                        <option value="Ciudad Valles">Ciudad Valles</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="booking-name">Tu nombre</label>
+                    <input type="text" id="booking-name" placeholder="¿Cómo te llamas?" required>
+                </div>
+
+                <button type="submit" class="modal-submit">Continuar por WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        /* =========================================================
+           CONFIGURACIÓN DEL ESTUDIO (Edita tu WhatsApp aquí)
+           ========================================================= */
+        const STUDIO_CONFIG = {
+            whatsappNumber: "524440000000" // Reemplazar por el número real con lada (52 + 10 dígitos)
+        };
+
+        /* =========================================================
+           DATOS DEL CATÁLOGO
+           ========================================================= */
+        const PIERCINGS = [
+            {
+                nombre: "Lóbulo",
+                zona: "Zona baja",
+                categoria: "baja",
+                dolor: 2,
+                cicatrizacion: "4–6 meses",
+                joya: "Recta / Poste",
+                precios: { acero: 250, titanio: 350 }
+            },
+            {
+                nombre: "Flat",
+                zona: "Zona media / alta",
+                categoria: "media",
+                dolor: 4,
+                cicatrizacion: "9–12 meses",
+                joya: "Recta / Poste",
+                precios: { acero: 250, titanio: 350 }
+            },
+            {
+                nombre: "Helix",
+                zona: "Zona externa",
+                categoria: "externa",
+                dolor: 4,
+                cicatrizacion: "9–12 meses",
+                joya: "Recta / Poste",
+                precios: { acero: 250, titanio: 350 }
+            },
+            {
+                nombre: "Mid Helix",
+                zona: "Zona externa media",
+                categoria: "externa",
+                dolor: 4,
+                cicatrizacion: "9–12 meses",
+                joya: "Recta / Poste",
+                precios: { acero: 250, titanio: 350 }
+            },
+            {
+                nombre: "Conch",
+                zona: "Zona interna",
+                categoria: "interna",
+                dolor: 4,
+                cicatrizacion: "9–12 meses",
+                joya: "Recta / Poste",
+                precios: { acero: 250, titanio: 350 }
+            }
+        ];
+
+        let state = {
+            material: "acero",
+            zone: "all"
+        };
+
+        const catalogList = document.getElementById("catalog-list");
+
+        function renderPainDots(scoreOutOf10) {
+            const filled = Math.max(1, Math.round(scoreOutOf10 / 2)); // Escala visual de 5 puntos
+            let html = '<span class="pain-dots" aria-hidden="true">';
+            for (let i = 1; i <= 5; i++) {
+                html += `<span class="pain-dot ${i <= filled ? 'filled' : ''}"></span>`;
+            }
+            html += '</span>';
+            return html;
+        }
+
+        function renderCatalog() {
+            const filtered = state.zone === "all"
+                ? PIERCINGS
+                : PIERCINGS.filter(p => p.categoria === state.zone);
+
+            const materialLabel = state.material === "acero"
+                ? "Acero Q. plateado"
+                : "Titanio grado implante";
+
+            catalogList.innerHTML = filtered.map(p => {
+                const price = p.precios[state.material];
+                const bookingLabel = `Perforación ${p.nombre} (${materialLabel} - $${price})`;
+
+                return `
+                    <article class="piercing-row">
+                        <div class="piercing-main">
+                            <div class="piercing-title-line">
+                                <h3 class="piercing-name">${p.nombre}</h3>
+                                <span class="piercing-zone">${p.zona}</span>
+                            </div>
+                            <div class="piercing-meta">
+                                <span class="meta-item"><span class="k">Joya:</span> ${p.joya}</span>
+                                <span class="meta-item"><span class="k">Cicatrización:</span> ${p.cicatrizacion}</span>
+                                <span class="meta-item">
+                                    <span class="k">Molestia:</span> ${p.dolor}/10
+                                    ${renderPainDots(p.dolor)}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="piercing-action">
+                            <div class="price-tag">$${price}</div>
+                            <span class="price-note">${materialLabel} + servicio</span>
+                            <button type="button" class="btn-book-inline" data-open-booking="${bookingLabel}">
+                                Agendar
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </button>
+                        </div>
+                    </article>
+                `;
+            }).join("");
+        }
+
+        /* Eventos de Material */
+        document.querySelectorAll(".material-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                state.material = btn.dataset.material;
+                document.querySelectorAll(".material-btn").forEach(b => {
+                    const active = b === btn;
+                    b.classList.toggle("active", active);
+                    b.setAttribute("aria-selected", active);
+                });
+                renderCatalog();
+            });
+        });
+
+        /* Eventos de Filtro de Zona */
+        document.querySelectorAll(".filter-chip").forEach(chip => {
+            chip.addEventListener("click", () => {
+                state.zone = chip.dataset.zone;
+                document.querySelectorAll(".filter-chip").forEach(c => c.classList.toggle("active", c === chip));
+                renderCatalog();
+            });
+        });
+
+        renderCatalog();
+
+        /* =========================================================
+           SCROLLSPY REAL (Sincroniza nav móvil y desktop)
+           ========================================================= */
+        const trackedSections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll("[data-nav]");
+
+        const spyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute("id");
+                    navLinks.forEach(link => {
+                        link.classList.toggle("active", link.dataset.nav === id);
+                    });
+                }
+            });
+        }, {
+            rootMargin: "-35% 0px -55% 0px",
+            threshold: 0
+        });
+
+        trackedSections.forEach(sec => {
+            if (sec.id !== "inicio") spyObserver.observe(sec);
+        });
+
+        /* =========================================================
+           REVEAL DISCRETO AL HACER SCROLL
+           ========================================================= */
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+        /* =========================================================
+           MODAL DE AGENDA POR WHATSAPP (Delegación de eventos)
+           ========================================================= */
+        const modal = document.getElementById("booking-modal");
+        const serviceInput = document.getElementById("booking-service");
+        const branchSelect = document.getElementById("booking-branch");
+        const nameInput = document.getElementById("booking-name");
+        const closeModalBtn = document.getElementById("close-modal");
+        const bookingForm = document.getElementById("booking-form");
+
+        function openModal(serviceText, branch = "") {
+            serviceInput.value = serviceText;
+            if (branch) branchSelect.value = branch;
+            modal.classList.add("open");
+            document.body.style.overflow = "hidden";
+            setTimeout(() => nameInput.focus(), 120);
+        }
+
+        function closeModal() {
+            modal.classList.remove("open");
+            document.body.style.overflow = "";
+        }
+
+        document.addEventListener("click", (e) => {
+            const trigger = e.target.closest("[data-open-booking]");
+            if (trigger) {
+                openModal(trigger.dataset.openBooking, trigger.dataset.branch || "");
+            }
+        });
+
+        closeModalBtn.addEventListener("click", closeModal);
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
+        });
+
+        bookingForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const nombre = nameInput.value.trim();
+            const servicio = serviceInput.value;
+            const sucursal = branchSelect.value;
+
+            const message = `Hola, soy ${nombre}. Me gustaría agendar / consultar disponibilidad para:\n• Servicio: ${servicio}\n• Sucursal: ${sucursal}`;
+            const url = `https://wa.me/${STUDIO_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, "_blank", "noopener,noreferrer");
+            closeModal();
+        });
+    </script>
+</body>
+</html>
