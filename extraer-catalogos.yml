@@ -1,0 +1,110 @@
+name: Extraer imágenes de los catálogos PDF
+
+on:
+  workflow_dispatch:
+    inputs:
+      aplicar_mapeo:
+        description: 'Marca esta opción SOLO después de completar imagenes/mapeo_imagenes.json'
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: extraer-catalogos-main
+  cancel-in-progress: false
+
+jobs:
+  extraer-y-publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: python -m pip install --upgrade pip pymupdf pillow
+
+      - name: Extraer imágenes y crear galería y mapa
+        if: ${{ inputs.aplicar_mapeo == false }}
+        run: python extraer_imagenes_pdf.py
+
+      - name: Validar el mapa de imágenes
+        if: ${{ inputs.aplicar_mapeo == true }}
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          map_file = Path('imagenes/mapeo_imagenes.json')
+          if not map_file.is_file():
+              print('No existe imagenes/mapeo_imagenes.json. Ejecuta primero el flujo sin aplicar el mapa.')
+              sys.exit(1)
+
+          mapping = json.loads(map_file.read_text(encoding='utf-8'))
+          pending = [key for key, value in mapping.items() if not value]
+          if pending:
+              print(f'Faltan {len(pending)} asignaciones en imagenes/mapeo_imagenes.json:')
+              for item in pending:
+                  print(f' - {item}')
+              sys.exit(1)
+
+          print(f'Mapa completo: {len(mapping)} fotografías asignadas.')
+          PY
+
+      - name: Aplicar fotografías al catálogo web
+        if: ${{ inputs.aplicar_mapeo == true }}
+        run: python extraer_imagenes_pdf.py --aplicar
+
+      - name: Guardar los resultados en el repositorio
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add imagenes/ index.html
+          if git diff --cached --quiet; then
+            echo 'No hay cambios nuevos que guardar.'
+          else
+            if [ "${{ inputs.aplicar_mapeo }}" = "true" ]; then
+              git commit -m 'Enlaza fotografías de los catálogos PDF'
+            else
+              git commit -m 'Extrae imágenes y genera galería de catálogos'
+            fi
+            git push origin HEAD:main
+          fi
+
+      - name: Publicar galería como artefacto descargable
+        if: ${{ always() && inputs.aplicar_mapeo == false }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: galeria-imagenes-ponte-a-brillar
+          path: |
+            imagenes/_extraidas/
+            imagenes/contact-sheet.html
+            imagenes/mapeo_imagenes.json
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Resumen
+        if: always()
+        run: |
+          {
+            echo '## Ponte a Brillar: procesamiento de catálogos'
+            if [ "${{ inputs.aplicar_mapeo }}" = "true" ]; then
+              echo 'Se solicitó aplicar el mapa de fotografías al index.html.'
+            else
+              echo 'Se generaron las imágenes extraídas, la galería visual y el JSON de asignación.'
+              echo 'Siguiente paso: revisar imagenes/contact-sheet.html y completar imagenes/mapeo_imagenes.json.'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
