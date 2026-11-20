@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ponte a Brillar | Estudio de Perforación</title>
-    <meta name="description" content="Es más que una perforación. Diseño de oreja, perforación segura para bebés, catálogo en titanio grado implante y agenda en línea.">
+    <meta name="description" content="Es más que una perforación. Diseño de oreja, perforación para bebés, catálogo de piercings y agenda en línea.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,8 +36,8 @@
             --clay: #8F4238;
             --clay-bg: #F6EAE6;
 
-            --line: rgba(59, 42, 32, 0.1);
-            --line-strong: rgba(59, 42, 32, 0.2);
+            --line: rgba(59, 42, 32, 0.09);
+            --line-strong: rgba(59, 42, 32, 0.18);
 
             --font-script: 'Allura', cursive;
             --font-serif: 'Bodoni Moda', Georgia, serif;
@@ -48,7 +48,7 @@
             --radius-pill: 999px;
 
             --max-w: 1080px;
-            --header-h: 64px;
+            --header-h: 62px;
             --ease: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
@@ -68,10 +68,10 @@
             font-family: var(--font-sans);
             background-color: var(--cream);
             background-image:
-                radial-gradient(ellipse 80% 50% at 85% 0%, rgba(223, 210, 189, 0.42), transparent 60%),
-                radial-gradient(ellipse 65% 45% at 10% 35%, rgba(239, 232, 220, 0.52), transparent 60%);
+                radial-gradient(ellipse 80% 50% at 85% 0%, rgba(223, 210, 189, 0.4), transparent 60%),
+                radial-gradient(ellipse 65% 45% at 10% 35%, rgba(239, 232, 220, 0.48), transparent 60%);
             color: var(--cocoa);
-            line-height: 1.6;
+            line-height: 1.55;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
             padding-bottom: 92px;
@@ -99,17 +99,17 @@
             width: 100%;
             max-width: var(--max-w);
             margin: 0 auto;
-            padding: 0 1.25rem;
+            padding: 0 1.2rem;
         }
 
         /* =========================================================
-           ESTRELLAS METÁLICAS 3D INFLADAS Y REDONDEADAS
+           ESTRELLAS 3D INFLADAS — SIN SUPERPOSICIÓN EN MÓVIL
            ========================================================= */
         .star-ui {
             display: inline-block;
             vertical-align: middle;
             flex-shrink: 0;
-            filter: drop-shadow(0 2px 5px rgba(138, 97, 30, 0.32));
+            filter: drop-shadow(0 2px 5px rgba(138, 97, 30, 0.3));
         }
 
         .hero-stars-bg {
@@ -145,10 +145,9 @@
             backface-visibility: visible;
         }
 
-        /* Capas de volumen inflado en el eje Z */
         .star-3d-face.l-front {
             transform: translateZ(4.5px) scale(0.95);
-            filter: drop-shadow(0 14px 24px rgba(138, 97, 30, 0.24));
+            filter: drop-shadow(0 12px 20px rgba(138, 97, 30, 0.22));
         }
         .star-3d-face.l-mid-front {
             transform: translateZ(2.2px) scale(0.99);
@@ -174,13 +173,14 @@
 
         @keyframes floatDrift {
             0%, 100% { transform: translateY(0px); }
-            50%      { transform: translateY(-14px); }
+            50%      { transform: translateY(-7px); }
         }
 
+        /* En móvil: ubicadas estrictamente en las franjas superior e inferior fuera del texto */
         .star-pos-1 {
-            width: clamp(86px, 14vw, 138px);
-            height: clamp(86px, 14vw, 138px);
-            top: 8%;
+            width: 48px;
+            height: 48px;
+            top: 14px;
             right: 6%;
             opacity: 0.78;
             --spin-dur: 13s;
@@ -188,58 +188,51 @@
         }
 
         .star-pos-2 {
-            width: clamp(66px, 11vw, 110px);
-            height: clamp(66px, 11vw, 110px);
-            bottom: 12%;
-            left: 5%;
-            opacity: 0.68;
+            width: 44px;
+            height: 44px;
+            bottom: 14px;
+            left: 7%;
+            opacity: 0.7;
             --spin-dur: 16s;
             --float-dur: 10s;
             --delay: -3s;
         }
 
         .star-pos-3 {
-            width: clamp(42px, 6.5vw, 64px);
-            height: clamp(42px, 6.5vw, 64px);
-            top: 15%;
-            left: 14%;
-            opacity: 0.62;
+            width: 34px;
+            height: 34px;
+            top: 18px;
+            left: 8%;
+            opacity: 0.65;
             --spin-dur: 10.5s;
             --float-dur: 7.5s;
             --delay: -1.5s;
         }
 
         .star-pos-4 {
-            width: clamp(36px, 5vw, 54px);
-            height: clamp(36px, 5vw, 54px);
-            bottom: 18%;
-            right: 15%;
-            opacity: 0.58;
+            width: 34px;
+            height: 34px;
+            bottom: 16px;
+            right: 8%;
+            opacity: 0.62;
             --spin-dur: 11.5s;
             --float-dur: 9.2s;
             --delay: -5s;
         }
 
         .star-pos-5 {
-            width: clamp(26px, 3.8vw, 38px);
-            height: clamp(26px, 3.8vw, 38px);
-            top: 50%;
-            right: 25%;
-            opacity: 0.44;
-            --spin-dur: 9s;
-            --float-dur: 6.8s;
-            --delay: -2.2s;
+            display: none;
         }
 
         /* =========================================================
-           HEADER MINIMALISTA (SIN BARRA DE MENÚ SUPERIOR)
+           HEADER MINIMALISTA (SIN MENÚ SUPERIOR)
            ========================================================= */
         .site-header {
             position: sticky;
             top: 0;
             z-index: 500;
             height: var(--header-h);
-            background: rgba(250, 247, 242, 0.86);
+            background: rgba(250, 247, 242, 0.88);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--line);
@@ -266,39 +259,25 @@
         .brand {
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.55rem;
         }
 
-        .brand-mark {
-            display: inline-flex;
-            perspective: 260px;
-        }
+        .brand-mark { display: inline-flex; perspective: 260px; }
+        .brand-mark svg { transition: transform 0.75s var(--ease); }
+        .brand:hover .brand-mark svg { transform: rotateY(180deg) scale(1.08); }
 
-        .brand-mark svg {
-            transition: transform 0.75s var(--ease);
-        }
-
-        .brand:hover .brand-mark svg {
-            transform: rotateY(180deg) scale(1.08);
-        }
-
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1;
-        }
+        .brand-text { display: flex; flex-direction: column; line-height: 1; }
 
         .brand-name {
             font-family: var(--font-script);
-            font-size: 1.9rem;
+            font-size: 1.85rem;
             font-weight: 400;
             color: var(--cocoa);
-            letter-spacing: 0.01em;
             line-height: 0.92;
         }
 
         .brand-sub {
-            font-size: 0.56rem;
+            font-size: 0.55rem;
             text-transform: uppercase;
             letter-spacing: 0.28em;
             color: var(--cocoa-faint);
@@ -308,9 +287,9 @@
         .btn-cta-sm {
             position: relative;
             overflow: hidden;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             font-weight: 500;
-            padding: 0.56rem 1.2rem;
+            padding: 0.52rem 1.15rem;
             border-radius: var(--radius-pill);
             background: var(--olive);
             color: var(--cream-pure);
@@ -332,11 +311,12 @@
         .shimmer-btn:hover::after { transform: translateX(120%); }
 
         /* =========================================================
-           PORTADA / HERO — IDENTIDAD Y ESTRELLAS INFLADAS 3D
+           PORTADA / HERO — ZONA SEGURA DE TEXTO EN MÓVIL
            ========================================================= */
         .hero {
             position: relative;
-            padding: clamp(4.25rem, 11vw, 6.75rem) 0 clamp(3rem, 7vw, 4.5rem);
+            /* Padding amplio arriba/abajo para que las estrellas floten en sus franjas sin tocar texto */
+            padding: 5.25rem 0 4.85rem;
             border-bottom: 1px solid var(--line);
             overflow: hidden;
             text-align: center;
@@ -345,53 +325,51 @@
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 720px;
+            max-width: 620px;
             margin: 0 auto;
-            padding: 1.25rem 0.5rem;
-            background: radial-gradient(ellipse 75% 75% at 50% 50%, rgba(250, 247, 242, 0.85) 0%, rgba(250, 247, 242, 0) 100%);
+            padding: 0.25rem 0.5rem;
         }
 
         .hero-brand-lockup {
             display: inline-flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .hero-eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.68rem;
+            gap: 0.45rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.24em;
             color: var(--gold-deep);
             font-weight: 600;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.65rem;
         }
 
         .hero-wordmark {
             font-family: var(--font-script);
             font-style: normal;
-            font-size: clamp(3.9rem, 12.5vw, 6.8rem);
+            font-size: clamp(3.6rem, 13vw, 6.6rem);
             font-weight: 400;
             line-height: 0.94;
-            letter-spacing: 0.01em;
             color: var(--cocoa);
         }
 
         .hero-wordmark-rule {
-            width: min(260px, 65%);
+            width: min(220px, 60%);
             height: 1px;
-            margin: 0.65rem auto 0.65rem;
+            margin: 0.6rem auto;
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
         }
 
         .hero-wordmark-sub {
-            font-size: clamp(0.72rem, 1.8vw, 0.84rem);
+            font-size: clamp(0.68rem, 1.8vw, 0.82rem);
             text-transform: uppercase;
-            letter-spacing: 0.44em;
-            padding-left: 0.44em;
+            letter-spacing: 0.42em;
+            padding-left: 0.42em;
             color: var(--olive);
             font-weight: 600;
         }
@@ -399,76 +377,59 @@
         .hero-slogan {
             font-family: var(--font-serif);
             font-style: italic;
-            font-size: clamp(1.55rem, 4.3vw, 2.35rem);
-            font-weight: 400;
+            font-size: clamp(1.45rem, 4.2vw, 2.2rem);
             color: var(--olive);
-            margin-bottom: 0.85rem;
+            margin-bottom: 0.55rem;
         }
 
-        .hero-slogan em {
-            font-style: italic;
-            font-weight: 500;
-            color: var(--cocoa);
-        }
+        .hero-slogan em { color: var(--cocoa); font-weight: 500; }
 
         .hero-lead {
-            font-size: clamp(0.9rem, 2.2vw, 1rem);
+            font-size: 0.88rem;
             color: var(--cocoa-soft);
-            max-width: 48ch;
+            max-width: 42ch;
             margin: 0 auto;
         }
 
         /* =========================================================
-           CONTENEDOR DE VISTA ÚNICA
+           VISTAS PRINCIPALES
            ========================================================= */
         .view-section {
             display: none;
-            padding: 3rem 0 4.25rem;
+            padding: 2.5rem 0 3.75rem;
             min-height: 60vh;
-            animation: viewEnter 0.45s var(--ease);
+            animation: viewEnter 0.4s var(--ease);
         }
 
-        .view-section.is-active {
-            display: block;
-        }
+        .view-section.is-active { display: block; }
 
         @keyframes viewEnter {
-            from { opacity: 0; transform: translateY(12px); }
+            from { opacity: 0; transform: translateY(10px); }
             to   { opacity: 1; transform: translateY(0); }
         }
 
         .section-head {
             display: flex;
             flex-direction: column;
-            gap: 0.45rem;
-            margin-bottom: 1.85rem;
+            gap: 0.35rem;
+            margin-bottom: 1.5rem;
         }
 
         .section-kicker {
             display: inline-flex;
             align-items: center;
-            gap: 0.45rem;
-            font-size: 0.68rem;
+            gap: 0.4rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.18em;
             color: var(--gold-deep);
             font-weight: 600;
         }
 
-        .section-title {
-            font-size: clamp(2.15rem, 5.5vw, 3.05rem);
-            color: var(--cocoa);
-        }
+        .section-title { font-size: clamp(2rem, 5vw, 2.85rem); color: var(--cocoa); }
+        .section-desc { font-size: 0.86rem; color: var(--cocoa-soft); max-width: 50ch; }
 
-        .section-desc {
-            font-size: 0.9rem;
-            color: var(--cocoa-soft);
-            max-width: 56ch;
-        }
-
-        /* =========================================================
-           IMÁGENES CON RESPALDO EN ESTRELLA 3D INFLADA
-           ========================================================= */
+        /* Imágenes con respaldo limpio */
         .media-frame {
             position: relative;
             overflow: hidden;
@@ -495,8 +456,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 0.55rem;
-            gap: 0.25rem;
+            padding: 0.4rem;
+            gap: 0.2rem;
         }
 
         .media-frame img.is-missing + .media-fallback { display: flex; }
@@ -504,51 +465,46 @@
         .media-fallback span {
             font-family: var(--font-serif);
             font-style: italic;
-            font-size: 0.8rem;
-            line-height: 1.15;
+            font-size: 0.72rem;
+            line-height: 1.1;
             color: var(--cocoa);
         }
 
         /* =========================================================
-           VISTA SERVICIOS (SIN ETIQUETAS DE "MÓDULO")
+           SERVICIOS
            ========================================================= */
         .service-tabs {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 0.65rem;
-            margin-bottom: 1.5rem;
+            gap: 0.55rem;
+            margin-bottom: 1.35rem;
         }
 
         .service-tab {
             text-align: left;
-            padding: 0.95rem 1.05rem;
+            padding: 0.85rem 1rem;
             border-radius: var(--radius-sm);
             border: 1px solid var(--line);
             background: var(--cream-pure);
             display: flex;
             flex-direction: column;
-            gap: 0.18rem;
-            transition: all 0.3s var(--ease);
+            gap: 0.12rem;
+            transition: all 0.28s var(--ease);
         }
 
-        .service-tab:hover {
-            border-color: var(--gold);
-        }
+        .service-tab:hover { border-color: var(--gold); }
 
         .service-tab.active {
             background: var(--olive);
             border-color: var(--olive);
             color: var(--cream-pure);
-            box-shadow: 0 8px 22px rgba(66, 82, 43, 0.16);
+            box-shadow: 0 8px 20px rgba(66, 82, 43, 0.15);
         }
 
         .service-tab-kicker {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.32rem;
-            font-size: 0.61rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.14em;
             color: var(--gold-deep);
             font-weight: 600;
         }
@@ -558,30 +514,21 @@
         .service-tab-title {
             font-family: var(--font-serif);
             font-style: italic;
-            font-size: 1.28rem;
-            line-height: 1.18;
-            font-weight: 500;
+            font-size: 1.24rem;
+            line-height: 1.15;
         }
 
-        .service-tab-sub {
-            font-size: 0.72rem;
-            color: var(--cocoa-soft);
-        }
+        .service-tab-sub { font-size: 0.7rem; color: var(--cocoa-soft); }
+        .service-tab.active .service-tab-sub { color: rgba(255, 255, 255, 0.78); }
 
-        .service-tab.active .service-tab-sub { color: rgba(255, 255, 255, 0.8); }
-
-        .service-panel {
-            display: none;
-            animation: viewEnter 0.4s var(--ease);
-        }
-
+        .service-panel { display: none; animation: viewEnter 0.38s var(--ease); }
         .service-panel.active { display: block; }
 
         .service-shell {
             background: var(--cream-pure);
             border: 1px solid var(--champagne);
             border-radius: var(--radius-md);
-            padding: clamp(1.35rem, 3.5vw, 2.35rem);
+            padding: clamp(1.25rem, 3.2vw, 2.2rem);
         }
 
         .service-shell.sage {
@@ -594,95 +541,77 @@
             overflow: hidden;
             display: inline-flex;
             align-items: center;
-            gap: 0.55rem;
-            padding: 0.82rem 1.45rem;
+            gap: 0.5rem;
+            padding: 0.78rem 1.35rem;
             border-radius: var(--radius-pill);
             background: var(--cocoa);
             color: var(--cream-pure);
-            font-size: 0.84rem;
+            font-size: 0.82rem;
             font-weight: 500;
             transition: background 0.3s var(--ease), transform 0.25s var(--ease);
         }
 
-        .btn-primary:hover {
-            background: var(--olive);
-            transform: translateY(-1px);
-        }
+        .btn-primary:hover { background: var(--olive); transform: translateY(-1px); }
 
         /* Diseño de Oreja */
-        .design-layout { display: grid; gap: 2rem; }
+        .design-layout { display: grid; gap: 1.75rem; }
 
         .design-hero-media {
             display: grid;
-            grid-template-columns: 102px 1fr;
-            gap: 1.1rem;
+            grid-template-columns: 88px 1fr;
+            gap: 1rem;
             align-items: center;
-            margin-bottom: 1.15rem;
+            margin-bottom: 1rem;
         }
 
-        .design-thumb {
-            width: 102px;
-            height: 102px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
+        .design-thumb { width: 88px; height: 88px; border-radius: 50%; flex-shrink: 0; }
 
         .pill-meta {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            font-size: 0.65rem;
+            font-size: 0.62rem;
             text-transform: uppercase;
             letter-spacing: 0.14em;
             color: var(--olive);
             background: var(--olive-soft);
-            padding: 0.24rem 0.65rem;
+            padding: 0.22rem 0.62rem;
             border-radius: var(--radius-pill);
             font-weight: 600;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.35rem;
         }
 
-        .panel-title {
-            font-size: clamp(1.85rem, 4.5vw, 2.45rem);
-            color: var(--cocoa);
-        }
-
-        .panel-tagline {
-            font-size: 0.82rem;
-            color: var(--gold-deep);
-            font-weight: 500;
-            margin-top: 0.2rem;
-        }
+        .panel-title { font-size: clamp(1.75rem, 4.2vw, 2.3rem); color: var(--cocoa); }
+        .panel-tagline { font-size: 0.8rem; color: var(--gold-deep); font-weight: 500; margin-top: 0.15rem; }
 
         .vanya-quote {
             font-family: var(--font-serif);
             font-style: italic;
-            font-size: 1.24rem;
-            line-height: 1.42;
+            font-size: 1.15rem;
+            line-height: 1.4;
             color: var(--cocoa);
             border-left: 2px solid var(--gold);
-            padding-left: 1rem;
-            margin: 1rem 0 1.25rem;
+            padding-left: 0.9rem;
+            margin: 0.85rem 0 1.15rem;
         }
 
         .zones-trio {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 0.55rem;
-            margin-bottom: 1.35rem;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .zone-chip-box {
             background: var(--cream);
             border: 1px solid var(--line);
             border-radius: var(--radius-sm);
-            padding: 0.65rem;
+            padding: 0.55rem;
             text-align: center;
         }
 
         .zone-chip-box span {
             display: block;
-            font-size: 0.6rem;
+            font-size: 0.58rem;
             text-transform: uppercase;
             letter-spacing: 0.14em;
             color: var(--gold-deep);
@@ -692,53 +621,52 @@
         .zone-chip-box strong {
             font-family: var(--font-serif);
             font-style: italic;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 500;
         }
 
         /* =========================================================
-           ¿QUÉ INCLUYE? — VISOR EN TRANSICIÓN (7 CUADROS)
+           ¿QUÉ INCLUYE? — VISOR MODERNO DESLIZABLE (SOLO # ESQUINADO)
            ========================================================= */
         .includes-showcase {
-            background: linear-gradient(155deg, var(--cream) 0%, #F5EFE4 100%);
+            background: linear-gradient(160deg, var(--cream) 0%, #F4ECE0 100%);
             border: 1px solid var(--champagne);
             border-radius: var(--radius-md);
-            padding: 1.35rem;
+            padding: 1.25rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            gap: 1rem;
-            position: relative;
-            overflow: hidden;
+            gap: 0.95rem;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .includes-head {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            gap: 0.75rem;
-            padding-bottom: 0.85rem;
-            border-bottom: 1px solid var(--line);
+            gap: 0.6rem;
         }
 
-        .includes-head h4 {
-            font-size: 1.45rem;
-            color: var(--olive);
-        }
+        .includes-head h4 { font-size: 1.38rem; color: var(--olive); }
 
         .includes-head span {
-            font-size: 0.64rem;
+            font-size: 0.62rem;
             text-transform: uppercase;
             letter-spacing: 0.14em;
             color: var(--gold-deep);
             font-weight: 600;
-            white-space: nowrap;
         }
 
+        /* Escenario deslizable por swipe o arrastre */
         .includes-stage {
             position: relative;
-            min-height: 218px;
+            min-height: 174px;
+            touch-action: pan-y;
+            cursor: grab;
         }
+
+        .includes-stage:active { cursor: grabbing; }
 
         .include-slide {
             position: absolute;
@@ -746,182 +674,128 @@
             background: var(--cream-pure);
             border: 1px solid var(--line);
             border-radius: var(--radius-sm);
-            padding: 1.4rem 1.35rem;
+            padding: 1.55rem 1.35rem 1.35rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 0.55rem;
+            gap: 0.42rem;
             opacity: 0;
-            transform: translateY(10px) scale(0.985);
+            transform: translateX(18px) scale(0.985);
             pointer-events: none;
-            transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
-            box-shadow: 0 10px 26px rgba(59, 42, 32, 0.04);
+            transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+            box-shadow: 0 10px 24px rgba(59, 42, 32, 0.04);
         }
 
         .include-slide.is-active {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateX(0) scale(1);
             pointer-events: auto;
             z-index: 2;
         }
 
-        .include-slide.is-leaving {
+        .include-slide.is-leaving-left {
             opacity: 0;
-            transform: translateY(-10px) scale(0.985);
+            transform: translateX(-18px) scale(0.985);
             z-index: 1;
         }
 
-        .include-slide-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.5rem;
+        .include-slide.is-leaving-right {
+            opacity: 0;
+            transform: translateX(18px) scale(0.985);
+            z-index: 1;
         }
 
-        .include-slide-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.66rem;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            color: var(--gold-deep);
-            font-weight: 600;
-        }
-
-        .include-slide-num {
+        /* Únicamente el número esquinado arriba a la derecha */
+        .include-corner-num {
+            position: absolute;
+            top: 0.78rem;
+            right: 1rem;
             font-family: var(--font-serif);
             font-style: italic;
-            font-size: 1.95rem;
+            font-size: 1.5rem;
             line-height: 1;
-            color: rgba(189, 146, 66, 0.42);
+            color: rgba(189, 146, 66, 0.45);
+            pointer-events: none;
         }
 
         .include-slide-title {
             font-family: var(--font-serif);
             font-style: italic;
-            font-size: 1.38rem;
-            line-height: 1.22;
+            font-size: 1.34rem;
+            line-height: 1.2;
             color: var(--cocoa);
             font-weight: 500;
+            padding-right: 2.2rem;
         }
 
         .include-slide-desc {
-            font-size: 0.86rem;
+            font-size: 0.84rem;
             color: var(--cocoa-soft);
-            line-height: 1.55;
+            line-height: 1.5;
         }
 
-        .includes-progress-track {
-            width: 100%;
-            height: 2px;
-            background: rgba(59, 42, 32, 0.08);
-            border-radius: var(--radius-pill);
-            overflow: hidden;
-        }
-
-        .includes-progress-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--olive), var(--gold), var(--gold-bright));
-        }
-
-        .includes-progress-fill.animating {
-            animation: includeProgress var(--slide-dur, 4200ms) linear forwards;
-        }
-
-        .includes-showcase.is-paused .includes-progress-fill.animating {
-            animation-play-state: paused;
-        }
-
-        @keyframes includeProgress {
-            from { width: 0%; }
-            to   { width: 100%; }
-        }
-
-        .includes-controls {
+        /* Barra minimalista: flechas semitranslúcidas como puntos + indicadores de punto */
+        .includes-nav-bar {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
+            justify-content: center;
+            gap: 0.55rem;
         }
 
-        .includes-dots {
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
-            flex-wrap: wrap;
-        }
-
-        .include-dot {
+        .include-arrow-dot {
             width: 26px;
             height: 26px;
             border-radius: 50%;
-            border: 1px solid var(--line);
-            background: rgba(255, 255, 255, 0.7);
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 0.72rem;
-            color: var(--cocoa-soft);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s var(--ease);
-        }
-
-        .include-dot:hover {
-            border-color: var(--gold);
-            color: var(--cocoa);
-        }
-
-        .include-dot.active {
-            background: var(--olive);
-            border-color: var(--olive);
-            color: var(--cream-pure);
-            transform: scale(1.06);
-        }
-
-        .includes-arrows {
-            display: inline-flex;
-            gap: 0.35rem;
-        }
-
-        .include-arrow {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            border: 1px solid var(--line-strong);
-            background: var(--cream-pure);
-            color: var(--cocoa);
+            background: rgba(59, 42, 32, 0.06);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(189, 146, 66, 0.25);
+            color: rgba(59, 42, 32, 0.62);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             transition: all 0.25s var(--ease);
         }
 
-        .include-arrow:hover {
+        .include-arrow-dot:hover {
+            background: rgba(66, 82, 43, 0.14);
             border-color: var(--gold);
-            background: var(--olive);
-            color: var(--cream-pure);
+            color: var(--olive);
+        }
+
+        .includes-dots {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.36rem;
+            padding: 0 0.2rem;
+        }
+
+        .include-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: var(--radius-pill);
+            background: rgba(59, 42, 32, 0.18);
+            transition: width 0.35s var(--ease), background 0.35s var(--ease);
+            padding: 0;
+        }
+
+        .include-dot:hover { background: rgba(189, 146, 66, 0.6); }
+
+        .include-dot.active {
+            width: 22px;
+            background: var(--gold);
         }
 
         /* Bebés */
-        .babies-top { display: grid; gap: 1.15rem; }
-        .babies-media { display: flex; align-items: center; gap: 1.1rem; }
+        .babies-top { display: grid; gap: 1rem; }
+        .babies-media { display: flex; align-items: center; gap: 1rem; }
+        .babies-thumb { width: 84px; height: 84px; border-radius: 50%; flex-shrink: 0; border-color: var(--olive-line); }
 
-        .babies-thumb {
-            width: 94px;
-            height: 94px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            border-color: var(--olive-line);
-        }
-
-        .babies-badges { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+        .babies-badges { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
         .babies-badge {
-            font-size: 0.72rem;
-            padding: 0.3rem 0.75rem;
+            font-size: 0.7rem;
+            padding: 0.26rem 0.68rem;
             border-radius: var(--radius-pill);
             background: rgba(255, 255, 255, 0.86);
             border: 1px solid var(--olive-line);
@@ -929,79 +803,46 @@
             font-weight: 500;
         }
 
-        .steps-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.85rem;
-            margin-top: 1.45rem;
-        }
+        .steps-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1.25rem; }
 
         .step-card {
             background: rgba(255, 255, 255, 0.92);
             border: 1px solid var(--olive-line);
             border-radius: var(--radius-sm);
-            padding: 1.15rem;
+            padding: 1rem;
             transition: transform 0.3s var(--ease), border-color 0.25s ease;
         }
 
         .step-card:hover { transform: translateY(-2px); border-color: var(--gold); }
 
-        .step-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 0.45rem;
-        }
-
-        .step-num {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 1.45rem;
-            color: var(--gold-deep);
-            line-height: 1;
-        }
-
-        .step-chip {
-            font-size: 0.62rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--olive);
-            opacity: 0.8;
-        }
-
-        .step-card h5 {
-            font-family: var(--font-sans);
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--cocoa);
-            margin-bottom: 0.28rem;
-        }
-
-        .step-card p { font-size: 0.82rem; color: var(--cocoa-soft); }
+        .step-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.35rem; }
+        .step-num { font-family: var(--font-serif); font-style: italic; font-size: 1.35rem; color: var(--gold-deep); line-height: 1; }
+        .step-chip { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--olive); opacity: 0.8; }
+        .step-card h5 { font-size: 0.86rem; font-weight: 600; color: var(--cocoa); margin-bottom: 0.2rem; }
+        .step-card p { font-size: 0.8rem; color: var(--cocoa-soft); }
 
         .no-gun-banner {
-            margin-top: 1.25rem;
-            padding: 1.05rem 1.2rem;
+            margin-top: 1.15rem;
+            padding: 0.95rem 1.1rem;
             background: var(--clay-bg);
             border-left: 3px solid var(--clay);
             border-radius: var(--radius-sm);
             color: var(--clay);
-            font-size: 0.83rem;
+            font-size: 0.81rem;
             display: flex;
             flex-direction: column;
-            gap: 0.85rem;
+            gap: 0.75rem;
         }
 
         .btn-olive {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.45rem;
-            padding: 0.7rem 1.25rem;
+            padding: 0.66rem 1.2rem;
             border-radius: var(--radius-pill);
             background: var(--olive);
             color: var(--cream-pure);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 500;
             width: fit-content;
             transition: background 0.25s ease;
@@ -1010,59 +851,28 @@
         .btn-olive:hover { background: var(--cocoa); }
 
         /* Promos */
-        .promos-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.9rem;
-            margin-top: 1.25rem;
-        }
+        .promos-grid { display: grid; grid-template-columns: 1fr; gap: 0.8rem; margin-top: 1.1rem; }
 
         .promo-card {
             background: var(--cream);
             border: 1px solid var(--line);
             border-radius: var(--radius-sm);
-            padding: 1.35rem;
+            padding: 1.2rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            gap: 0.9rem;
+            gap: 0.75rem;
             transition: border-color 0.25s ease, transform 0.3s var(--ease);
         }
 
         .promo-card:hover { border-color: var(--gold); transform: translateY(-2px); }
-
-        .promo-day {
-            font-size: 0.68rem;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            color: var(--olive);
-            font-weight: 600;
-        }
-
-        .promo-big {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 2.6rem;
-            font-weight: 600;
-            color: var(--gold-deep);
-            line-height: 1;
-            margin: 0.35rem 0 0.45rem;
-        }
-
-        .promo-desc { font-size: 0.84rem; color: var(--cocoa-soft); }
-
-        .promo-foot {
-            margin-top: 1.15rem;
-            font-size: 0.75rem;
-            color: var(--cocoa-faint);
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 0.5rem;
-        }
+        .promo-day { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--olive); font-weight: 600; }
+        .promo-big { font-family: var(--font-serif); font-style: italic; font-size: 2.45rem; font-weight: 600; color: var(--gold-deep); line-height: 1; margin: 0.3rem 0; }
+        .promo-desc { font-size: 0.82rem; color: var(--cocoa-soft); }
+        .promo-foot { margin-top: 1rem; font-size: 0.72rem; color: var(--cocoa-faint); }
 
         /* Guía / FAQ */
-        .faq-grid { display: grid; gap: 0.7rem; margin-top: 1.15rem; }
+        .faq-grid { display: grid; gap: 0.6rem; margin-top: 1rem; }
 
         .faq-item {
             background: var(--cream);
@@ -1073,8 +883,8 @@
 
         .faq-item summary {
             list-style: none;
-            padding: 1rem 1.15rem;
-            font-size: 0.88rem;
+            padding: 0.9rem 1.05rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--cocoa);
             display: flex;
@@ -1085,49 +895,25 @@
         }
 
         .faq-item summary::-webkit-details-marker { display: none; }
-
-        .faq-icon {
-            color: var(--gold-deep);
-            font-size: 1.15rem;
-            line-height: 1;
-            transition: transform 0.25s ease;
-        }
-
+        .faq-icon { color: var(--gold-deep); font-size: 1.1rem; line-height: 1; transition: transform 0.25s ease; }
         .faq-item[open] .faq-icon { transform: rotate(45deg); }
+        .faq-body { padding: 0.75rem 1.05rem 0.95rem; font-size: 0.82rem; color: var(--cocoa-soft); border-top: 1px solid var(--line); }
 
-        .faq-body {
-            padding: 0.85rem 1.15rem 1.05rem;
-            font-size: 0.84rem;
-            color: var(--cocoa-soft);
-            border-top: 1px solid var(--line);
-        }
-
-        .care-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.65rem; }
-
-        .care-tag {
-            font-size: 0.74rem;
-            background: var(--cream-pure);
-            border: 1px solid var(--line);
-            color: var(--cocoa);
-            padding: 0.25rem 0.65rem;
-            border-radius: var(--radius-pill);
-        }
+        .care-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.55rem; }
+        .care-tag { font-size: 0.72rem; background: var(--cream-pure); border: 1px solid var(--line); color: var(--cocoa); padding: 0.22rem 0.6rem; border-radius: var(--radius-pill); }
 
         /* =========================================================
-           AGENDA TU CITA — DESPLIEGUE SIMPLIFICADO Y ELEGANTE
+           AGENDA TU CITA — SIMPLIFICADA
            ========================================================= */
-        .agenda-wrap {
-            margin-top: 2.25rem;
-            scroll-margin-top: calc(var(--header-h) + 18px);
-        }
+        .agenda-wrap { margin-top: 2rem; scroll-margin-top: calc(var(--header-h) + 16px); }
 
         .agenda-card {
             background: var(--cream-pure);
             border: 1px solid var(--champagne);
             border-radius: var(--radius-md);
-            padding: clamp(1.45rem, 3.8vw, 2.35rem);
+            padding: clamp(1.3rem, 3.5vw, 2.2rem);
             display: grid;
-            gap: 1.75rem;
+            gap: 1.5rem;
             transition: box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
         }
 
@@ -1136,188 +922,130 @@
             box-shadow: 0 0 0 4px rgba(189, 146, 66, 0.2);
         }
 
-        .agenda-bullets {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-            margin: 1rem 0 1.25rem;
-            font-size: 0.84rem;
-            color: var(--cocoa-soft);
-        }
-
-        .agenda-bullets li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.55rem;
-        }
-
-        .agenda-bullets .star-ui { margin-top: 3px; }
-
         .wa-chip {
             display: inline-flex;
             align-items: center;
-            gap: 0.55rem;
-            padding: 0.62rem 1rem;
+            gap: 0.5rem;
+            padding: 0.56rem 0.92rem;
+            margin-top: 1rem;
             border-radius: var(--radius-sm);
             background: var(--cream);
             border: 1px solid var(--line);
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             width: fit-content;
         }
 
-        .wa-chip span {
-            font-size: 0.66rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--cocoa-faint);
-        }
+        .wa-chip span { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--cocoa-faint); }
 
         .agenda-form {
             background: var(--cream);
             border: 1px solid var(--line);
             border-radius: var(--radius-sm);
-            padding: 1.35rem;
+            padding: 1.25rem;
             display: grid;
-            gap: 1.05rem;
+            gap: 0.95rem;
         }
 
-        .form-row-2 { display: grid; grid-template-columns: 1fr; gap: 0.9rem; }
-
-        .field { display: flex; flex-direction: column; gap: 0.42rem; }
+        .form-row-2 { display: grid; grid-template-columns: 1fr; gap: 0.85rem; }
+        .field { display: flex; flex-direction: column; gap: 0.38rem; }
 
         .field-label {
-            font-size: 0.65rem;
+            font-size: 0.63rem;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.14em;
             color: var(--cocoa-faint);
             font-weight: 600;
         }
 
-        /* Píldoras limpias de selección */
-        .pill-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.42rem;
-        }
+        .pill-group { display: flex; flex-wrap: wrap; gap: 0.38rem; }
 
         .choice-pill {
-            padding: 0.46rem 0.9rem;
+            padding: 0.44rem 0.85rem;
             border-radius: var(--radius-pill);
             border: 1px solid var(--line-strong);
             background: var(--cream-pure);
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             font-weight: 500;
             color: var(--cocoa-soft);
-            transition: all 0.25s var(--ease);
+            transition: all 0.24s var(--ease);
         }
 
-        .choice-pill:hover {
-            border-color: var(--gold);
-            color: var(--cocoa);
-        }
+        .choice-pill:hover { border-color: var(--gold); color: var(--cocoa); }
 
         .choice-pill.active {
             background: var(--olive);
             border-color: var(--olive);
             color: var(--cream-pure);
-            box-shadow: 0 4px 12px rgba(66, 82, 43, 0.16);
+            box-shadow: 0 4px 12px rgba(66, 82, 43, 0.15);
         }
 
-        /* Subpanel contextual (solo visible cuando requiere detalle) */
         .sub-options-box {
             display: none;
             background: var(--cream-pure);
             border: 1px solid var(--champagne);
             border-radius: var(--radius-sm);
-            padding: 0.95rem 1rem;
-            gap: 0.8rem;
-            animation: viewEnter 0.3s var(--ease);
+            padding: 0.88rem 0.95rem;
+            gap: 0.75rem;
+            animation: viewEnter 0.28s var(--ease);
         }
 
-        .sub-options-box.is-open {
-            display: grid;
-        }
+        .sub-options-box.is-open { display: grid; }
 
-        .mini-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.38rem;
-        }
+        .mini-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 
         .mini-pill {
-            padding: 0.34rem 0.72rem;
+            padding: 0.32rem 0.68rem;
             border-radius: var(--radius-pill);
             border: 1px solid var(--line);
             background: var(--cream);
-            font-size: 0.73rem;
+            font-size: 0.72rem;
             color: var(--cocoa-soft);
-            transition: all 0.22s var(--ease);
+            transition: all 0.2s var(--ease);
         }
 
         .mini-pill:hover { border-color: var(--gold); color: var(--cocoa); }
-
-        .mini-pill.active {
-            background: var(--cocoa);
-            border-color: var(--cocoa);
-            color: var(--cream-pure);
-        }
+        .mini-pill.active { background: var(--cocoa); border-color: var(--cocoa); color: var(--cream-pure); }
 
         .agenda-summary-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 0.75rem;
-            padding: 0.65rem 0.9rem;
+            gap: 0.65rem;
+            padding: 0.58rem 0.85rem;
             border-radius: var(--radius-sm);
             background: rgba(255, 255, 255, 0.85);
             border: 1px dashed rgba(189, 146, 66, 0.55);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
         }
 
-        .agenda-summary-bar span {
-            color: var(--cocoa-faint);
-            font-size: 0.68rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            white-space: nowrap;
-        }
-
-        .agenda-summary-bar strong {
-            color: var(--cocoa);
-            font-weight: 600;
-            text-align: right;
-        }
+        .agenda-summary-bar span { color: var(--cocoa-faint); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.12em; white-space: nowrap; }
+        .agenda-summary-bar strong { color: var(--cocoa); font-weight: 600; text-align: right; }
 
         .field input,
         .field select {
             width: 100%;
-            padding: 0.72rem 0.88rem;
+            padding: 0.68rem 0.85rem;
             border: 1px solid var(--line-strong);
             border-radius: var(--radius-sm);
             background: var(--cream-pure);
             font-family: inherit;
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             color: var(--cocoa);
             transition: border-color 0.2s ease;
         }
 
         .field input:focus,
-        .field select:focus {
-            outline: none;
-            border-color: var(--gold);
-        }
+        .field select:focus { outline: none; border-color: var(--gold); }
 
         .btn-wa-submit {
             position: relative;
             overflow: hidden;
             width: 100%;
-            margin-top: 0.15rem;
-            padding: 0.92rem 1.2rem;
+            padding: 0.88rem 1.15rem;
             border-radius: var(--radius-pill);
             background: var(--olive);
             color: var(--cream-pure);
-            font-size: 0.86rem;
+            font-size: 0.84rem;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
@@ -1329,27 +1057,26 @@
         .btn-wa-submit:hover { background: var(--cocoa); }
 
         /* =========================================================
-           VISTA CATÁLOGO
+           CATÁLOGO — 26 FICHAS LIMPIAS Y SIN SATURACIÓN
            ========================================================= */
         .catalog-toolbar {
             display: flex;
             flex-direction: column;
-            gap: 1.1rem;
-            padding: 1.1rem 1.2rem;
+            gap: 1rem;
+            padding: 1rem 1.1rem;
             background: var(--cream-pure);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            margin-bottom: 1.5rem;
-            box-shadow: 0 8px 26px rgba(59, 42, 32, 0.03);
+            margin-bottom: 1.35rem;
         }
 
         .bar-label {
             display: block;
-            font-size: 0.65rem;
+            font-size: 0.62rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             color: var(--cocoa-faint);
-            margin-bottom: 0.45rem;
+            margin-bottom: 0.4rem;
             font-weight: 600;
         }
 
@@ -1361,7 +1088,7 @@
             padding: 4px;
             border-radius: var(--radius-pill);
             width: 100%;
-            max-width: 440px;
+            max-width: 410px;
         }
 
         .toggle-glider {
@@ -1374,7 +1101,7 @@
             background: var(--cream-pure);
             border: 1px solid rgba(189, 146, 66, 0.34);
             box-shadow: 0 2px 8px rgba(59, 42, 32, 0.08);
-            transition: transform 0.4s var(--ease);
+            transition: transform 0.38s var(--ease);
             pointer-events: none;
         }
 
@@ -1385,31 +1112,31 @@
         .material-btn {
             position: relative;
             z-index: 1;
-            padding: 0.5rem 0.4rem;
-            font-size: 0.74rem;
+            padding: 0.46rem 0.35rem;
+            font-size: 0.73rem;
             color: var(--cocoa-soft);
             text-align: center;
-            transition: color 0.25s ease;
+            transition: color 0.22s ease;
             white-space: nowrap;
         }
 
         .material-btn.active { color: var(--cocoa); font-weight: 600; }
 
-        .zone-tabs { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+        .zone-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
         .zone-tab {
-            padding: 0.42rem 0.88rem;
+            padding: 0.38rem 0.82rem;
             border-radius: var(--radius-pill);
             border: 1px solid var(--line);
-            font-size: 0.76rem;
+            font-size: 0.74rem;
             color: var(--cocoa-soft);
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            transition: all 0.25s var(--ease);
+            gap: 0.32rem;
+            transition: all 0.24s var(--ease);
         }
 
-        .zone-tab span { font-size: 0.68rem; opacity: 0.7; }
+        .zone-tab span { font-size: 0.66rem; opacity: 0.7; }
         .zone-tab:hover { border-color: var(--gold); color: var(--cocoa); }
 
         .zone-tab.active {
@@ -1418,269 +1145,202 @@
             color: var(--cream-pure);
         }
 
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
+        .catalog-grid { display: grid; grid-template-columns: 1fr; gap: 0.9rem; }
 
         .piercing-card {
             background: var(--cream-pure);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 1.2rem;
+            padding: 1.05rem 1.1rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            gap: 1rem;
-            transition: transform 0.35s var(--ease), border-color 0.3s ease, box-shadow 0.35s var(--ease);
+            gap: 0.85rem;
+            transition: transform 0.3s var(--ease), border-color 0.25s ease, box-shadow 0.3s var(--ease);
         }
 
         .piercing-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             border-color: var(--gold);
-            box-shadow: 0 12px 26px rgba(59, 42, 32, 0.05);
+            box-shadow: 0 10px 24px rgba(59, 42, 32, 0.05);
         }
 
         .piercing-card:hover .piercing-photo img { transform: scale(1.06); }
 
         .card-top {
             display: grid;
-            grid-template-columns: 76px 1fr;
-            gap: 0.95rem;
+            grid-template-columns: 62px 1fr;
+            gap: 0.85rem;
             align-items: center;
         }
 
-        .piercing-photo {
-            width: 76px;
-            height: 76px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .card-title-group h3 { font-size: 1.48rem; line-height: 1.12; }
+        .piercing-photo { width: 62px; height: 62px; border-radius: 50%; flex-shrink: 0; }
+        .card-title-group h3 { font-size: 1.38rem; line-height: 1.1; }
 
         .card-zone-label {
             display: inline-block;
-            margin-top: 0.25rem;
-            font-size: 0.64rem;
-            text-transform: uppercase;
-            letter-spacing: 0.13em;
-            color: var(--olive);
-            background: var(--olive-soft);
-            padding: 0.16rem 0.52rem;
-            border-radius: var(--radius-pill);
-            font-weight: 600;
-        }
-
-        .card-specs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.55rem 0.8rem;
-            padding: 0.8rem 0;
-            border-top: 1px solid var(--line);
-            border-bottom: 1px solid var(--line);
-            font-size: 0.76rem;
-        }
-
-        .spec-cell { display: flex; flex-direction: column; gap: 0.1rem; }
-        .spec-cell.full { grid-column: 1 / -1; }
-
-        .spec-k {
-            font-size: 0.64rem;
+            margin-top: 0.2rem;
+            font-size: 0.62rem;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            color: var(--cocoa-faint);
-        }
-
-        .spec-v {
-            color: var(--cocoa);
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            flex-wrap: wrap;
-        }
-
-        .no-hoop-tag {
-            font-size: 0.64rem;
-            color: var(--clay);
-            background: var(--clay-bg);
-            padding: 0.08rem 0.42rem;
+            color: var(--olive);
+            background: var(--olive-soft);
+            padding: 0.14rem 0.5rem;
             border-radius: var(--radius-pill);
             font-weight: 600;
         }
 
-        .pain-meter { display: inline-flex; gap: 2.5px; align-items: center; }
-
-        .pain-pip {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--champagne);
+        /* Tira de especificaciones compacta (3 datos clave) */
+        .card-specs-strip {
+            display: grid;
+            grid-template-columns: 1.15fr 0.78fr 0.95fr;
+            gap: 0.5rem;
+            padding: 0.68rem 0;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
         }
 
-        .pain-pip.on { background: var(--gold); }
+        .spec-mini { display: flex; flex-direction: column; gap: 0.08rem; }
+        .spec-k { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.11em; color: var(--cocoa-faint); }
+        .spec-v { font-size: 0.75rem; color: var(--cocoa); font-weight: 500; line-height: 1.25; }
 
-        .card-extra-note { font-size: 0.72rem; color: var(--cocoa-soft); line-height: 1.45; }
+        .no-hoop-pill {
+            display: inline-block;
+            margin-top: 0.22rem;
+            font-size: 0.6rem;
+            color: var(--clay);
+            background: var(--clay-bg);
+            padding: 0.08rem 0.4rem;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            width: fit-content;
+        }
+
+        .card-note-mini {
+            font-size: 0.71rem;
+            color: var(--cocoa-soft);
+            line-height: 1.38;
+        }
 
         .card-bottom {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            gap: 0.75rem;
+            gap: 0.65rem;
         }
 
         .price-val {
             font-family: var(--font-serif);
             font-style: italic;
-            font-size: 1.75rem;
+            font-size: 1.65rem;
             font-weight: 600;
             line-height: 1;
             font-variant-numeric: tabular-nums;
             color: var(--cocoa);
         }
 
-        .price-val.flash { animation: goldPulse 0.48s var(--ease); }
+        .price-val.flash { animation: goldPulse 0.45s var(--ease); }
 
         @keyframes goldPulse {
-            0% { opacity: 0.35; transform: translateY(-3px); color: var(--gold); }
+            0% { opacity: 0.35; transform: translateY(-2px); color: var(--gold); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        .price-sub {
-            display: block;
-            font-size: 0.68rem;
-            color: var(--cocoa-faint);
-            margin-top: 0.2rem;
-        }
+        .price-sub { display: block; font-size: 0.65rem; color: var(--cocoa-faint); margin-top: 0.16rem; }
 
         .btn-card-book {
-            padding: 0.48rem 0.9rem;
+            padding: 0.44rem 0.85rem;
             border-radius: var(--radius-pill);
             border: 1px solid var(--line-strong);
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             font-weight: 500;
             color: var(--cocoa);
             display: inline-flex;
             align-items: center;
-            gap: 0.3rem;
-            transition: all 0.25s var(--ease);
+            gap: 0.25rem;
+            transition: all 0.24s var(--ease);
             white-space: nowrap;
         }
 
-        .btn-card-book:hover {
-            background: var(--olive);
-            border-color: var(--olive);
-            color: var(--cream-pure);
-        }
+        .btn-card-book:hover { background: var(--olive); border-color: var(--olive); color: var(--cream-pure); }
 
         .catalog-footnote {
-            margin-top: 1.4rem;
-            padding: 0.95rem 1.15rem;
+            margin-top: 1.25rem;
+            padding: 0.85rem 1.05rem;
             background: var(--sand);
             border-radius: var(--radius-sm);
-            font-size: 0.8rem;
+            font-size: 0.76rem;
             color: var(--cocoa-soft);
             display: flex;
             flex-direction: column;
-            gap: 0.3rem;
+            gap: 0.25rem;
         }
 
         .catalog-footnote strong { color: var(--cocoa); }
 
         /* =========================================================
-           VISTA SUCURSALES
+           SUCURSALES
            ========================================================= */
-        .locations-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+        .locations-grid { display: grid; grid-template-columns: 1fr; gap: 0.9rem; }
 
         .location-card {
             background: var(--cream-pure);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 1.5rem;
+            padding: 1.35rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            gap: 1.15rem;
-            transition: transform 0.35s var(--ease), border-color 0.3s ease, box-shadow 0.35s var(--ease);
+            gap: 1rem;
+            transition: transform 0.3s var(--ease), border-color 0.25s ease;
         }
 
-        .location-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--gold);
-            box-shadow: 0 12px 26px rgba(59, 42, 32, 0.05);
-        }
-
-        .location-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 0.75rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .location-card h3 { font-size: 1.55rem; }
+        .location-card:hover { transform: translateY(-2px); border-color: var(--gold); }
+        .location-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.35rem; }
+        .location-card h3 { font-size: 1.5rem; }
 
         .location-badge {
-            font-size: 0.64rem;
+            font-size: 0.62rem;
             text-transform: uppercase;
             letter-spacing: 0.14em;
             color: var(--gold-deep);
             background: var(--gold-soft);
-            padding: 0.22rem 0.6rem;
+            padding: 0.2rem 0.56rem;
             border-radius: var(--radius-pill);
             font-weight: 600;
-            white-space: nowrap;
         }
 
-        .location-address { font-size: 0.85rem; color: var(--cocoa-soft); }
+        .location-address { font-size: 0.83rem; color: var(--cocoa-soft); }
 
         .location-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.15rem;
-            padding-top: 0.95rem;
+            gap: 1.1rem;
+            padding-top: 0.85rem;
             border-top: 1px solid var(--line);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 500;
         }
 
-        .arrow-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            color: var(--cocoa);
-            transition: color 0.2s ease, gap 0.25s var(--ease);
-        }
-
-        .arrow-link:hover { color: var(--gold-deep); gap: 0.48rem; }
+        .arrow-link { display: inline-flex; align-items: center; gap: 0.28rem; color: var(--cocoa); transition: color 0.2s ease, gap 0.25s var(--ease); }
+        .arrow-link:hover { color: var(--gold-deep); gap: 0.45rem; }
 
         /* =========================================================
            FOOTER + ÚNICA BARRA DE NAVEGACIÓN EN LA BASE
            ========================================================= */
         .site-footer {
             border-top: 1px solid var(--line);
-            padding: 2rem 0 2.25rem;
-            font-size: 0.78rem;
+            padding: 1.75rem 0 2rem;
+            font-size: 0.76rem;
             color: var(--cocoa-faint);
         }
 
-        .footer-inner { display: flex; flex-direction: column; gap: 0.8rem; }
-        .footer-links { display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; }
+        .footer-inner { display: flex; flex-direction: column; gap: 0.7rem; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 1.1rem; align-items: center; }
 
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            color: var(--cocoa);
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
+        .social-link { display: inline-flex; align-items: center; gap: 0.38rem; color: var(--cocoa); font-weight: 500; transition: color 0.2s ease; }
         .social-link:hover { color: var(--gold-deep); }
 
-        /* Barra única de navegación en la base (Móvil + Escritorio) */
         .bottom-nav {
             position: fixed;
             left: 0;
@@ -1693,7 +1353,7 @@
             border-top: 1px solid var(--champagne);
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            padding: 0.48rem 0.5rem calc(0.48rem + env(safe-area-inset-bottom));
+            padding: 0.45rem 0.5rem calc(0.45rem + env(safe-area-inset-bottom));
             box-shadow: 0 -8px 28px rgba(59, 42, 32, 0.06);
         }
 
@@ -1702,94 +1362,66 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 0.22rem;
-            padding: 0.38rem 0.5rem;
-            font-size: 0.7rem;
+            gap: 0.2rem;
+            padding: 0.36rem 0.5rem;
+            font-size: 0.69rem;
             color: var(--cocoa-faint);
             position: relative;
             border-radius: var(--radius-pill);
-            transition: color 0.25s ease, background 0.25s ease;
+            transition: color 0.24s ease, background 0.24s ease;
         }
 
-        .bottom-nav-item svg {
-            width: 19px;
-            height: 19px;
-            stroke: currentColor;
-            stroke-width: 1.5;
-            fill: none;
-        }
-
-        .bottom-nav-item:hover {
-            color: var(--cocoa);
-        }
-
-        .bottom-nav-item.active {
-            color: var(--olive);
-            font-weight: 600;
-        }
+        .bottom-nav-item svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.5; fill: none; }
+        .bottom-nav-item:hover { color: var(--cocoa); }
+        .bottom-nav-item.active { color: var(--olive); font-weight: 600; }
 
         .bottom-nav-item.active::before {
             content: "";
             position: absolute;
-            top: -0.48rem;
-            width: 30px;
+            top: -0.45rem;
+            width: 28px;
             height: 2px;
             background: var(--gold);
         }
 
-        /* =========================================================
-           BOTÓN SEMITRANSPARENTE ELEGANTE PARA IR ARRIBA
-           ========================================================= */
+        /* Botón semitransparente ir arriba */
         .back-to-top {
             position: fixed;
-            right: 18px;
-            bottom: calc(82px + env(safe-area-inset-bottom));
+            right: 16px;
+            bottom: calc(80px + env(safe-area-inset-bottom));
             z-index: 700;
-            width: 46px;
-            height: 46px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background: rgba(250, 247, 242, 0.56);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(189, 146, 66, 0.48);
+            border: 1px solid rgba(189, 146, 66, 0.46);
             color: var(--cocoa);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 24px rgba(59, 42, 32, 0.12);
+            box-shadow: 0 8px 22px rgba(59, 42, 32, 0.11);
             opacity: 0;
             pointer-events: none;
             transform: translateY(14px) scale(0.94);
-            transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), background 0.25s ease, border-color 0.25s ease;
+            transition: opacity 0.32s var(--ease), transform 0.32s var(--ease), background 0.25s ease;
         }
 
-        .back-to-top.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0) scale(1);
-        }
+        .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+        .back-to-top:hover { background: rgba(255, 255, 255, 0.82); border-color: var(--gold); color: var(--olive); }
 
-        .back-to-top:hover {
-            background: rgba(255, 255, 255, 0.8);
-            border-color: var(--gold);
-            color: var(--olive);
-        }
-
-        .back-to-top svg { transition: transform 0.3s var(--ease); }
-        .back-to-top:hover svg { transform: translateY(-2.5px); }
-
-        /* Toast */
         .toast {
             position: fixed;
             left: 50%;
-            bottom: 88px;
+            bottom: 84px;
             transform: translate(-50%, 16px);
             background: var(--cocoa);
             color: var(--cream-pure);
-            font-size: 0.78rem;
-            padding: 0.6rem 1.15rem;
+            font-size: 0.76rem;
+            padding: 0.56rem 1.05rem;
             border-radius: var(--radius-pill);
-            box-shadow: 0 10px 26px rgba(59, 42, 32, 0.22);
+            box-shadow: 0 10px 24px rgba(59, 42, 32, 0.22);
             opacity: 0;
             pointer-events: none;
             z-index: 900;
@@ -1797,13 +1429,13 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            transition: opacity 0.3s ease, transform 0.35s var(--ease);
+            transition: opacity 0.28s ease, transform 0.32s var(--ease);
         }
 
         .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
         @media (prefers-reduced-motion: reduce) {
-            .star-3d-wrap, .star-3d-spinner, .view-section, .service-panel, .include-slide, .includes-progress-fill {
+            .star-3d-wrap, .star-3d-spinner, .view-section, .service-panel, .include-slide {
                 animation: none !important;
                 transition: none !important;
             }
@@ -1820,34 +1452,49 @@
         }
 
         @media (min-width: 768px) {
-            body { padding-bottom: 108px; }
+            body { padding-bottom: 106px; }
             .container { padding: 0 2rem; }
 
-            /* Cápsula elegante flotante en la base en escritorio */
+            .hero { padding: 5.5rem 0 4.5rem; }
+
+            /* En escritorio las estrellas flotan en los laterales amplios, sin cruzar el texto */
+            .star-pos-1 { width: clamp(90px, 11vw, 130px); height: clamp(90px, 11vw, 130px); top: 10%; right: 5%; }
+            .star-pos-2 { width: clamp(72px, 9vw, 104px); height: clamp(72px, 9vw, 104px); bottom: 12%; left: 5%; }
+            .star-pos-3 { width: clamp(46px, 5.5vw, 62px); height: clamp(46px, 5.5vw, 62px); top: 16%; left: 13%; }
+            .star-pos-4 { width: clamp(40px, 4.5vw, 52px); height: clamp(40px, 4.5vw, 52px); bottom: 16%; right: 14%; }
+            .star-pos-5 {
+                display: block;
+                width: 34px;
+                height: 34px;
+                top: 48%;
+                right: 18%;
+                opacity: 0.45;
+                --spin-dur: 9s;
+                --float-dur: 6.8s;
+                --delay: -2.2s;
+            }
+
             .bottom-nav {
                 left: 50%;
                 right: auto;
                 bottom: 20px;
                 transform: translateX(-50%);
-                width: min(470px, calc(100% - 3rem));
+                width: min(460px, calc(100% - 3rem));
                 border-radius: var(--radius-pill);
                 border: 1px solid var(--champagne);
                 padding: 6px;
                 background: rgba(255, 255, 255, 0.88);
-                box-shadow: 0 14px 36px rgba(59, 42, 32, 0.12);
+                box-shadow: 0 14px 34px rgba(59, 42, 32, 0.11);
             }
 
             .bottom-nav-item {
                 flex-direction: row;
-                gap: 0.45rem;
-                padding: 0.65rem 1.05rem;
-                font-size: 0.8rem;
+                gap: 0.42rem;
+                padding: 0.62rem 1rem;
+                font-size: 0.79rem;
             }
 
-            .bottom-nav-item svg {
-                width: 16px;
-                height: 16px;
-            }
+            .bottom-nav-item svg { width: 16px; height: 16px; }
 
             .bottom-nav-item.active {
                 background: var(--olive);
@@ -1856,38 +1503,25 @@
             }
 
             .bottom-nav-item.active::before { display: none; }
+            .toast { bottom: 90px; }
 
-            .toast { bottom: 92px; }
-
-            .back-to-top {
-                right: 28px;
-                bottom: 24px;
-                width: 50px;
-                height: 50px;
-            }
-
+            .back-to-top { right: 28px; bottom: 24px; width: 48px; height: 48px; }
             .service-tabs { grid-template-columns: repeat(4, 1fr); }
 
             .design-layout {
                 grid-template-columns: 0.96fr 1.04fr;
                 align-items: stretch;
-                gap: 2.35rem;
+                gap: 2.2rem;
             }
 
-            .includes-stage {
-                min-height: 240px;
-            }
+            .includes-stage { min-height: 205px; }
 
-            .no-gun-banner {
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-            }
+            .no-gun-banner { flex-direction: row; align-items: center; justify-content: space-between; }
 
             .agenda-card {
-                grid-template-columns: 0.84fr 1.16fr;
+                grid-template-columns: 0.82fr 1.18fr;
                 align-items: start;
-                gap: 2.25rem;
+                gap: 2.1rem;
             }
 
             .form-row-2 { grid-template-columns: 1fr 1fr; }
@@ -1896,16 +1530,11 @@
                 flex-direction: row;
                 align-items: flex-end;
                 justify-content: space-between;
-                padding: 1.2rem 1.45rem;
+                padding: 1.1rem 1.35rem;
             }
 
             .locations-grid { grid-template-columns: repeat(3, 1fr); }
-
-            .footer-inner {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
+            .footer-inner { flex-direction: row; justify-content: space-between; align-items: center; }
         }
 
         @media (min-width: 1024px) {
@@ -1916,10 +1545,9 @@
 </head>
 <body>
 
-    <!-- SPRITE SVG: ESTRELLA METÁLICA 3D INFLADA Y REDONDEADA (ORO 18K) -->
+    <!-- SPRITE SVG: ESTRELLA METÁLICA 3D INFLADA Y REDONDEADA -->
     <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden; visibility:hidden;">
         <defs>
-            <!-- Volumen inflado principal (efecto globo / charm metálico) -->
             <radialGradient id="puffyGoldBody" cx="36%" cy="30%" r="68%" fx="32%" fy="26%">
                 <stop offset="0%" stop-color="#FFFDF5"/>
                 <stop offset="18%" stop-color="#F8DF98"/>
@@ -1928,14 +1556,12 @@
                 <stop offset="100%" stop-color="#6F4910"/>
             </radialGradient>
 
-            <!-- Brillo especular central suave -->
             <radialGradient id="puffyGoldDome" cx="38%" cy="32%" r="45%">
                 <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.92"/>
                 <stop offset="45%" stop-color="#FFF2C4" stop-opacity="0.42"/>
                 <stop offset="100%" stop-color="#E0B254" stop-opacity="0"/>
             </radialGradient>
 
-            <!-- Rebote de luz cálida en el borde inferior derecho -->
             <linearGradient id="puffyRimLight" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#FFFBE8" stop-opacity="0.88"/>
                 <stop offset="45%" stop-color="#E5BC66" stop-opacity="0.28"/>
@@ -1943,7 +1569,6 @@
                 <stop offset="100%" stop-color="#F6D88C" stop-opacity="0.72"/>
             </linearGradient>
 
-            <!-- Destello líquido sobre los lóbulos inflados -->
             <linearGradient id="puffySpecular" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.88"/>
                 <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
@@ -1953,34 +1578,28 @@
                 <path d="M60 10 C70 10 71 31 80 40 C89 49 110 50 110 60 C110 70 89 71 80 80 C71 89 70 110 60 110 C50 110 49 89 40 80 C31 71 10 70 10 60 C10 50 31 49 40 40 C49 31 50 10 60 10 Z"/>
             </clipPath>
 
-            <!-- Símbolo reutilizable: Estrella inflada redondeada 3D -->
             <symbol id="star-metallic-3d" viewBox="0 0 120 120">
-                <!-- Cuerpo inflado -->
                 <path d="M60 10 C70 10 71 31 80 40 C89 49 110 50 110 60 C110 70 89 71 80 80 C71 89 70 110 60 110 C50 110 49 89 40 80 C31 71 10 70 10 60 C10 50 31 49 40 40 C49 31 50 10 60 10 Z"
                       fill="url(#puffyGoldBody)"
                       stroke="url(#puffyRimLight)"
                       stroke-width="2.4"/>
-
                 <g clip-path="url(#puffyStarClip)">
-                    <!-- Domo de volumen interior -->
                     <circle cx="52" cy="48" r="46" fill="url(#puffyGoldDome)"/>
-                    <!-- Reflejos suaves en lóbulos inflados -->
                     <ellipse cx="55" cy="28" rx="6.5" ry="13" transform="rotate(-8 55 28)" fill="url(#puffySpecular)" opacity="0.72"/>
                     <ellipse cx="30" cy="56" rx="12" ry="6" transform="rotate(-10 30 56)" fill="url(#puffySpecular)" opacity="0.62"/>
                     <ellipse cx="48" cy="48" rx="14" ry="9" transform="rotate(-34 48 48)" fill="#FFFFFF" opacity="0.48"/>
-                    <!-- Rebote cálido inferior derecho -->
                     <ellipse cx="76" cy="78" rx="16" ry="7" transform="rotate(-42 76 78)" fill="#FFE6A3" opacity="0.34"/>
                 </g>
             </symbol>
         </defs>
     </svg>
 
-    <!-- ENCABEZADO MINIMALISTA (SIN BARRA DE MENÚ SUPERIOR) -->
+    <!-- ENCABEZADO MINIMALISTA -->
     <header class="site-header">
         <div class="container header-inner">
             <a href="#inicio" class="brand" id="brand-home">
                 <span class="brand-mark" aria-hidden="true">
-                    <svg class="star-ui" width="26" height="26"><use href="#star-metallic-3d"/></svg>
+                    <svg class="star-ui" width="24" height="24"><use href="#star-metallic-3d"/></svg>
                 </span>
                 <span class="brand-text">
                     <span class="brand-name">Ponte a Brillar</span>
@@ -1994,9 +1613,7 @@
     </header>
 
     <main>
-        <!-- =========================================================
-             PORTADA / HERO — IDENTIDAD + ESTRELLAS 3D INFLADAS GIRANDO
-             ========================================================= -->
+        <!-- PORTADA / HERO -->
         <section id="inicio" class="hero">
             <div class="hero-stars-bg" aria-hidden="true">
                 <div class="star-3d-wrap star-pos-1">
@@ -2050,9 +1667,9 @@
                 <div class="hero-content">
                     <div class="hero-brand-lockup">
                         <span class="hero-eyebrow">
-                            <svg class="star-ui" width="16" height="16"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
                             Tu estudio de confianza
-                            <svg class="star-ui" width="16" height="16"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
                         </span>
                         <h1 class="hero-wordmark">Ponte a Brillar</h1>
                         <div class="hero-wordmark-rule" aria-hidden="true"></div>
@@ -2060,9 +1677,7 @@
                     </div>
 
                     <p class="hero-slogan">Es más que una <em>perforación.</em></p>
-                    <p class="hero-lead">
-                        Perforaciones con aguja estéril de uso único, joyería biocompatible y diseño corporal guiado por especialistas.
-                    </p>
+                    <p class="hero-lead">Aguja estéril de uso único, joyería biocompatible y diseño corporal.</p>
                 </div>
             </div>
         </section>
@@ -2074,51 +1689,35 @@
             <div class="container">
                 <div class="section-head">
                     <span class="section-kicker">
-                        <svg class="star-ui" width="15" height="15"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
                         Estudio &amp; Reservación
                     </span>
                     <h2 class="section-title">Servicios</h2>
-                    <p class="section-desc">
-                        Conoce nuestras experiencias especializadas, promociones vigentes y guía de cuidados antes de reservar tu cita.
-                    </p>
                 </div>
 
-                <!-- Pestañas limpias SIN "Módulo 1, 2, 3..." -->
                 <div class="service-tabs" role="tablist" aria-label="Categorías de servicios">
                     <button type="button" class="service-tab active" data-service-panel="diseno" role="tab" aria-selected="true">
-                        <span class="service-tab-kicker">
-                            <svg class="star-ui" width="11" height="11"><use href="#star-metallic-3d"/></svg>
-                            Especialidad
-                        </span>
+                        <span class="service-tab-kicker">Especialidad</span>
                         <span class="service-tab-title">Diseño de Oreja</span>
-                        <span class="service-tab-sub">By Vanya G. · 3 zonas</span>
+                        <span class="service-tab-sub">By Vanya G.</span>
                     </button>
 
                     <button type="button" class="service-tab" data-service-panel="bebes" role="tab" aria-selected="false">
-                        <span class="service-tab-kicker">
-                            <svg class="star-ui" width="11" height="11"><use href="#star-metallic-3d"/></svg>
-                            Primeros aretes
-                        </span>
+                        <span class="service-tab-kicker">Primeros aretes</span>
                         <span class="service-tab-title">Bebés</span>
                         <span class="service-tab-sub">A un paso de brillar</span>
                     </button>
 
                     <button type="button" class="service-tab" data-service-panel="promos" role="tab" aria-selected="false">
-                        <span class="service-tab-kicker">
-                            <svg class="star-ui" width="11" height="11"><use href="#star-metallic-3d"/></svg>
-                            Beneficios
-                        </span>
+                        <span class="service-tab-kicker">Beneficios</span>
                         <span class="service-tab-title">Promos Titanio</span>
-                        <span class="service-tab-sub">Lunes, Martes y Miércoles</span>
+                        <span class="service-tab-sub">Lun · Mar · Mié</span>
                     </button>
 
                     <button type="button" class="service-tab" data-service-panel="guia" role="tab" aria-selected="false">
-                        <span class="service-tab-kicker">
-                            <svg class="star-ui" width="11" height="11"><use href="#star-metallic-3d"/></svg>
-                            Información
-                        </span>
+                        <span class="service-tab-kicker">Información</span>
                         <span class="service-tab-title">Guía y Cuidados</span>
-                        <span class="service-tab-sub">FAQ, garantía y tarjeta</span>
+                        <span class="service-tab-sub">FAQ y garantía</span>
                     </button>
                 </div>
 
@@ -2131,164 +1730,109 @@
                                     <div class="media-frame design-thumb">
                                         <img src="img/diseno-oreja.jpg" alt="Diseño de oreja Ponte a Brillar" onerror="this.classList.add('is-missing')">
                                         <div class="media-fallback">
-                                            <svg class="star-ui" width="26" height="26"><use href="#star-metallic-3d"/></svg>
+                                            <svg class="star-ui" width="24" height="24"><use href="#star-metallic-3d"/></svg>
                                             <span>By Vanya G.</span>
                                         </div>
                                     </div>
                                     <div>
                                         <span class="pill-meta">Servicio Guiado</span>
                                         <h3 class="panel-title">Diseño de Oreja</h3>
-                                        <p class="panel-tagline">Menos costo × más servicios · ¡Toca ponerte brillo!</p>
+                                        <p class="panel-tagline">Menos costo × más servicios</p>
                                     </div>
                                 </div>
 
                                 <blockquote class="vanya-quote">
-                                    “Guiado por Vanya, una de nuestras 3 perforadoras: 8 años en el mundo del body piercing y licenciatura en diseño para lograr armonía en tu oreja.”
+                                    “Guiado por Vanya: 8 años en body piercing y licenciatura en diseño para dar armonía a tu oreja.”
                                 </blockquote>
 
-                                <div class="zones-trio" aria-label="Zonas incluidas en el diseño">
-                                    <div class="zone-chip-box">
-                                        <span>Zona 01</span>
-                                        <strong>Zona Alta</strong>
-                                    </div>
-                                    <div class="zone-chip-box">
-                                        <span>Zona 02</span>
-                                        <strong>Zona Media</strong>
-                                    </div>
-                                    <div class="zone-chip-box">
-                                        <span>Zona 03</span>
-                                        <strong>Zona Baja</strong>
-                                    </div>
+                                <div class="zones-trio">
+                                    <div class="zone-chip-box"><span>01</span><strong>Zona Alta</strong></div>
+                                    <div class="zone-chip-box"><span>02</span><strong>Zona Media</strong></div>
+                                    <div class="zone-chip-box"><span>03</span><strong>Zona Baja</strong></div>
                                 </div>
 
                                 <button type="button" class="btn-primary shimmer-btn" data-book-category="diseno">
                                     Reservar Diseño de Oreja
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                                 </button>
                             </div>
 
-                            <!-- ¿QUÉ INCLUYE? — 7 CUADROS EN TRANSICIÓN CON DESVANECIMIENTO -->
-                            <div class="includes-showcase" id="includes-showcase" aria-label="Beneficios incluidos en Diseño de Oreja">
+                            <!-- ¿QUÉ INCLUYE? — DESLIZABLE, SOLO NÚMERO ESQUINADO Y FLECHAS SEMITRANSLÚCIDAS COMO PUNTOS -->
+                            <div class="includes-showcase" id="includes-showcase" aria-label="Qué incluye Diseño de Oreja">
                                 <div class="includes-head">
                                     <h4>¿Qué incluye?</h4>
                                     <span>Titanio Grado Implante</span>
                                 </div>
 
                                 <div class="includes-stage" id="includes-stage" aria-live="polite">
-                                    <article class="include-slide is-active" data-slide="0">
-                                        <div class="include-slide-top">
-                                            <span class="include-slide-badge">
-                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                                                Beneficio 1 de 7
-                                            </span>
-                                            <span class="include-slide-num">01</span>
-                                        </div>
-                                        <h5 class="include-slide-title">3 servicios de perforación</h5>
-                                        <p class="include-slide-desc">Distribuidos de manera armónica en las 3 zonas de tu oreja: baja, media y alta.</p>
+                                    <article class="include-slide is-active">
+                                        <span class="include-corner-num">01</span>
+                                        <h5 class="include-slide-title">3 perforaciones</h5>
+                                        <p class="include-slide-desc">Armonizadas en zona baja, media y alta de tu oreja.</p>
                                     </article>
 
-                                    <article class="include-slide" data-slide="1">
-                                        <div class="include-slide-top">
-                                            <span class="include-slide-badge">
-                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                                                Beneficio 2 de 7
-                                            </span>
-                                            <span class="include-slide-num">02</span>
-                                        </div>
-                                        <h5 class="include-slide-title">3 joyas de diseño en Titanio grado implante</h5>
-                                        <p class="include-slide-desc">Más ligero, 100% biocompatible y el material #1 a nivel global para favorecer una cicatrización limpia y segura.</p>
+                                    <article class="include-slide">
+                                        <span class="include-corner-num">02</span>
+                                        <h5 class="include-slide-title">3 joyas de diseño en Titanio</h5>
+                                        <p class="include-slide-desc">Grado implante, 100% biocompatible y ligero para cicatrizar mejor.</p>
                                     </article>
 
-                                    <article class="include-slide" data-slide="2">
-                                        <div class="include-slide-top">
-                                            <span class="include-slide-badge">
-                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                                                Beneficio 3 de 7
-                                            </span>
-                                            <span class="include-slide-num">03</span>
-                                        </div>
+                                    <article class="include-slide">
+                                        <span class="include-corner-num">03</span>
                                         <h5 class="include-slide-title">Asesoría personalizada</h5>
-                                        <p class="include-slide-desc">Acompañamiento experto en ubicación anatómica, proporciones, estilo y composición integral de tu oreja.</p>
+                                        <p class="include-slide-desc">Ubicación anatómica, estilo y composición guiada.</p>
                                     </article>
 
-                                    <article class="include-slide" data-slide="3">
-                                        <div class="include-slide-top">
-                                            <span class="include-slide-badge">
-                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                                                Beneficio 4 de 7
-                                            </span>
-                                            <span class="include-slide-num">04</span>
-                                        </div>
-                                        <h5 class="include-slide-title">Tarjeta de cuidados + kit de limpieza</h5>
-                                        <p class="include-slide-desc">Recibes tu tarjeta física de cuidados impresos junto con un kit completo de limpieza para 3 meses.</p>
+                                    <article class="include-slide">
+                                        <span class="include-corner-num">04</span>
+                                        <h5 class="include-slide-title">Tarjeta + kit de limpieza</h5>
+                                        <p class="include-slide-desc">Cuidados impresos y kit de limpieza para 3 meses.</p>
                                     </article>
 
-                                    <article class="include-slide" data-slide="4">
-                                        <div class="include-slide-top">
-                                            <span class="include-slide-badge">
-                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                                                Beneficio 5 de 7
-                                            </span>
-                                            <span class="include-slide-num">05</span>
-                                        </div>
-                                        <h5 class="include-slide-title">Garantía de 3 meses en tu joya</h5>
-                                        <p class="include-slide-desc">Respaldo directo en la calidad de tus piezas y enrosque durante los primeros tres meses.</p>
+                                    <article class="include-slide">
+                                        <span class="include-corner-num">05</span>
+                                        <h5 class="include-slide-title">Garantía de 3 meses</h5>
+                                        <p class="include-slide-desc">Respaldo directo en la calidad y enrosque de tus joyas.</p>
                                     </article>
 
-                                    <article class="include-slide" data-slide="5">
-                                        <div class="include-slide-top">
-                                            <span class="include-slide-badge">
-                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                                                Beneficio 6 de 7
-                                            </span>
-                                            <span class="include-slide-num">06</span>
-                                        </div>
+                                    <article class="include-slide">
+                                        <span class="include-corner-num">06</span>
                                         <h5 class="include-slide-title">1 valoración post-piercing</h5>
-                                        <p class="include-slide-desc">Revisión profesional de seguimiento para verificar el avance de tu cicatrización y resolver cualquier duda.</p>
+                                        <p class="include-slide-desc">Revisión de seguimiento para verificar tu cicatrización.</p>
                                     </article>
 
-                                    <article class="include-slide" data-slide="6">
-                                        <div class="include-slide-top">
-                                            <span class="include-slide-badge">
-                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                                                Beneficio 7 de 7
-                                            </span>
-                                            <span class="include-slide-num">07</span>
-                                        </div>
+                                    <article class="include-slide">
+                                        <span class="include-corner-num">07</span>
                                         <h5 class="include-slide-title">Aretes de regalo en par</h5>
-                                        <p class="include-slide-desc">Incluye un par de aretes de obsequio pensados para lucir en tus perforaciones de nacimiento.</p>
+                                        <p class="include-slide-desc">Obsequio pensado para tus perforaciones de nacimiento.</p>
                                     </article>
                                 </div>
 
-                                <div class="includes-progress-track" aria-hidden="true">
-                                    <div class="includes-progress-fill" id="includes-progress-fill"></div>
-                                </div>
+                                <div class="includes-nav-bar">
+                                    <button type="button" class="include-arrow-dot" id="include-prev" aria-label="Anterior">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                                    </button>
 
-                                <div class="includes-controls">
-                                    <div class="includes-dots" id="includes-dots" role="tablist" aria-label="Seleccionar beneficio incluido">
-                                        <button type="button" class="include-dot active" data-goto="0" aria-label="Punto 1">1</button>
-                                        <button type="button" class="include-dot" data-goto="1" aria-label="Punto 2">2</button>
-                                        <button type="button" class="include-dot" data-goto="2" aria-label="Punto 3">3</button>
-                                        <button type="button" class="include-dot" data-goto="3" aria-label="Punto 4">4</button>
-                                        <button type="button" class="include-dot" data-goto="4" aria-label="Punto 5">5</button>
-                                        <button type="button" class="include-dot" data-goto="5" aria-label="Punto 6">6</button>
-                                        <button type="button" class="include-dot" data-goto="6" aria-label="Punto 7">7</button>
+                                    <div class="includes-dots" id="includes-dots" role="tablist" aria-label="Beneficios">
+                                        <button type="button" class="include-dot active" data-goto="0" aria-label="Beneficio 1"></button>
+                                        <button type="button" class="include-dot" data-goto="1" aria-label="Beneficio 2"></button>
+                                        <button type="button" class="include-dot" data-goto="2" aria-label="Beneficio 3"></button>
+                                        <button type="button" class="include-dot" data-goto="3" aria-label="Beneficio 4"></button>
+                                        <button type="button" class="include-dot" data-goto="4" aria-label="Beneficio 5"></button>
+                                        <button type="button" class="include-dot" data-goto="5" aria-label="Beneficio 6"></button>
+                                        <button type="button" class="include-dot" data-goto="6" aria-label="Beneficio 7"></button>
                                     </div>
-                                    <div class="includes-arrows">
-                                        <button type="button" class="include-arrow" id="include-prev" aria-label="Beneficio anterior">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 18l-6-6 6-6"/></svg>
-                                        </button>
-                                        <button type="button" class="include-arrow" id="include-next" aria-label="Siguiente beneficio">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18l6-6-6-6"/></svg>
-                                        </button>
-                                    </div>
+
+                                    <button type="button" class="include-arrow-dot" id="include-next" aria-label="Siguiente">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- PERFORACIONES A BEBÉS -->
+                <!-- BEBÉS -->
                 <div class="service-panel" id="panel-bebes" role="tabpanel">
                     <div class="service-shell sage">
                         <div class="babies-top">
@@ -2296,72 +1840,53 @@
                                 <div class="media-frame babies-thumb">
                                     <img src="img/bebes.jpg" alt="Perforaciones a bebés Ponte a Brillar" onerror="this.classList.add('is-missing')">
                                     <div class="media-fallback">
-                                        <svg class="star-ui" width="26" height="26"><use href="#star-metallic-3d"/></svg>
-                                        <span>Primeros Aretes</span>
+                                        <svg class="star-ui" width="24" height="24"><use href="#star-metallic-3d"/></svg>
+                                        <span>Bebés</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <span class="pill-meta" style="background: rgba(255,255,255,0.85);">By Vanya G. · Brillo sin dolor</span>
+                                    <span class="pill-meta" style="background: rgba(255,255,255,0.85);">By Vanya G. · +6 meses</span>
                                     <h3 class="panel-title" style="color: var(--olive);">A un paso de brillar</h3>
-                                    <p class="section-desc" style="margin-top: 0.25rem;">
-                                        Apoyamos que los primeros aretes se realicen después de los <strong>6 meses</strong>, en un espacio confiable, seguro y en manos de una experta.
-                                    </p>
                                 </div>
                             </div>
 
                             <div class="babies-badges">
-                                <span class="babies-badge">Duración total: 1 hora</span>
-                                <span class="babies-badge">Exclusivo bajo cita</span>
-                                <span class="babies-badge">90% menos doloroso</span>
-                                <span class="babies-badge">Cánula desechable y estéril</span>
+                                <span class="babies-badge">Duración: 1 hora</span>
+                                <span class="babies-badge">Solo bajo cita</span>
+                                <span class="babies-badge">90% menos dolor</span>
+                                <span class="babies-badge">Cánula estéril</span>
                             </div>
                         </div>
 
                         <div class="steps-grid">
                             <article class="step-card">
-                                <div class="step-head">
-                                    <span class="step-num">01</span>
-                                    <span class="step-chip">Bienvenida</span>
-                                </div>
+                                <div class="step-head"><span class="step-num">01</span><span class="step-chip">Inicio</span></div>
                                 <h5>Presentación</h5>
-                                <p>Conocen a nuestra perforadora para resolver todas sus dudas antes de pasar a la zona de perforación.</p>
+                                <p>Resolvemos dudas con nuestra perforadora antes de iniciar.</p>
                             </article>
 
                             <article class="step-card">
-                                <div class="step-head">
-                                    <span class="step-num">02</span>
-                                    <span class="step-chip">Lidocaína</span>
-                                </div>
+                                <div class="step-head"><span class="step-num">02</span><span class="step-chip">Lidocaína</span></div>
                                 <h5>Preparación</h5>
-                                <p>Limpieza en las orejas del bebé, aplicación de lidocaína tópica y recubrimiento protector.</p>
+                                <p>Limpieza y aplicación de lidocaína tópica protectora.</p>
                             </article>
 
                             <article class="step-card">
-                                <div class="step-head">
-                                    <span class="step-num">03</span>
-                                    <span class="step-chip">30 min</span>
-                                </div>
-                                <h5>Paseo por la plaza</h5>
-                                <p>Espera tranquila de 30 minutos para realizar un servicio 90% menos doloroso para el bienestar del bebé.</p>
+                                <div class="step-head"><span class="step-num">03</span><span class="step-chip">30 min</span></div>
+                                <h5>Paseo tranquilo</h5>
+                                <p>Espera de 30 min para un proceso 90% menos doloroso.</p>
                             </article>
 
                             <article class="step-card">
-                                <div class="step-head">
-                                    <span class="step-num">04</span>
-                                    <span class="step-chip">Pausa 15 min</span>
-                                </div>
-                                <h5>Perforación con calma</h5>
-                                <p>Al volver a tienda otorgamos 15 minutos tras la primera perforación por si el bebé requiere calma.</p>
+                                <div class="step-head"><span class="step-num">04</span><span class="step-chip">Pausa 15 min</span></div>
+                                <h5>Perforación</h5>
+                                <p>Pausa de 15 min tras el primer arete si el bebé necesita calma.</p>
                             </article>
                         </div>
 
                         <div class="no-gun-banner">
-                            <div>
-                                <strong>En contra de los piercings con pistola.</strong> Trabajamos con cánula (aguja de bisel fino y alargado para un trabajo delicado), material 100% desechable y estéril.
-                            </div>
-                            <button type="button" class="btn-olive" data-book-category="bebes">
-                                Agendar cita bebé
-                            </button>
+                            <div><strong>Nunca con pistola.</strong> Cánula desechable y estéril de bisel fino.</div>
+                            <button type="button" class="btn-olive" data-book-category="bebes">Agendar cita bebé</button>
                         </div>
                     </div>
                 </div>
@@ -2369,114 +1894,78 @@
                 <!-- PROMOS TITANIO -->
                 <div class="service-panel" id="panel-promos" role="tabpanel">
                     <div class="service-shell">
-                        <span class="pill-meta">Beneficios en Estudio</span>
+                        <span class="pill-meta">Servicios en Titanio</span>
                         <h3 class="panel-title">Promos Titanio</h3>
-                        <p class="section-desc" style="margin-top: 0.3rem;">
-                            Beneficios pensados para que elijas Titanio grado implante en tus perforaciones.
-                        </p>
 
                         <div class="promos-grid">
                             <article class="promo-card">
                                 <div>
                                     <span class="promo-day">Lunes</span>
                                     <div class="promo-big">20%</div>
-                                    <p class="promo-desc">De descuento en todos los servicios realizados en <strong>Titanio</strong>.</p>
+                                    <p class="promo-desc">Descuento en todos los servicios en Titanio.</p>
                                 </div>
-                                <button type="button" class="arrow-link" data-book-category="promos" data-book-promo="lunes">
-                                    Consultar / Agendar →
-                                </button>
+                                <button type="button" class="arrow-link" data-book-category="promos" data-book-promo="lunes">Agendar →</button>
                             </article>
 
                             <article class="promo-card">
                                 <div>
                                     <span class="promo-day">Martes</span>
                                     <div class="promo-big">2×1</div>
-                                    <p class="promo-desc">En todos los servicios en <strong>Titanio</strong> para <strong>estudiantes y cumpleañeros</strong>.</p>
+                                    <p class="promo-desc">En Titanio para estudiantes y cumpleañeros.</p>
                                 </div>
-                                <button type="button" class="arrow-link" data-book-category="promos" data-book-promo="martes">
-                                    Consultar / Agendar →
-                                </button>
+                                <button type="button" class="arrow-link" data-book-category="promos" data-book-promo="martes">Agendar →</button>
                             </article>
 
                             <article class="promo-card">
                                 <div>
                                     <span class="promo-day">Miércoles</span>
                                     <div class="promo-big">3×2</div>
-                                    <p class="promo-desc">En todos los servicios realizados en <strong>Titanio</strong>.</p>
+                                    <p class="promo-desc">En todos los servicios realizados en Titanio.</p>
                                 </div>
-                                <button type="button" class="arrow-link" data-book-category="promos" data-book-promo="miercoles">
-                                    Consultar / Agendar →
-                                </button>
+                                <button type="button" class="arrow-link" data-book-category="promos" data-book-promo="miercoles">Agendar →</button>
                             </article>
                         </div>
 
-                        <div class="promo-foot">
-                            <span>* Consulta disponibilidad y términos vigentes en sucursal o WhatsApp.</span>
-                            <span>Promociones sujetas a validación en tienda.</span>
-                        </div>
+                        <div class="promo-foot">* Sujeto a disponibilidad y validación en tienda.</div>
                     </div>
                 </div>
 
-                <!-- GUÍA, FAQ Y CUIDADOS -->
+                <!-- GUÍA Y CUIDADOS -->
                 <div class="service-panel" id="panel-guia" role="tabpanel">
                     <div class="service-shell">
-                        <span class="pill-meta">Antes y Después de tu Perforación</span>
-                        <h3 class="panel-title">Preguntas Frecuentes y Cuidados</h3>
+                        <span class="pill-meta">Información clave</span>
+                        <h3 class="panel-title">Guía y Cuidados</h3>
 
                         <div class="faq-grid">
                             <details class="faq-item" open>
-                                <summary>
-                                    ¿Requiero cita para perforarme?
-                                    <span class="faq-icon">+</span>
-                                </summary>
-                                <div class="faq-body">
-                                    Para perforaciones individuales trabajamos en <strong>horario fijo</strong> (publicado con un día de anticipación en redes sociales), aunque puedes agendar aquí para asegurar atención. <strong>Perforación a bebés</strong> es exclusivamente bajo cita.
-                                </div>
+                                <summary>¿Requiero cita?<span class="faq-icon">+</span></summary>
+                                <div class="faq-body">No, operamos en horario fijo publicado un día antes en redes. <strong>Bebés</strong> es solo con cita.</div>
                             </details>
 
                             <details class="faq-item">
-                                <summary>
-                                    ¿Con qué perforan y aplican anestesia?
-                                    <span class="faq-icon">+</span>
-                                </summary>
-                                <div class="faq-body">
-                                    Perforamos únicamente con <strong>aguja estéril de uso único</strong> (una por servicio, nunca pistola). La anestesia inyectada está prohibida para perforadores, por lo que utilizamos <strong>lidocaína en spray</strong> y técnicas de relajación para tu bienestar.
-                                </div>
+                                <summary>¿Aguja y anestesia?<span class="faq-icon">+</span></summary>
+                                <div class="faq-body">Solo aguja estéril de uso único. Sin anestesia inyectada; usamos <strong>lidocaína en spray</strong> y relajación.</div>
                             </details>
 
                             <details class="faq-item">
-                                <summary>
-                                    ¿Puedo llevar mi propia pieza?
-                                    <span class="faq-icon">+</span>
-                                </summary>
-                                <div class="faq-body">
-                                    Sí, siempre que sea <strong>nueva</strong> y cumpla con las reglas de materiales y formas aptas para inicio. Al ser joya del cliente no cubre garantía y el costo equivale al servicio básico.
-                                </div>
+                                <summary>¿Puedo llevar mi pieza?<span class="faq-icon">+</span></summary>
+                                <div class="faq-body">Sí, debe ser nueva y apta para inicio. Sin garantía; mismo costo que servicio básico.</div>
                             </details>
 
                             <details class="faq-item">
-                                <summary>
-                                    ¿Qué incluye mi servicio y mi tarjeta física?
-                                    <span class="faq-icon">+</span>
-                                </summary>
-                                <div class="faq-body">
-                                    Al pagar tu servicio recibes tu tarjeta de cuidados con contacto de la perforadora. Presentándola físicamente con sus sellos incluye: <strong>valoración por cualquier circunstancia</strong>, <strong>garantía en joya y enrosque</strong>, y <strong>valoración para cambio, esterilización y colocación</strong>.
-                                </div>
+                                <summary>¿Qué incluye mi tarjeta física?<span class="faq-icon">+</span></summary>
+                                <div class="faq-body">Con tus sellos: valoración gratuita, garantía en joya/enrosque y cambio, esterilización y colocación.</div>
                             </details>
 
                             <details class="faq-item">
-                                <summary>
-                                    Reglas esenciales de cuidados (45 días)
-                                    <span class="faq-icon">+</span>
-                                </summary>
+                                <summary>Cuidados básicos (45 días)<span class="faq-icon">+</span></summary>
                                 <div class="faq-body">
-                                    Sigue siempre las indicaciones de tu tarjeta impresa y evita sustancias no indicadas:
                                     <div class="care-tags">
-                                        <span class="care-tag">45 días sin mar ni alberca</span>
+                                        <span class="care-tag">Sin mar ni alberca</span>
                                         <span class="care-tag">Sin alcohol ni agua oxigenada</span>
-                                        <span class="care-tag">Boca: enjuague sin alcohol tras comer</span>
-                                        <span class="care-tag">Nariz: limpieza interna con hisopos y no sonar</span>
-                                        <span class="care-tag">Limpieza extra ante sudoración</span>
+                                        <span class="care-tag">Boca: enjuague sin alcohol</span>
+                                        <span class="care-tag">Nariz: hisopos · no sonar</span>
+                                        <span class="care-tag">Limpieza extra si sudas</span>
                                     </div>
                                 </div>
                             </details>
@@ -2484,31 +1973,18 @@
                     </div>
                 </div>
 
-                <!-- =========================================================
-                     AGENDA TU CITA — VISTA SIMPLIFICADA Y ELEGANTE
-                     ========================================================= -->
+                <!-- AGENDA TU CITA -->
                 <div id="agenda" class="agenda-wrap">
                     <div class="agenda-card" id="agenda-card">
                         <div>
-                            <span class="section-kicker" style="margin-bottom: 0.35rem;">
-                                <svg class="star-ui" width="15" height="15"><use href="#star-metallic-3d"/></svg>
+                            <span class="section-kicker" style="margin-bottom: 0.3rem;">
+                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
                                 Reservación Directa
                             </span>
                             <h3 class="panel-title">Agenda tu cita</h3>
-                            <p class="section-desc" style="margin-top: 0.45rem;">
-                                Elige el tipo de servicio y tu sucursal en segundos. Prepararemos tu solicitud lista para confirmar horario por WhatsApp.
+                            <p class="section-desc" style="margin-top: 0.35rem;">
+                                Elige tu servicio y sucursal para enviar tu solicitud precargada por WhatsApp.
                             </p>
-
-                            <ul class="agenda-bullets">
-                                <li>
-                                    <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                                    <span><strong>Bebés</strong> y <strong>Diseño de Oreja</strong> requieren cita confirmada.</span>
-                                </li>
-                                <li>
-                                    <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                                    <span>¿Dudas sobre piezas de diseño o promos? Escríbenos directo.</span>
-                                </li>
-                            </ul>
 
                             <a href="https://wa.me/525653317595" target="_blank" rel="noopener noreferrer" class="wa-chip">
                                 <span>WhatsApp</span>
@@ -2517,9 +1993,8 @@
                         </div>
 
                         <form class="agenda-form" id="agenda-form">
-                            <!-- 1. Selección elegante por píldoras -->
                             <div class="field">
-                                <span class="field-label">1. ¿Qué deseas agendar?</span>
+                                <span class="field-label">1. Servicio</span>
                                 <div class="pill-group" id="booking-category-pills" role="radiogroup" aria-label="Tipo de servicio">
                                     <button type="button" class="choice-pill active" data-cat="diseno">Diseño de Oreja</button>
                                     <button type="button" class="choice-pill" data-cat="bebes">Bebés</button>
@@ -2529,24 +2004,22 @@
                                 </div>
                             </div>
 
-                            <!-- Subpanel limpio: Promos Titanio -->
                             <div class="sub-options-box" id="sub-promos">
-                                <span class="field-label">Elige tu día de promoción</span>
+                                <span class="field-label">Día de promoción</span>
                                 <div class="mini-pills" id="booking-promo-pills">
-                                    <button type="button" class="mini-pill active" data-promo="lunes">Lunes · 20% Titanio</button>
-                                    <button type="button" class="mini-pill" data-promo="martes">Martes · 2×1 Est. / Cumple</button>
-                                    <button type="button" class="mini-pill" data-promo="miercoles">Miércoles · 3×2 Titanio</button>
+                                    <button type="button" class="mini-pill active" data-promo="lunes">Lunes · 20%</button>
+                                    <button type="button" class="mini-pill" data-promo="martes">Martes · 2×1</button>
+                                    <button type="button" class="mini-pill" data-promo="miercoles">Miércoles · 3×2</button>
                                 </div>
                             </div>
 
-                            <!-- Subpanel limpio: Perforación Individual -->
                             <div class="sub-options-box" id="sub-individual">
                                 <div class="field">
                                     <span class="field-label">Zona</span>
                                     <div class="mini-pills" id="booking-zone-pills">
                                         <button type="button" class="mini-pill active" data-bzone="oreja">Oreja</button>
                                         <button type="button" class="mini-pill" data-bzone="nariz">Nariz</button>
-                                        <button type="button" class="mini-pill" data-bzone="boca">Boca</button>
+                                        <button type="button" class="mini-pill" data-bzone="labio">Labio</button>
                                         <button type="button" class="mini-pill" data-bzone="cuerpo">Ceja y Cuerpo</button>
                                     </div>
                                 </div>
@@ -2567,37 +2040,34 @@
                                 </div>
                             </div>
 
-                            <!-- Resumen limpio en vivo -->
                             <div class="agenda-summary-bar" aria-live="polite">
                                 <span>Selección</span>
                                 <strong id="booking-summary-text">Diseño de Oreja (By Vanya G.)</strong>
                             </div>
 
-                            <!-- 2. Sucursal por píldoras limpias -->
                             <div class="field">
                                 <span class="field-label">2. Sucursal</span>
                                 <div class="pill-group" id="booking-branch-pills" role="radiogroup" aria-label="Sucursal">
-                                    <button type="button" class="choice-pill active" data-branch="Carranza">Carranza (Centro)</button>
-                                    <button type="button" class="choice-pill" data-branch="Plaza El Dorado">Plaza El Dorado</button>
-                                    <button type="button" class="choice-pill" data-branch="Ciudad Valles">Ciudad Valles</button>
+                                    <button type="button" class="choice-pill active" data-branch="Carranza">Carranza</button>
+                                    <button type="button" class="choice-pill" data-branch="Plaza El Dorado">El Dorado</button>
+                                    <button type="button" class="choice-pill" data-branch="Ciudad Valles">Cd. Valles</button>
                                 </div>
                             </div>
 
-                            <!-- 3. Datos breves -->
                             <div class="form-row-2">
                                 <div class="field">
-                                    <label class="field-label" for="agenda-name">Tu nombre</label>
-                                    <input type="text" id="agenda-name" placeholder="Escribe tu nombre" required>
+                                    <label class="field-label" for="agenda-name">Nombre</label>
+                                    <input type="text" id="agenda-name" placeholder="Tu nombre" required>
                                 </div>
                                 <div class="field">
-                                    <label class="field-label" for="agenda-when">Día / Horario tentativo</label>
-                                    <input type="text" id="agenda-when" placeholder="Ej. Sábado por la tarde">
+                                    <label class="field-label" for="agenda-when">Día / horario</label>
+                                    <input type="text" id="agenda-when" placeholder="Ej. Sábado tarde">
                                 </div>
                             </div>
 
                             <button type="submit" class="btn-wa-submit shimmer-btn">
-                                Enviar solicitud por WhatsApp
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                                Enviar por WhatsApp
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                             </button>
                         </form>
                     </div>
@@ -2606,50 +2076,47 @@
         </section>
 
         <!-- =========================================================
-             VISTA · CATÁLOGO
+             VISTA · CATÁLOGO COMPLETO (26 FICHAS — TODAS LAS ZONAS)
              ========================================================= -->
         <section id="view-catalogo" class="view-section" role="tabpanel" aria-label="Catálogo">
             <div class="container">
                 <div class="section-head">
                     <span class="section-kicker">
-                        <svg class="star-ui" width="15" height="15"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
                         Joyería &amp; Perforaciones
                     </span>
                     <h2 class="section-title">Catálogo</h2>
-                    <p class="section-desc">
-                        Costos individuales por perforación / orificio con joya básica + servicio. Cambia el material o filtra por zona anatómica.
-                    </p>
+                    <p class="section-desc">Costo individual por perforación con joya básica + servicio.</p>
                 </div>
 
                 <div class="catalog-toolbar">
                     <div>
-                        <span class="bar-label">Material de joya básica</span>
-                        <div class="material-toggle" id="material-toggle" data-active="titanio" role="tablist" aria-label="Selector de material">
+                        <span class="bar-label">Material</span>
+                        <div class="material-toggle" id="material-toggle" data-active="titanio" role="tablist" aria-label="Material">
                             <span class="toggle-glider" aria-hidden="true"></span>
-                            <button type="button" class="material-btn" data-material="acero" role="tab" aria-selected="false">Acero Plateado</button>
-                            <button type="button" class="material-btn" data-material="color" role="tab" aria-selected="false">Acero Color</button>
-                            <button type="button" class="material-btn active" data-material="titanio" role="tab" aria-selected="true">Titanio Natural</button>
+                            <button type="button" class="material-btn" data-material="acero" role="tab" aria-selected="false">Acero</button>
+                            <button type="button" class="material-btn" data-material="color" role="tab" aria-selected="false">Color</button>
+                            <button type="button" class="material-btn active" data-material="titanio" role="tab" aria-selected="true">Titanio</button>
                         </div>
                     </div>
 
                     <div>
-                        <span class="bar-label">Zona corporal</span>
+                        <span class="bar-label">Zona</span>
                         <div class="zone-tabs" id="zone-tabs">
-                            <button type="button" class="zone-tab active" data-zone="oreja">Oreja <span>14</span></button>
+                            <button type="button" class="zone-tab active" data-zone="todas">Todas <span>26</span></button>
+                            <button type="button" class="zone-tab" data-zone="oreja">Oreja <span>14</span></button>
                             <button type="button" class="zone-tab" data-zone="nariz">Nariz <span>4</span></button>
-                            <button type="button" class="zone-tab" data-zone="boca">Boca <span>5</span></button>
-                            <button type="button" class="zone-tab" data-zone="cuerpo">Ceja y Cuerpo <span>3</span></button>
+                            <button type="button" class="zone-tab" data-zone="labio">Labio <span>5</span></button>
+                            <button type="button" class="zone-tab" data-zone="cuerpo">Ceja · Ombligo · Pezón <span>3</span></button>
                         </div>
                     </div>
                 </div>
 
-                <div class="catalog-grid" id="catalog-grid" aria-live="polite">
-                    <!-- Tarjetas inyectadas por JS -->
-                </div>
+                <div class="catalog-grid" id="catalog-grid" aria-live="polite"></div>
 
                 <div class="catalog-footnote">
-                    <div><strong>Acero Color:</strong> Disponible en dorado, negro, tornasol o rosado (en pezón: solo dorado).</div>
-                    <div><strong>Piezas de diseño:</strong> Disponibles en tienda en Acero, Titanio u Oro; se cobra el costo de la pieza elegida más el servicio de perforación indicado en cada ficha.</div>
+                    <div><strong>Color:</strong> Dorado, negro, tornasol o rosado (en pezón: solo dorado).</div>
+                    <div><strong>Piezas de diseño:</strong> Costo de pieza elegida en tienda + servicio indicado en cada ficha.</div>
                 </div>
             </div>
         </section>
@@ -2661,13 +2128,10 @@
             <div class="container">
                 <div class="section-head">
                     <span class="section-kicker">
-                        <svg class="star-ui" width="15" height="15"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
                         Visítanos
                     </span>
                     <h2 class="section-title">Sucursales</h2>
-                    <p class="section-desc">
-                        Consulta horarios diarios en nuestras redes sociales o agenda directamente en tu sede más cercana.
-                    </p>
                 </div>
 
                 <div class="locations-grid">
@@ -2677,45 +2141,37 @@
                                 <h3>Carranza</h3>
                                 <span class="location-badge">Centro</span>
                             </div>
-                            <p class="location-address">Av. Venustiano Carranza 484, Zona Centro, San Luis Potosí.</p>
+                            <p class="location-address">Av. Venustiano Carranza 484, Zona Centro, SLP.</p>
                         </div>
                         <div class="location-links">
-                            <a href="https://maps.google.com/?q=Av.+Venustiano+Carranza+484,+Centro,+San+Luis+Potosi" target="_blank" rel="noopener noreferrer" class="arrow-link">
-                                Ver mapa ↗
-                            </a>
-                            <button type="button" class="arrow-link" data-select-branch="Carranza">
-                                Agendar aquí →
-                            </button>
+                            <a href="https://maps.google.com/?q=Av.+Venustiano+Carranza+484,+Centro,+San+Luis+Potosi" target="_blank" rel="noopener noreferrer" class="arrow-link">Mapa ↗</a>
+                            <button type="button" class="arrow-link" data-select-branch="Carranza">Agendar →</button>
                         </div>
                     </article>
 
                     <article class="location-card">
                         <div>
                             <div class="location-top">
-                                <h3>Plaza El Dorado</h3>
+                                <h3>El Dorado</h3>
                                 <span class="location-badge">Sucursal</span>
                             </div>
-                            <p class="location-address">Horario fijo publicado con un día de anticipación en redes sociales.</p>
+                            <p class="location-address">Horario fijo publicado un día antes en redes.</p>
                         </div>
                         <div class="location-links">
-                            <button type="button" class="arrow-link" data-select-branch="Plaza El Dorado">
-                                Agendar aquí →
-                            </button>
+                            <button type="button" class="arrow-link" data-select-branch="Plaza El Dorado">Agendar →</button>
                         </div>
                     </article>
 
                     <article class="location-card">
                         <div>
                             <div class="location-top">
-                                <h3>Ciudad Valles</h3>
+                                <h3>Cd. Valles</h3>
                                 <span class="location-badge">Sucursal</span>
                             </div>
-                            <p class="location-address">Consulta horarios y disponibilidad de atención en redes o WhatsApp.</p>
+                            <p class="location-address">Consulta horarios en redes o WhatsApp.</p>
                         </div>
                         <div class="location-links">
-                            <button type="button" class="arrow-link" data-select-branch="Ciudad Valles">
-                                Consultar / Agendar →
-                            </button>
+                            <button type="button" class="arrow-link" data-select-branch="Ciudad Valles">Agendar →</button>
                         </div>
                     </article>
                 </div>
@@ -2728,18 +2184,16 @@
         <div class="container footer-inner">
             <span>Ponte a Brillar · Estudio de Perforación</span>
             <div class="footer-links">
-                <a href="https://wa.me/525653317595" target="_blank" rel="noopener noreferrer" class="social-link">
-                    WhatsApp: +52 56 5331 7595
-                </a>
+                <a href="https://wa.me/525653317595" target="_blank" rel="noopener noreferrer" class="social-link">+52 56 5331 7595</a>
                 <a href="https://www.instagram.com/ponteabrillar_perforaciones/" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg>
                     @ponteabrillar_perforaciones
                 </a>
             </div>
         </div>
     </footer>
 
-    <!-- ÚNICA BARRA DE NAVEGACIÓN EN LA BASE DE LA PÁGINA -->
+    <!-- ÚNICA BARRA DE NAVEGACIÓN EN LA BASE -->
     <nav class="bottom-nav" aria-label="Menú principal">
         <button type="button" class="bottom-nav-item active" data-view-target="servicios" aria-current="page">
             <svg viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3z"/></svg>
@@ -2755,9 +2209,9 @@
         </button>
     </nav>
 
-    <!-- BOTÓN SEMITRANSPARENTE PARA IR ARRIBA -->
+    <!-- BOTÓN IR ARRIBA -->
     <button type="button" class="back-to-top" id="back-to-top" aria-label="Volver arriba" title="Volver arriba">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 19V5"/>
             <path d="M6.5 10.5L12 5l5.5 5.5"/>
         </svg>
@@ -2766,15 +2220,12 @@
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script>
-        /* =========================================================
-           CONFIGURACIÓN WHATSAPP (México +52)
-           ========================================================= */
         const STUDIO_CONFIG = {
             whatsappNumber: "525653317595"
         };
 
         /* =========================================================
-           CONTROL DE VISTA ÚNICA (MENÚ BASE)
+           NAVEGACIÓN DE VISTAS (BASE)
            ========================================================= */
         let activeView = "servicios";
 
@@ -2795,7 +2246,7 @@
             if (scrollToSection) {
                 const targetEl = document.getElementById(`view-${viewName}`);
                 if (targetEl) {
-                    const y = targetEl.getBoundingClientRect().top + window.scrollY - 68;
+                    const y = targetEl.getBoundingClientRect().top + window.scrollY - 64;
                     window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
                 }
             }
@@ -2833,13 +2284,13 @@
         });
 
         /* =========================================================
-           ¿QUÉ INCLUYE? — TRANSICIÓN AUTOMÁTICA CON DESVANECIMIENTO
+           ¿QUÉ INCLUYE? — DESVANECIMIENTO + DESLIZABLE (SWIPE / DRAG)
            ========================================================= */
         (function initIncludesShowcase() {
             const showcase = document.getElementById("includes-showcase");
+            const stage = document.getElementById("includes-stage");
             const slides = Array.from(document.querySelectorAll(".include-slide"));
             const dots = Array.from(document.querySelectorAll(".include-dot"));
-            const progressFill = document.getElementById("includes-progress-fill");
             const prevBtn = document.getElementById("include-prev");
             const nextBtn = document.getElementById("include-next");
 
@@ -2847,290 +2298,279 @@
             let currentIndex = 0;
             let timerId = null;
             let isPaused = false;
+            let startX = 0;
+            let isDragging = false;
 
-            showcase.style.setProperty("--slide-dur", `${DURATION}ms`);
-
-            function restartProgress() {
-                progressFill.classList.remove("animating");
-                void progressFill.offsetWidth;
-                progressFill.classList.add("animating");
-            }
-
-            function goToSlide(nextIndex) {
+            function goToSlide(nextIndex, direction = 1) {
                 const total = slides.length;
                 const normalized = (nextIndex + total) % total;
-                if (normalized === currentIndex) {
-                    restartProgress();
-                    return;
-                }
+                if (normalized === currentIndex) return;
 
                 const outgoing = slides[currentIndex];
                 const incoming = slides[normalized];
 
-                slides.forEach(s => s.classList.remove("is-leaving"));
+                slides.forEach(s => s.classList.remove("is-leaving-left", "is-leaving-right"));
                 outgoing.classList.remove("is-active");
-                outgoing.classList.add("is-leaving");
+                outgoing.classList.add(direction >= 0 ? "is-leaving-left" : "is-leaving-right");
 
-                incoming.classList.remove("is-leaving");
+                incoming.classList.remove("is-leaving-left", "is-leaving-right");
                 incoming.classList.add("is-active");
 
-                dots.forEach((dot, idx) => {
-                    dot.classList.toggle("active", idx === normalized);
-                });
-
+                dots.forEach((dot, idx) => dot.classList.toggle("active", idx === normalized));
                 currentIndex = normalized;
-                restartProgress();
             }
 
             function scheduleNext() {
                 clearTimeout(timerId);
                 if (isPaused) return;
                 timerId = setTimeout(() => {
-                    const panelVisible = document.getElementById("panel-diseno").classList.contains("active")
-                        && activeView === "servicios";
-                    if (panelVisible) {
-                        goToSlide(currentIndex + 1);
-                    }
+                    const visible = document.getElementById("panel-diseno").classList.contains("active") && activeView === "servicios";
+                    if (visible) goToSlide(currentIndex + 1, 1);
                     scheduleNext();
                 }, DURATION);
             }
 
-            function pauseAuto() {
-                isPaused = true;
-                showcase.classList.add("is-paused");
-                clearTimeout(timerId);
-            }
-
-            function resumeAuto() {
-                isPaused = false;
-                showcase.classList.remove("is-paused");
-                restartProgress();
-                scheduleNext();
-            }
-
             dots.forEach(dot => {
                 dot.addEventListener("click", () => {
-                    goToSlide(Number(dot.dataset.goto));
+                    const target = Number(dot.dataset.goto);
+                    goToSlide(target, target >= currentIndex ? 1 : -1);
                     scheduleNext();
                 });
             });
 
             prevBtn.addEventListener("click", () => {
-                goToSlide(currentIndex - 1);
+                goToSlide(currentIndex - 1, -1);
                 scheduleNext();
             });
 
             nextBtn.addEventListener("click", () => {
-                goToSlide(currentIndex + 1);
+                goToSlide(currentIndex + 1, 1);
                 scheduleNext();
             });
 
-            showcase.addEventListener("mouseenter", pauseAuto);
-            showcase.addEventListener("mouseleave", resumeAuto);
-            showcase.addEventListener("focusin", pauseAuto);
-            showcase.addEventListener("focusout", resumeAuto);
+            /* Soporte táctil (móvil) y arrastre con mouse */
+            stage.addEventListener("pointerdown", (e) => {
+                isDragging = true;
+                startX = e.clientX;
+                isPaused = true;
+                clearTimeout(timerId);
+            });
 
-            restartProgress();
+            window.addEventListener("pointerup", (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                const diff = e.clientX - startX;
+                if (Math.abs(diff) > 35) {
+                    goToSlide(diff < 0 ? currentIndex + 1 : currentIndex - 1, diff < 0 ? 1 : -1);
+                }
+                isPaused = false;
+                scheduleNext();
+            });
+
+            showcase.addEventListener("mouseenter", () => { isPaused = true; clearTimeout(timerId); });
+            showcase.addEventListener("mouseleave", () => { isPaused = false; scheduleNext(); });
+
             scheduleNext();
         })();
 
         /* =========================================================
-           CATÁLOGO COMPLETO (26 PERFORACIONES)
+           CATÁLOGO COMPLETO DEL PDF (26 FICHAS — TODAS LAS ZONAS)
            ========================================================= */
         const CATALOG_DATA = [
             // --- OREJA (14) ---
             {
-                id: "lobulo", nombre: "Lóbulo", grupo: "oreja", zona: "Zona baja (cualquier altura)",
+                id: "lobulo", nombre: "Lóbulo", grupo: "oreja", zona: "Oreja · Baja",
                 img: "img/oreja-lobulo.jpg", pieza: "Recta / Poste", noAros: true,
-                dolor: 2, tiempo: "4–6 meses",
+                dolor: "2/10", tiempo: "4–6 m",
                 precios: { acero: 250, color: 280, titanio: 350 },
-                extra: "Diseño (Acero, Titanio u Oro): costo pieza + $100 servicio."
+                nota: "Diseño (Acero, Titanio u Oro): pieza + $100"
             },
             {
-                id: "lobulo-alto", nombre: "Lóbulo Alto", grupo: "oreja", zona: "Zona baja (cualquier altura)",
+                id: "lobulo-alto", nombre: "Lóbulo Alto", grupo: "oreja", zona: "Oreja · Baja",
                 img: "img/oreja-lobulo-alto.jpg", pieza: "Recta / Poste", noAros: true,
-                dolor: 2, tiempo: "4–6 meses",
+                dolor: "2/10", tiempo: "4–6 m",
                 precios: { acero: 250, color: 280, titanio: 350 },
-                extra: "Diseño (Acero, Titanio u Oro): costo pieza + $100 servicio."
+                nota: "Diseño (Acero, Titanio u Oro): pieza + $100"
             },
             {
-                id: "flat", nombre: "Flat", grupo: "oreja", zona: "Zona media / alta",
+                id: "flat", nombre: "Flat", grupo: "oreja", zona: "Oreja · Media / Alta",
                 img: "img/oreja-flat.jpg", pieza: "Recta / Poste", noAros: true,
-                dolor: 4, tiempo: "9–12 meses",
+                dolor: "4/10", tiempo: "9–12 m",
                 precios: { acero: 250, color: 280, titanio: 350 },
-                extra: "Diseño (Acero, Titanio u Oro): costo pieza + $120 servicio."
+                nota: "Diseño (Acero, Titanio u Oro): pieza + $120"
             },
             {
-                id: "helix", nombre: "Helix", grupo: "oreja", zona: "Zona externa / alta",
+                id: "helix", nombre: "Helix", grupo: "oreja", zona: "Oreja · Externa / Alta",
                 img: "img/oreja-helix.jpg", pieza: "Recta / Poste", noAros: true,
-                dolor: 4, tiempo: "9–12 meses",
+                dolor: "4/10", tiempo: "9–12 m",
                 precios: { acero: 250, color: 280, titanio: 350 },
-                extra: "Diseño (Acero, Titanio u Oro): costo pieza + $120 servicio."
+                nota: "Diseño (Acero, Titanio u Oro): pieza + $120"
             },
             {
-                id: "conch", nombre: "Conch", grupo: "oreja", zona: "Zona interna / media",
+                // Valores exactos del PDF ($250 acero / $380 color / $250 titanio)
+                id: "conch", nombre: "Conch", grupo: "oreja", zona: "Oreja · Interna / Media",
                 img: "img/oreja-conch.jpg", pieza: "Recta / Poste", noAros: true,
-                dolor: 4, tiempo: "9–12 meses",
+                dolor: "4/10", tiempo: "9–12 m",
                 precios: { acero: 250, color: 380, titanio: 250 },
-                extra: "Diseño (Acero y Titanio): costo pieza + $120 servicio."
+                nota: "Diseño (Acero y Titanio): pieza + $120"
             },
             {
-                id: "mid-helix", nombre: "Mid Helix", grupo: "oreja", zona: "Zona externa / media",
+                id: "mid-helix", nombre: "Mid Helix", grupo: "oreja", zona: "Oreja · Externa / Media",
                 img: "img/oreja-mid-helix.jpg", pieza: "Recta / Poste", noAros: true,
-                dolor: 4, tiempo: "9–12 meses",
+                dolor: "4/10", tiempo: "9–12 m",
                 precios: { acero: 250, color: 280, titanio: 350 },
-                extra: "Diseño (Acero, Titanio u Oro): costo pieza + $120 servicio."
+                nota: "Diseño (Acero, Titanio u Oro): pieza + $120"
             },
             {
-                id: "daith", nombre: "Daith", grupo: "oreja", zona: "Zona interna / media",
+                id: "daith", nombre: "Daith", grupo: "oreja", zona: "Oreja · Interna / Media",
                 img: "img/oreja-daith.jpg", pieza: "Redonda / Aro", noAros: false,
-                dolor: 5, tiempo: "9–12 meses",
+                dolor: "5/10", tiempo: "9–12 m",
                 precios: { acero: 300, color: 330, titanio: 400 },
-                extra: "Diseño (Acero y Titanio): costo pieza + $180 servicio."
+                nota: "Diseño (Acero y Titanio): pieza + $180"
             },
             {
-                id: "tragus", nombre: "Tragus", grupo: "oreja", zona: "Zona interna / media",
+                id: "tragus", nombre: "Tragus", grupo: "oreja", zona: "Oreja · Interna / Media",
                 img: "img/oreja-tragus.jpg", pieza: "Recta / Poste", noAros: true,
-                dolor: 6, tiempo: "9–12 meses",
+                dolor: "6/10", tiempo: "9–12 m",
                 precios: { acero: 300, color: 330, titanio: 400 },
-                extra: "Diseño (Acero y Titanio): costo pieza + $180 servicio."
+                nota: "Diseño (Acero y Titanio): pieza + $180"
             },
             {
-                id: "rook", nombre: "Rook", grupo: "oreja", zona: "Zona interna / media alta",
+                id: "rook", nombre: "Rook", grupo: "oreja", zona: "Oreja · Interna / Media alta",
                 img: "img/oreja-rook.jpg", pieza: "Banana", noAros: false,
-                dolor: 7, tiempo: "9–12 meses",
+                dolor: "7/10", tiempo: "9–12 m",
                 precios: { acero: 300, color: 330, titanio: 400 },
-                extra: "Diseño (Acero y Titanio): costo pieza + $180 servicio."
+                nota: "Diseño (Acero y Titanio): pieza + $180"
             },
             {
-                id: "snug", nombre: "Snug", grupo: "oreja", zona: "Zona interna / media alta",
+                id: "snug", nombre: "Snug", grupo: "oreja", zona: "Oreja · Interna / Media alta",
                 img: "img/oreja-snug.jpg", pieza: "Banana", noAros: false,
-                dolor: 7, tiempo: "9–12 meses",
+                dolor: "7/10", tiempo: "9–12 m",
                 precios: { acero: 300, color: 330, titanio: 400 },
-                extra: "Diseño (Acero y Titanio): costo pieza + $180 servicio."
+                nota: "Diseño (Acero y Titanio): pieza + $180"
             },
             {
-                id: "industrial", nombre: "Industrial", grupo: "oreja", zona: "Zona alta (cualquier inclinación)",
+                id: "industrial", nombre: "Industrial", grupo: "oreja", zona: "Oreja · Alta",
                 img: "img/oreja-industrial.jpg", pieza: "Barra / Barbell", noAros: false,
-                dolor: 9, tiempo: "15–18 meses",
+                dolor: "9/10", tiempo: "15–18 m",
                 precios: { acero: 400, color: 430, titanio: 500 },
-                extra: "Joya básica recta larga incluida."
+                nota: "Incluye barra recta básica"
             },
             {
-                id: "anti-helix", nombre: "Anti Helix", grupo: "oreja", zona: "Zona interna / lateral",
+                id: "anti-helix", nombre: "Anti Helix", grupo: "oreja", zona: "Oreja · Interna / Lateral",
                 img: "img/oreja-anti-helix.jpg", pieza: "Recta / Barra", noAros: false,
-                dolor: 4, tiempo: "9–12 meses",
+                dolor: "4/10", tiempo: "9–12 m",
                 precios: { acero: 300, color: 330, titanio: 400 },
-                extra: "Diseño (Acero y Titanio): costo pieza + $180 servicio."
+                nota: "Diseño (Acero y Titanio): pieza + $180"
             },
             {
-                id: "anti-tragus", nombre: "Anti Tragus", grupo: "oreja", zona: "Zona media interna",
+                id: "anti-tragus", nombre: "Anti Tragus", grupo: "oreja", zona: "Oreja · Media interna",
                 img: "img/oreja-anti-tragus.jpg", pieza: "Barra / Barbell", noAros: false,
-                dolor: 6, tiempo: "9–12 meses",
+                dolor: "6/10", tiempo: "9–12 m",
                 precios: { acero: 400, color: 430, titanio: 500 },
-                extra: "Diseño (Acero y Titanio): costo pieza + $180 servicio."
+                nota: "Diseño (Acero y Titanio): pieza + $180"
             },
             {
-                id: "helix-vertical", nombre: "Helix Vertical", grupo: "oreja", zona: "Zona alta / enmedio",
+                id: "helix-vertical", nombre: "Helix Vertical", grupo: "oreja", zona: "Oreja · Alta / Enmedio",
                 img: "img/oreja-helix-vertical.jpg", pieza: "Recta / Barra", noAros: false,
-                dolor: 4, tiempo: "9–12 meses",
+                dolor: "4/10", tiempo: "9–12 m",
                 precios: { acero: 300, color: 330, titanio: 400 },
-                extra: "Diseño (Acero y Titanio): costo pieza + $180 servicio."
+                nota: "Diseño (Acero y Titanio): pieza + $180"
             },
 
             // --- NARIZ (4) ---
             {
-                id: "nostril-c", nombre: "Nostril (Poste)", grupo: "nariz", zona: "Lateral a elegir",
+                id: "nostril-c", nombre: "Nostril · Poste en C", grupo: "nariz", zona: "Nariz · Lateral",
                 img: "img/nariz-nostril-c.jpg", pieza: "Poste en C", noAros: false,
-                dolor: 6, tiempo: "9–12 meses",
+                dolor: "6/10", tiempo: "9–12 m",
                 precios: { acero: 350, color: 380, titanio: 450 },
-                extra: "Opción con poste recto / en C para inicio."
+                nota: ""
             },
             {
-                id: "nostril-gring", nombre: "Nostril (G-Ring)", grupo: "nariz", zona: "Lateral a elegir",
+                id: "nostril-gring", nombre: "Nostril · G-Ring", grupo: "nariz", zona: "Nariz · Lateral",
                 img: "img/nariz-nostril-gring.jpg", pieza: "G-Ring", noAros: false,
-                dolor: 6, tiempo: "9–12 meses",
+                dolor: "6/10", tiempo: "9–12 m",
                 precios: { acero: 400, color: 430, titanio: 500 },
-                extra: "Opción con argolla G-Ring."
+                nota: ""
             },
             {
-                id: "septum-medialuna", nombre: "Septum (Media luna)", grupo: "nariz", zona: "Nariz / zona media",
+                id: "septum-medialuna", nombre: "Septum · Media luna", grupo: "nariz", zona: "Nariz · Media",
                 img: "img/nariz-septum-medialuna.jpg", pieza: "Media luna", noAros: false,
-                dolor: 6, tiempo: "9–12 meses",
+                dolor: "6/10", tiempo: "9–12 m",
                 precios: { acero: 350, color: 380, titanio: 450 },
-                extra: "Pieza herradura / media luna inicial."
+                nota: ""
             },
             {
-                id: "septum-aro", nombre: "Septum (Aro)", grupo: "nariz", zona: "Nariz / zona media",
+                id: "septum-aro", nombre: "Septum · Aro", grupo: "nariz", zona: "Nariz · Media",
                 img: "img/nariz-septum-aro.jpg", pieza: "Aro", noAros: false,
-                dolor: 6, tiempo: "9–12 meses",
+                dolor: "6/10", tiempo: "9–12 m",
                 precios: { acero: 450, color: 480, titanio: 550 },
-                extra: "Pieza aro cerrado inicial."
+                nota: ""
             },
 
-            // --- BOCA (5) ---
+            // --- LABIO / BOCA (5) ---
             {
-                id: "side-labret", nombre: "Side Labret", grupo: "boca", zona: "Zona baja (cualquier lado)",
+                id: "side-labret", nombre: "Side Labret", grupo: "labio", zona: "Labio · Baja lateral",
                 img: "img/boca-side-labret.jpg", pieza: "Labret", noAros: false,
-                dolor: 6, tiempo: "9–12 meses",
+                dolor: "6/10", tiempo: "9–12 m",
                 precios: { acero: 350, color: 380, titanio: 450 },
-                extra: "Joya brillosa: $450 acero plateado · $550 titanio natural."
+                nota: "Brillosa: $450 acero · $550 titanio"
             },
             {
-                id: "snake-bites", nombre: "Snake Bites", grupo: "boca", zona: "Zona baja (ambos lados)",
+                id: "snake-bites", nombre: "Snake Bites", grupo: "labio", zona: "Labio · Ambos lados",
                 img: "img/boca-snake-bites.jpg", pieza: "Labret (par)", noAros: false,
-                dolor: 6, tiempo: "9–12 meses",
+                dolor: "6/10", tiempo: "9–12 m",
                 precios: { acero: 700, color: 760, titanio: 900 },
-                extra: "Joya brillosa: $900 acero plateado · $1,100 titanio natural."
+                nota: "Brillosa: $900 acero · $1,100 titanio"
             },
             {
-                id: "medusa", nombre: "Medusa", grupo: "boca", zona: "Zona alta / media",
+                id: "medusa", nombre: "Medusa", grupo: "labio", zona: "Labio · Alta media",
                 img: "img/boca-medusa.jpg", pieza: "Labret", noAros: false,
-                dolor: 6, tiempo: "9–12 meses",
+                dolor: "6/10", tiempo: "9–12 m",
                 precios: { acero: 350, color: 380, titanio: 450 },
-                extra: "Joya brillosa: $450 acero plateado · $550 titanio natural."
+                nota: "Brillosa: $450 acero · $550 titanio"
             },
             {
-                id: "labret-medio", nombre: "Labret Medio", grupo: "boca", zona: "Zona baja / enmedio",
+                id: "labret-medio", nombre: "Labret Medio", grupo: "labio", zona: "Labio · Baja centro",
                 img: "img/boca-labret-medio.jpg", pieza: "Labret", noAros: false,
-                dolor: 6, tiempo: "9–12 meses",
+                dolor: "6/10", tiempo: "9–12 m",
                 precios: { acero: 350, color: 380, titanio: 450 },
-                extra: "Joya brillosa: $450 acero plateado · $550 titanio natural."
+                nota: "Brillosa: $450 acero · $550 titanio"
             },
             {
-                id: "labret-vertical", nombre: "Labret Vertical", grupo: "boca", zona: "Zona baja / centrada",
+                id: "labret-vertical", nombre: "Labret Vertical", grupo: "labio", zona: "Labio · Baja centrada",
                 img: "img/boca-labret-vertical.jpg", pieza: "Labret", noAros: false,
-                dolor: 7, tiempo: "9–12 meses",
+                dolor: "7/10", tiempo: "9–12 m",
                 precios: { acero: 380, color: 410, titanio: 480 },
-                extra: "Joya básica incluida con servicio."
+                nota: ""
             },
 
-            // --- CEJA Y CUERPO (3) ---
+            // --- CEJA, OMBLIGO Y PEZÓN (3) ---
             {
-                id: "ceja", nombre: "Ceja", grupo: "cuerpo", zona: "Media (cualquier altura)",
-                img: "img/cuerpo-ceja.jpg", pieza: "Labret / Curva", noAros: false,
-                dolor: 6, tiempo: "9–12 meses",
+                id: "ceja", nombre: "Ceja", grupo: "cuerpo", zona: "Ceja · Media",
+                img: "img/cuerpo-ceja.jpg", pieza: "Labret", noAros: false,
+                dolor: "6/10", tiempo: "9–12 m",
                 precios: { acero: 350, color: 380, titanio: 450 },
-                extra: "Joya básica + servicio de perforación."
+                nota: ""
             },
             {
-                id: "ombligo", nombre: "Ombligo", grupo: "cuerpo", zona: "Abdomen · zona baja centrada",
-                img: "img/cuerpo-ombligo.jpg", pieza: "Labret / Banana", noAros: false,
-                dolor: 5, tiempo: "9–12 meses",
+                id: "ombligo", nombre: "Ombligo", grupo: "cuerpo", zona: "Abdomen · Centro",
+                img: "img/cuerpo-ombligo.jpg", pieza: "Labret", noAros: false,
+                dolor: "5/10", tiempo: "9–12 m",
                 precios: { acero: 400, color: 430, titanio: 500 },
-                extra: "Diseño en acero: $430 plateado · $460 color."
+                nota: "Diseño acero: $430 plateado · $460 color"
             },
             {
-                id: "pezon", nombre: "Pezón", grupo: "cuerpo", zona: "Busto · zona central",
+                id: "pezon", nombre: "Pezón", grupo: "cuerpo", zona: "Busto · Nipple",
                 img: "img/cuerpo-pezon.jpg", pieza: "Barbell / Barra", noAros: false,
-                dolor: 10, tiempo: "12–15 meses",
+                dolor: "10/10", tiempo: "12–15 m",
                 precios: { acero: 350, color: 380, titanio: 450 },
-                extra: "Color disponible en dorado ($380). Costo individual por orificio."
+                nota: "Color solo dorado ($380) · por orificio"
             }
         ];
 
         const MATERIAL_LABELS = {
-            acero: "Acero Q. plateado",
+            acero: "Acero plateado",
             color: "Acero color",
             titanio: "Titanio natural"
         };
@@ -3143,38 +2583,29 @@
 
         const catalogState = {
             material: "titanio",
-            zone: "oreja"
+            zone: "todas"
         };
 
         const catalogGrid = document.getElementById("catalog-grid");
         const materialToggle = document.getElementById("material-toggle");
 
-        function painDots(score) {
-            const onCount = Math.max(1, Math.round(score / 2));
-            let html = '<span class="pain-meter" aria-hidden="true">';
-            for (let i = 1; i <= 5; i++) {
-                html += `<span class="pain-pip ${i <= onCount ? "on" : ""}"></span>`;
-            }
-            return html + "</span>";
-        }
-
         function renderCatalog(animatePrice = false) {
-            const items = CATALOG_DATA.filter(item => item.grupo === catalogState.zone);
+            const items = catalogState.zone === "todas"
+                ? CATALOG_DATA
+                : CATALOG_DATA.filter(item => item.grupo === catalogState.zone);
             const matName = MATERIAL_LABELS[catalogState.material];
 
             catalogGrid.innerHTML = items.map(p => {
-                const price = p.precios[catalogState.material];
-                const formattedPrice = price.toLocaleString("es-MX");
+                const formattedPrice = p.precios[catalogState.material].toLocaleString("es-MX");
 
                 return `
                     <article class="piercing-card">
                         <div>
                             <div class="card-top">
                                 <div class="media-frame piercing-photo">
-                                    <img src="${p.img}" alt="Ubicación ${p.nombre}" loading="lazy" onerror="this.classList.add('is-missing')">
+                                    <img src="${p.img}" alt="${p.nombre}" loading="lazy" onerror="this.classList.add('is-missing')">
                                     <div class="media-fallback">
-                                        <svg class="star-ui" width="22" height="22"><use href="#star-metallic-3d"/></svg>
-                                        <span>${p.nombre}</span>
+                                        <svg class="star-ui" width="20" height="20"><use href="#star-metallic-3d"/></svg>
                                     </div>
                                 </div>
                                 <div class="card-title-group">
@@ -3183,31 +2614,29 @@
                                 </div>
                             </div>
 
-                            <div class="card-specs" style="margin-top: 0.9rem;">
-                                <div class="spec-cell full">
-                                    <span class="spec-k">Pieza inicial</span>
-                                    <span class="spec-v">
-                                        ${p.pieza}
-                                        ${p.noAros ? '<span class="no-hoop-tag">No aros al inicio</span>' : ''}
-                                    </span>
+                            <div class="card-specs-strip" style="margin-top: 0.75rem;">
+                                <div class="spec-mini">
+                                    <span class="spec-k">Pieza</span>
+                                    <span class="spec-v">${p.pieza}</span>
+                                    ${p.noAros ? '<span class="no-hoop-pill">No aros</span>' : ''}
                                 </div>
-                                <div class="spec-cell">
+                                <div class="spec-mini">
                                     <span class="spec-k">Dolor</span>
-                                    <span class="spec-v">${p.dolor}/10 ${painDots(p.dolor)}</span>
+                                    <span class="spec-v">${p.dolor}</span>
                                 </div>
-                                <div class="spec-cell">
-                                    <span class="spec-k">Cicatrización</span>
+                                <div class="spec-mini">
+                                    <span class="spec-k">Sana</span>
                                     <span class="spec-v">${p.tiempo}</span>
                                 </div>
                             </div>
 
-                            <p class="card-extra-note" style="margin-top: 0.65rem;">${p.extra}</p>
+                            ${p.nota ? `<p class="card-note-mini" style="margin-top: 0.55rem;">${p.nota}</p>` : ''}
                         </div>
 
                         <div class="card-bottom">
                             <div>
                                 <div class="price-val ${animatePrice ? "flash" : ""}">$${formattedPrice}</div>
-                                <span class="price-sub">${matName} + servicio</span>
+                                <span class="price-sub">${matName}</span>
                             </div>
                             <button type="button" class="btn-card-book"
                                 data-book-piercing-id="${p.id}"
@@ -3246,7 +2675,7 @@
         renderCatalog(false);
 
         /* =========================================================
-           AGENDA SIMPLIFICADA Y ELEGANTE + WHATSAPP
+           AGENDA SIMPLIFICADA + WHATSAPP
            ========================================================= */
         const bookingState = {
             category: "diseno",
@@ -3272,7 +2701,7 @@
             toastEl.textContent = text;
             toastEl.classList.add("show");
             clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2600);
+            toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2400);
         }
 
         function populateBookingPiercings(zone, preferredId = null) {
@@ -3282,9 +2711,7 @@
                 return `<option value="${p.id}">${p.nombre} — $${price}</option>`;
             }).join("");
 
-            const targetId = preferredId && list.some(p => p.id === preferredId)
-                ? preferredId
-                : list[0].id;
+            const targetId = preferredId && list.some(p => p.id === preferredId) ? preferredId : list[0].id;
             bookingState.piercingId = targetId;
             piercingSelect.value = targetId;
         }
@@ -3302,34 +2729,25 @@
         }
 
         function syncBookingUI() {
-            // Categoría activa
             document.querySelectorAll("#booking-category-pills .choice-pill").forEach(btn => {
                 btn.classList.toggle("active", btn.dataset.cat === bookingState.category);
             });
-
-            // Subpaneles condicionales
             subPromos.classList.toggle("is-open", bookingState.category === "promos");
             subIndividual.classList.toggle("is-open", bookingState.category === "individual");
 
-            // Promos
             document.querySelectorAll("#booking-promo-pills .mini-pill").forEach(btn => {
                 btn.classList.toggle("active", btn.dataset.promo === bookingState.promo);
             });
-
-            // Zona & material en individual
             document.querySelectorAll("#booking-zone-pills .mini-pill").forEach(btn => {
                 btn.classList.toggle("active", btn.dataset.bzone === bookingState.zone);
             });
             document.querySelectorAll("#booking-material-pills .mini-pill").forEach(btn => {
                 btn.classList.toggle("active", btn.dataset.bmat === bookingState.material);
             });
-
-            // Sucursal
             document.querySelectorAll("#booking-branch-pills .choice-pill").forEach(btn => {
                 btn.classList.toggle("active", btn.dataset.branch === bookingState.branch);
             });
 
-            // Resumen en vivo
             summaryText.textContent = getSelectedServiceLabel();
         }
 
@@ -3337,19 +2755,11 @@
         syncBookingUI();
 
         document.querySelectorAll("#booking-category-pills .choice-pill").forEach(btn => {
-            btn.addEventListener("click", () => {
-                bookingState.category = btn.dataset.cat;
-                syncBookingUI();
-            });
+            btn.addEventListener("click", () => { bookingState.category = btn.dataset.cat; syncBookingUI(); });
         });
-
         document.querySelectorAll("#booking-promo-pills .mini-pill").forEach(btn => {
-            btn.addEventListener("click", () => {
-                bookingState.promo = btn.dataset.promo;
-                syncBookingUI();
-            });
+            btn.addEventListener("click", () => { bookingState.promo = btn.dataset.promo; syncBookingUI(); });
         });
-
         document.querySelectorAll("#booking-zone-pills .mini-pill").forEach(btn => {
             btn.addEventListener("click", () => {
                 bookingState.zone = btn.dataset.bzone;
@@ -3357,7 +2767,6 @@
                 syncBookingUI();
             });
         });
-
         document.querySelectorAll("#booking-material-pills .mini-pill").forEach(btn => {
             btn.addEventListener("click", () => {
                 bookingState.material = btn.dataset.bmat;
@@ -3365,41 +2774,32 @@
                 syncBookingUI();
             });
         });
-
         piercingSelect.addEventListener("change", () => {
             bookingState.piercingId = piercingSelect.value;
             syncBookingUI();
         });
-
         document.querySelectorAll("#booking-branch-pills .choice-pill").forEach(btn => {
-            btn.addEventListener("click", () => {
-                bookingState.branch = btn.dataset.branch;
-                syncBookingUI();
-            });
+            btn.addEventListener("click", () => { bookingState.branch = btn.dataset.branch; syncBookingUI(); });
         });
 
         function focusAgenda(toastMsg) {
-            if (activeView !== "servicios") {
-                switchView("servicios");
-            }
+            if (activeView !== "servicios") switchView("servicios");
             requestAnimationFrame(() => {
                 document.getElementById("agenda").scrollIntoView({ behavior: "smooth", block: "center" });
                 agendaCard.classList.remove("pulse-focus");
                 void agendaCard.offsetWidth;
                 agendaCard.classList.add("pulse-focus");
-                setTimeout(() => agendaCard.classList.remove("pulse-focus"), 1500);
+                setTimeout(() => agendaCard.classList.remove("pulse-focus"), 1400);
             });
             if (toastMsg) showToast(toastMsg);
-            setTimeout(() => nameInput.focus({ preventScroll: true }), 550);
+            setTimeout(() => nameInput.focus({ preventScroll: true }), 500);
         }
 
         document.addEventListener("click", (e) => {
             const catBtn = e.target.closest("[data-book-category]");
             if (catBtn) {
                 bookingState.category = catBtn.dataset.bookCategory;
-                if (catBtn.dataset.bookPromo) {
-                    bookingState.promo = catBtn.dataset.bookPromo;
-                }
+                if (catBtn.dataset.bookPromo) bookingState.promo = catBtn.dataset.bookPromo;
                 syncBookingUI();
                 focusAgenda(`Seleccionado: ${getSelectedServiceLabel()}`);
                 return;
@@ -3440,7 +2840,7 @@
         });
 
         /* =========================================================
-           BARRA DE PROGRESO + BOTÓN SEMITRANSPARENTE IR ARRIBA
+           SCROLL PROGRESS + IR ARRIBA
            ========================================================= */
         const progressBar = document.getElementById("scroll-progress");
         const backToTopBtn = document.getElementById("back-to-top");
@@ -3455,10 +2855,7 @@
 
         window.addEventListener("scroll", updateScrollUI, { passive: true });
         updateScrollUI();
-
-        backToTopBtn.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
+        backToTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     </script>
 </body>
 </html>
