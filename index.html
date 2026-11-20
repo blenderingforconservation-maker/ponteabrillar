@@ -79,6 +79,10 @@
             flex-direction: column;
         }
 
+        body.intro-locked {
+            overflow: hidden;
+        }
+
         main {
             flex: 1;
             display: flex;
@@ -119,15 +123,200 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.24) 50%, transparent 75%);
+            background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.28) 50%, transparent 75%);
             transform: translateX(-120%);
             transition: transform 0.75s var(--ease);
+            pointer-events: none;
         }
 
         .shimmer-btn:hover::after { transform: translateX(120%); }
 
         /* =========================================================
-           ESTRELLAS 3D INFLADAS — ZONA SEGURA EN MÓVIL
+           PANTALLA DE INICIO — PUERTA DE MÁRMOL DORADO + PARTÍCULAS
+           ========================================================= */
+        .intro-curtain {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            pointer-events: auto;
+            overflow: hidden;
+        }
+
+        .intro-curtain.is-opening {
+            pointer-events: none;
+        }
+
+        .intro-curtain.is-done {
+            display: none;
+        }
+
+        .intro-door {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            overflow: hidden;
+            will-change: transform;
+            transition: transform 1.25s cubic-bezier(0.76, 0, 0.24, 1);
+            background: linear-gradient(135deg, #F6EFE3 0%, #E7D6B9 50%, #F8F2E8 100%);
+        }
+
+        .intro-door.left {
+            left: 0;
+            box-shadow: inset -1px 0 0 rgba(232, 202, 126, 0.85), 8px 0 28px rgba(59, 42, 32, 0.16);
+        }
+
+        .intro-door.right {
+            right: 0;
+            box-shadow: inset 1px 0 0 rgba(232, 202, 126, 0.85), -8px 0 28px rgba(59, 42, 32, 0.16);
+        }
+
+        /* Imagen completa recortada al 50% exacto por hoja para empate perfecto */
+        .intro-door-img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100vw;
+            background-image:
+                radial-gradient(ellipse 65% 65% at 50% 50%, rgba(255, 250, 238, 0.12), rgba(59, 42, 32, 0.18)),
+                url('imagenes/goldenmarble.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .intro-door.left .intro-door-img { left: 0; }
+        .intro-door.right .intro-door-img { right: 0; }
+
+        .intro-curtain.is-opening .intro-door.left {
+            transform: translateX(-104%);
+        }
+
+        .intro-curtain.is-opening .intro-door.right {
+            transform: translateX(104%);
+        }
+
+        /* Línea de luz dorada en la unión central antes de abrir */
+        .intro-seam-glow {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            transform: translateX(-50%) scaleY(0.12);
+            background: linear-gradient(
+                180deg,
+                transparent 0%,
+                rgba(255, 248, 224, 0.95) 28%,
+                #F5D276 50%,
+                rgba(255, 248, 224, 0.95) 72%,
+                transparent 100%
+            );
+            box-shadow: 0 0 18px 4px rgba(232, 202, 126, 0.85), 0 0 42px 8px rgba(189, 146, 66, 0.45);
+            opacity: 0;
+            z-index: 3;
+            transition: transform 0.65s var(--ease), opacity 0.45s ease;
+        }
+
+        .intro-curtain.is-ready .intro-seam-glow {
+            opacity: 1;
+            transform: translateX(-50%) scaleY(1);
+        }
+
+        .intro-curtain.is-opening .intro-seam-glow {
+            opacity: 0;
+            transform: translateX(-50%) scaleY(1.15);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+
+        .intro-emblem {
+            position: absolute;
+            inset: 0;
+            z-index: 4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            pointer-events: none;
+            transition: opacity 0.45s ease, transform 0.6s var(--ease);
+        }
+
+        .intro-emblem-pill {
+            padding: 0.95rem 1.85rem;
+            border-radius: var(--radius-md);
+            background: rgba(250, 247, 242, 0.68);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(232, 202, 126, 0.65);
+            box-shadow: 0 16px 42px rgba(59, 42, 32, 0.16);
+        }
+
+        .intro-emblem-title {
+            display: block;
+            font-family: var(--font-script);
+            font-size: clamp(2.8rem, 9vw, 4.4rem);
+            line-height: 0.96;
+            color: var(--cocoa);
+        }
+
+        .intro-emblem-sub {
+            display: block;
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.42em;
+            padding-left: 0.42em;
+            color: var(--gold-deep);
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .intro-curtain.is-opening .intro-emblem {
+            opacity: 0;
+            transform: scale(1.06);
+        }
+
+        .intro-particles-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2005;
+        }
+
+        /* =========================================================
+           CAPA DE ESTRELLITAS 2D DORADAS REACTIVAS (GIRO 3 EJES)
+           ========================================================= */
+        .spark-burst-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2100;
+            overflow: hidden;
+            perspective: 680px;
+        }
+
+        .spark-star-wrap {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 0;
+            pointer-events: none;
+            transform-style: preserve-3d;
+            will-change: transform, opacity;
+        }
+
+        .spark-star-2d {
+            display: block;
+            transform-style: preserve-3d;
+            will-change: transform;
+            filter: drop-shadow(0 0 6px rgba(232, 202, 126, 0.85));
+        }
+
+        /* =========================================================
+           ESTRELLAS 3D INFLADAS EN PORTADA — ZONA SEGURA EN MÓVIL
            ========================================================= */
         .star-ui {
             display: inline-block;
@@ -203,7 +392,7 @@
             top: 0;
             z-index: 600;
             height: var(--header-h);
-            background: rgba(250, 247, 242, 0.9);
+            background: rgba(250, 247, 242, 0.86);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--line);
@@ -262,8 +451,11 @@
             gap: 0.5rem;
             padding: 0.5rem 1rem;
             border-radius: var(--radius-pill);
-            border: 1px solid var(--champagne);
-            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(189, 146, 66, 0.34);
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), 0 4px 14px rgba(59, 42, 32, 0.05);
             font-size: 0.77rem;
             font-weight: 500;
             color: var(--cocoa);
@@ -273,7 +465,7 @@
         .menu-trigger:hover,
         .menu-trigger[aria-expanded="true"] {
             border-color: var(--gold);
-            background: var(--cream-pure);
+            background: rgba(255, 255, 255, 0.85);
             color: var(--olive);
         }
 
@@ -323,7 +515,7 @@
             width: min(350px, calc(100vw - 2rem));
             max-height: calc(100dvh - var(--header-h) - 24px);
             overflow-y: auto;
-            background: rgba(255, 255, 255, 0.97);
+            background: rgba(255, 255, 255, 0.94);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--champagne);
@@ -496,17 +688,19 @@
             font-size: 0.74rem;
             font-weight: 500;
             color: var(--cocoa-soft);
-            padding: 0.34rem 0.72rem;
+            padding: 0.34rem 0.78rem;
             border-radius: var(--radius-pill);
-            border: 1px solid var(--line);
-            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(189, 146, 66, 0.28);
+            background: rgba(255, 255, 255, 0.52);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             transition: all 0.22s var(--ease);
         }
 
         .back-home-btn:hover {
             border-color: var(--gold);
             color: var(--olive);
-            background: var(--cream-pure);
+            background: rgba(255, 255, 255, 0.88);
         }
 
         .section-head {
@@ -531,7 +725,7 @@
         .section-desc { font-size: 0.86rem; color: var(--cocoa-soft); max-width: 52ch; }
 
         /* =========================================================
-           PÁGINA 0 · INICIO (PORTADA + ACCESOS LIMPIOS)
+           PÁGINA 0 · INICIO + BOTONES TRASLÚCIDOS MODERNOS
            ========================================================= */
         .hero {
             position: relative;
@@ -607,72 +801,107 @@
             font-size: 0.87rem;
             color: var(--cocoa-soft);
             max-width: 42ch;
-            margin: 0 auto 1.55rem;
+            margin: 0 auto 1.65rem;
         }
 
         .hero-quick-actions {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 0.6rem;
+            gap: 0.75rem;
         }
 
+        /* Botones traslúcidos modernos (Glassmorphism) */
         .btn-hero-main {
-            padding: 0.74rem 1.4rem;
+            padding: 0.8rem 1.5rem;
             border-radius: var(--radius-pill);
-            background: var(--olive);
+            background: rgba(66, 82, 43, 0.76);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(232, 202, 126, 0.55);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                0 10px 26px rgba(66, 82, 43, 0.2);
             color: var(--cream-pure);
             font-size: 0.81rem;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 0.45rem;
-            transition: background 0.25s ease, transform 0.25s var(--ease);
+            gap: 0.48rem;
+            transition: transform 0.28s var(--ease), background 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
         }
 
-        .btn-hero-main:hover { background: var(--cocoa); transform: translateY(-1px); }
+        .btn-hero-main:hover {
+            background: rgba(59, 42, 32, 0.84);
+            border-color: var(--gold-bright);
+            transform: translateY(-2px);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                0 14px 30px rgba(59, 42, 32, 0.22);
+        }
 
         .btn-hero-ghost {
-            padding: 0.74rem 1.32rem;
+            padding: 0.8rem 1.45rem;
             border-radius: var(--radius-pill);
-            border: 1px solid var(--champagne);
-            background: rgba(255, 255, 255, 0.84);
+            background: rgba(255, 255, 255, 0.44);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(189, 146, 66, 0.38);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.82),
+                0 8px 22px rgba(59, 42, 32, 0.06);
             color: var(--cocoa);
             font-size: 0.81rem;
             font-weight: 500;
-            transition: border-color 0.25s ease, color 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: transform 0.28s var(--ease), background 0.28s ease, border-color 0.28s ease, color 0.28s ease;
         }
 
-        .btn-hero-ghost:hover { border-color: var(--gold); color: var(--olive); }
+        .btn-hero-ghost:hover {
+            background: rgba(255, 255, 255, 0.72);
+            border-color: var(--gold);
+            color: var(--olive);
+            transform: translateY(-2px);
+        }
 
-        /* Accesos elegantes en portada (sin saturar) */
+        /* Tarjetas traslúcidas modernas del menú de inicio */
         .home-hub {
-            padding: 2.25rem 0 3.25rem;
+            padding: 2.35rem 0 3.25rem;
         }
 
         .home-hub-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 0.8rem;
+            gap: 0.85rem;
         }
 
         .hub-card {
-            background: var(--cream-pure);
-            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.46);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(189, 146, 66, 0.26);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.85),
+                0 10px 26px rgba(59, 42, 32, 0.05);
             border-radius: var(--radius-md);
-            padding: 1.2rem 1.25rem;
+            padding: 1.25rem 1.3rem;
             text-align: left;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 1rem;
-            transition: transform 0.28s var(--ease), border-color 0.25s ease, box-shadow 0.28s var(--ease);
+            transition: transform 0.3s var(--ease), border-color 0.28s ease, background 0.28s ease, box-shadow 0.3s var(--ease);
         }
 
         .hub-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.76);
             border-color: var(--gold);
-            box-shadow: 0 10px 24px rgba(59, 42, 32, 0.05);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.95),
+                0 16px 32px rgba(138, 97, 30, 0.11);
         }
 
         .hub-card-kicker {
@@ -697,23 +926,24 @@
         }
 
         .hub-arrow {
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            border: 1px solid var(--line);
-            background: var(--cream);
+            border: 1px solid rgba(189, 146, 66, 0.3);
+            background: rgba(255, 255, 255, 0.56);
             color: var(--olive);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+            transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s var(--ease);
         }
 
         .hub-card:hover .hub-arrow {
-            background: var(--olive);
+            background: rgba(66, 82, 43, 0.88);
             border-color: var(--olive);
             color: var(--cream-pure);
+            transform: translateX(2px);
         }
 
         /* =========================================================
@@ -843,11 +1073,7 @@
 
         .btn-olive:hover { background: var(--cocoa); transform: translateY(-1px); }
 
-        /* Diseño de Oreja + Bebés (Layout simétrico 2 columnas) */
-        .split-service-layout {
-            display: grid;
-            gap: 1.75rem;
-        }
+        .split-service-layout { display: grid; gap: 1.75rem; }
 
         .service-hero-media {
             display: grid;
@@ -905,13 +1131,7 @@
         .zone-chip-box span { display: block; font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); font-weight: 600; }
         .zone-chip-box strong { font-family: var(--font-serif); font-style: italic; font-size: 1rem; font-weight: 500; }
 
-        /* Badges + aviso bebés */
-        .babies-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.42rem;
-            margin: 0.85rem 0 1.05rem;
-        }
+        .babies-badges { display: flex; flex-wrap: wrap; gap: 0.42rem; margin: 0.85rem 0 1.05rem; }
 
         .babies-badge {
             font-size: 0.71rem;
@@ -954,30 +1174,11 @@
             border-color: var(--olive-line);
         }
 
-        .showcase-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            gap: 0.6rem;
-        }
-
+        .showcase-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; }
         .showcase-head h4 { font-size: 1.38rem; color: var(--olive); }
+        .showcase-head span { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); font-weight: 600; }
 
-        .showcase-head span {
-            font-size: 0.62rem;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--gold-deep);
-            font-weight: 600;
-        }
-
-        .showcase-stage {
-            position: relative;
-            min-height: 176px;
-            touch-action: pan-y;
-            cursor: grab;
-        }
-
+        .showcase-stage { position: relative; min-height: 176px; touch-action: pan-y; cursor: grab; }
         .showcase-stage:active { cursor: grabbing; }
 
         .showcase-slide {
@@ -1014,32 +1215,11 @@
             pointer-events: none;
         }
 
-        .slide-kicker-tag {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--olive);
-            font-weight: 600;
-        }
-
-        .slide-title {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 1.34rem;
-            line-height: 1.2;
-            color: var(--cocoa);
-            font-weight: 500;
-            padding-right: 2.2rem;
-        }
-
+        .slide-kicker-tag { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--olive); font-weight: 600; }
+        .slide-title { font-family: var(--font-serif); font-style: italic; font-size: 1.34rem; line-height: 1.2; color: var(--cocoa); font-weight: 500; padding-right: 2.2rem; }
         .slide-desc { font-size: 0.84rem; color: var(--cocoa-soft); line-height: 1.5; }
 
-        .showcase-nav-bar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.55rem;
-        }
+        .showcase-nav-bar { display: flex; align-items: center; justify-content: center; gap: 0.55rem; }
 
         .slide-arrow-dot {
             width: 26px;
@@ -1056,63 +1236,24 @@
             transition: all 0.25s var(--ease);
         }
 
-        .slide-arrow-dot:hover {
-            background: rgba(66, 82, 43, 0.14);
-            border-color: var(--gold);
-            color: var(--olive);
-        }
+        .slide-arrow-dot:hover { background: rgba(66, 82, 43, 0.14); border-color: var(--gold); color: var(--olive); }
 
-        .showcase-dots {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.36rem;
-            padding: 0 0.2rem;
-        }
-
-        .slide-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: var(--radius-pill);
-            background: rgba(59, 42, 32, 0.18);
-            transition: width 0.35s var(--ease), background 0.35s var(--ease);
-        }
-
+        .showcase-dots { display: inline-flex; align-items: center; gap: 0.36rem; padding: 0 0.2rem; }
+        .slide-dot { width: 7px; height: 7px; border-radius: var(--radius-pill); background: rgba(59, 42, 32, 0.18); transition: width 0.35s var(--ease), background 0.35s var(--ease); }
         .slide-dot:hover { background: rgba(189, 146, 66, 0.6); }
         .slide-dot.active { width: 22px; background: var(--gold); }
 
-        /* Servicio: Perforaciones individuales */
-        .service-highlights {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.55rem;
-            margin: 1rem 0 1.25rem;
-        }
+        .service-highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.55rem; margin: 1rem 0 1.25rem; }
 
-        .highlight-box {
-            background: var(--cream);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-sm);
-            padding: 0.72rem 0.65rem;
-        }
-
+        .highlight-box { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.72rem 0.65rem; }
         .highlight-box strong { display: block; font-size: 0.78rem; color: var(--cocoa); margin-bottom: 0.1rem; }
         .highlight-box span { font-size: 0.7rem; color: var(--cocoa-soft); line-height: 1.3; display: block; }
 
-        .body-shortcuts {
-            background: var(--cream);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-md);
-            padding: 1.2rem;
-        }
-
+        .body-shortcuts { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 1.2rem; }
         .body-shortcuts-title { font-size: 1.28rem; color: var(--olive); margin-bottom: 0.25rem; }
         .body-shortcuts-sub { font-size: 0.78rem; color: var(--cocoa-soft); margin-bottom: 0.9rem; }
 
-        .body-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.55rem;
-        }
+        .body-cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.55rem; }
 
         .body-shortcut-card {
             background: var(--cream-pure);
@@ -1128,7 +1269,6 @@
 
         .body-shortcut-card strong { font-family: var(--font-serif); font-style: italic; font-size: 1.15rem; font-weight: 500; color: var(--cocoa); }
         .body-shortcut-card span { font-size: 0.68rem; color: var(--cocoa-faint); }
-
         .body-shortcut-card:hover { border-color: var(--gold); background: var(--olive); transform: translateY(-2px); }
         .body-shortcut-card:hover strong { color: var(--cream-pure); }
         .body-shortcut-card:hover span { color: var(--gold-bright); }
@@ -1197,21 +1337,10 @@
             transition: transform 0.3s var(--ease), border-color 0.25s ease, box-shadow 0.3s var(--ease);
         }
 
-        .piercing-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--gold);
-            box-shadow: 0 12px 26px rgba(59, 42, 32, 0.05);
-        }
-
+        .piercing-card:hover { transform: translateY(-2px); border-color: var(--gold); box-shadow: 0 12px 26px rgba(59, 42, 32, 0.05); }
         .piercing-card:hover .piercing-photo img { transform: scale(1.06); }
 
-        .card-top {
-            display: grid;
-            grid-template-columns: 64px 1fr;
-            gap: 0.85rem;
-            align-items: center;
-        }
-
+        .card-top { display: grid; grid-template-columns: 64px 1fr; gap: 0.85rem; align-items: center; }
         .piercing-photo { width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0; }
         .card-title-group h4 { font-size: 1.4rem; line-height: 1.1; color: var(--cocoa); }
 
@@ -1257,11 +1386,7 @@
             width: fit-content;
         }
 
-        .card-prices-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.38rem;
-        }
+        .card-prices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.38rem; }
 
         .price-opt {
             padding: 0.46rem 0.35rem;
@@ -1275,45 +1400,14 @@
         .price-opt:hover { border-color: var(--gold); }
         .price-opt.selected { background: var(--olive-soft); border-color: var(--olive); }
 
-        .price-opt-mat {
-            display: block;
-            font-size: 0.58rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--cocoa-soft);
-            font-weight: 600;
-        }
-
+        .price-opt-mat { display: block; font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cocoa-soft); font-weight: 600; }
         .price-opt.selected .price-opt-mat { color: var(--olive); }
 
-        .price-opt-val {
-            display: block;
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--cocoa);
-            line-height: 1.15;
-            margin-top: 1px;
-        }
+        .price-opt-val { display: block; font-family: var(--font-serif); font-style: italic; font-size: 1.15rem; font-weight: 600; color: var(--cocoa); line-height: 1.15; margin-top: 1px; }
 
-        .card-note-mini {
-            font-size: 0.7rem;
-            color: var(--cocoa-soft);
-            background: var(--sand);
-            padding: 0.38rem 0.6rem;
-            border-radius: 8px;
-            line-height: 1.35;
-        }
+        .card-note-mini { font-size: 0.7rem; color: var(--cocoa-soft); background: var(--sand); padding: 0.38rem 0.6rem; border-radius: 8px; line-height: 1.35; }
 
-        .card-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0.6rem;
-            padding-top: 0.2rem;
-        }
-
+        .card-bottom { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; padding-top: 0.2rem; }
         .card-unit-label { font-size: 0.64rem; color: var(--cocoa-faint); }
 
         .btn-card-book {
@@ -1376,12 +1470,7 @@
         .care-layout { display: grid; gap: 1.25rem; }
         .faq-grid { display: grid; gap: 0.6rem; }
 
-        .faq-item {
-            background: var(--cream-pure);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-        }
+        .faq-item { background: var(--cream-pure); border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; }
 
         .faq-item summary {
             list-style: none;
@@ -1441,10 +1530,7 @@
             transition: box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
         }
 
-        .agenda-card.pulse-focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 0 4px rgba(189, 146, 66, 0.2);
-        }
+        .agenda-card.pulse-focus { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(189, 146, 66, 0.2); }
 
         .wa-chip {
             display: inline-flex;
@@ -1461,25 +1547,10 @@
 
         .wa-chip span { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--cocoa-faint); }
 
-        .agenda-form {
-            background: var(--cream);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-sm);
-            padding: 1.25rem;
-            display: grid;
-            gap: 0.95rem;
-        }
-
+        .agenda-form { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1.25rem; display: grid; gap: 0.95rem; }
         .form-row-2 { display: grid; grid-template-columns: 1fr; gap: 0.85rem; }
         .field { display: flex; flex-direction: column; gap: 0.38rem; }
-
-        .field-label {
-            font-size: 0.63rem;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--cocoa-faint);
-            font-weight: 600;
-        }
+        .field-label { font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--cocoa-faint); font-weight: 600; }
 
         .pill-group { display: flex; flex-wrap: wrap; gap: 0.38rem; }
 
@@ -1497,29 +1568,11 @@
         .choice-pill:hover { border-color: var(--gold); color: var(--cocoa); }
         .choice-pill.active { background: var(--olive); border-color: var(--olive); color: var(--cream-pure); box-shadow: 0 4px 12px rgba(66, 82, 43, 0.15); }
 
-        .sub-options-box {
-            display: none;
-            background: var(--cream-pure);
-            border: 1px solid var(--champagne);
-            border-radius: var(--radius-sm);
-            padding: 0.88rem 0.95rem;
-            gap: 0.75rem;
-            animation: pageEnter 0.28s var(--ease);
-        }
-
+        .sub-options-box { display: none; background: var(--cream-pure); border: 1px solid var(--champagne); border-radius: var(--radius-sm); padding: 0.88rem 0.95rem; gap: 0.75rem; animation: pageEnter 0.28s var(--ease); }
         .sub-options-box.is-open { display: grid; }
         .mini-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 
-        .mini-pill {
-            padding: 0.32rem 0.68rem;
-            border-radius: var(--radius-pill);
-            border: 1px solid var(--line);
-            background: var(--cream);
-            font-size: 0.72rem;
-            color: var(--cocoa-soft);
-            transition: all 0.2s var(--ease);
-        }
-
+        .mini-pill { padding: 0.32rem 0.68rem; border-radius: var(--radius-pill); border: 1px solid var(--line); background: var(--cream); font-size: 0.72rem; color: var(--cocoa-soft); transition: all 0.2s var(--ease); }
         .mini-pill:hover { border-color: var(--gold); color: var(--cocoa); }
         .mini-pill.active { background: var(--cocoa); border-color: var(--cocoa); color: var(--cream-pure); }
 
@@ -1574,23 +1627,10 @@
         /* =========================================================
            PÁGINA 6 · CONÓCENOS
            ========================================================= */
-        .about-banner {
-            background: var(--cream-pure);
-            border: 1px solid var(--champagne);
-            border-radius: var(--radius-md);
-            padding: clamp(1.25rem, 3.2vw, 1.9rem);
-            margin-bottom: 1.35rem;
-        }
-
+        .about-banner { background: var(--cream-pure); border: 1px solid var(--champagne); border-radius: var(--radius-md); padding: clamp(1.25rem, 3.2vw, 1.9rem); margin-bottom: 1.35rem; }
         .about-pillars { display: grid; grid-template-columns: 1fr; gap: 0.7rem; }
 
-        .about-pillar {
-            background: var(--cream);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-sm);
-            padding: 0.9rem 1rem;
-        }
-
+        .about-pillar { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.9rem 1rem; }
         .about-pillar strong { display: block; font-family: var(--font-serif); font-style: italic; font-size: 1.15rem; color: var(--olive); margin-bottom: 0.15rem; }
         .about-pillar span { font-size: 0.78rem; color: var(--cocoa-soft); }
 
@@ -1612,47 +1652,45 @@
         .location-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.35rem; }
         .location-card h3 { font-size: 1.5rem; }
 
-        .location-badge {
-            font-size: 0.62rem;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--gold-deep);
-            background: var(--gold-soft);
-            padding: 0.2rem 0.56rem;
-            border-radius: var(--radius-pill);
-            font-weight: 600;
-        }
-
+        .location-badge { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); background: var(--gold-soft); padding: 0.2rem 0.56rem; border-radius: var(--radius-pill); font-weight: 600; }
         .location-address { font-size: 0.83rem; color: var(--cocoa-soft); }
 
-        .location-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.1rem;
-            padding-top: 0.85rem;
-            border-top: 1px solid var(--line);
-            font-size: 0.78rem;
-            font-weight: 500;
-        }
-
+        .location-links { display: flex; flex-wrap: wrap; gap: 1.1rem; padding-top: 0.85rem; border-top: 1px solid var(--line); font-size: 0.78rem; font-weight: 500; }
         .arrow-link { display: inline-flex; align-items: center; gap: 0.28rem; color: var(--cocoa); transition: color 0.2s ease, gap 0.25s var(--ease); }
         .arrow-link:hover { color: var(--gold-deep); gap: 0.45rem; }
 
         /* =========================================================
-           FOOTER + BOTONES FLOTANTES (INSTAGRAM BLANCO/DORADO + ARRIBA)
+           FOOTER MINIMALISTA + BOTONES FLOTANTES
            ========================================================= */
         .site-footer {
             border-top: 1px solid var(--line);
-            padding: 1.65rem 0 2rem;
-            font-size: 0.76rem;
-            color: var(--cocoa-faint);
-            background: rgba(250, 247, 242, 0.75);
+            padding: 1.55rem 0 1.85rem;
+            background: rgba(250, 247, 242, 0.78);
+            text-align: center;
         }
 
-        .footer-inner { display: flex; flex-direction: column; gap: 0.7rem; }
-        .footer-links { display: flex; flex-wrap: wrap; gap: 1.1rem; align-items: center; }
-        .social-link { display: inline-flex; align-items: center; gap: 0.38rem; color: var(--cocoa); font-weight: 500; transition: color 0.2s ease; }
-        .social-link:hover { color: var(--gold-deep); }
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.28rem;
+        }
+
+        .footer-brand {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 0.98rem;
+            color: var(--cocoa);
+            letter-spacing: 0.01em;
+        }
+
+        .footer-credit {
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--cocoa-faint);
+        }
 
         .floating-dock {
             position: fixed;
@@ -1675,7 +1713,6 @@
             transition: transform 0.3s var(--ease), background 0.25s ease, border-color 0.25s ease, opacity 0.3s var(--ease), box-shadow 0.25s ease;
         }
 
-        /* Botón Instagram: blanco puro con ícono dorado */
         .float-ig {
             background: var(--cream-pure);
             border: 1.5px solid rgba(189, 146, 66, 0.48);
@@ -1730,7 +1767,7 @@
         .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
         @media (prefers-reduced-motion: reduce) {
-            .star-3d-wrap, .star-3d-spinner, .page-view, .service-panel, .showcase-slide, .nav-dropdown {
+            .star-3d-wrap, .star-3d-spinner, .page-view, .service-panel, .showcase-slide, .nav-dropdown, .intro-door {
                 animation: none !important;
                 transition: none !important;
             }
@@ -1781,21 +1818,10 @@
 
             .showcase-stage { min-height: 205px; }
 
-            .care-layout {
-                grid-template-columns: 1.15fr 0.85fr;
-                align-items: start;
-                gap: 1.5rem;
-            }
-
-            .agenda-card {
-                grid-template-columns: 0.82fr 1.18fr;
-                align-items: start;
-                gap: 2.1rem;
-            }
-
+            .care-layout { grid-template-columns: 1.15fr 0.85fr; align-items: start; gap: 1.5rem; }
+            .agenda-card { grid-template-columns: 0.82fr 1.18fr; align-items: start; gap: 2.1rem; }
             .form-row-2 { grid-template-columns: 1fr 1fr; }
             .locations-grid { grid-template-columns: repeat(3, 1fr); }
-            .footer-inner { flex-direction: row; justify-content: space-between; align-items: center; }
 
             .floating-dock { right: 26px; bottom: 26px; }
             .float-btn { width: 52px; height: 52px; }
@@ -1806,9 +1832,30 @@
         }
     </style>
 </head>
-<body>
+<body class="intro-locked">
 
-    <!-- SPRITE SVG: ESTRELLA METÁLICA 3D INFLADA Y REDONDEADA -->
+    <!-- PANTALLA DE INICIO ANIMADA: PUERTA DE MÁRMOL DORADO + PARTÍCULAS -->
+    <div class="intro-curtain" id="intro-curtain" aria-hidden="true">
+        <div class="intro-door left">
+            <div class="intro-door-img"></div>
+        </div>
+        <div class="intro-door right">
+            <div class="intro-door-img"></div>
+        </div>
+        <div class="intro-seam-glow"></div>
+        <div class="intro-emblem">
+            <div class="intro-emblem-pill">
+                <span class="intro-emblem-title">Ponte a Brillar</span>
+                <span class="intro-emblem-sub">Perforaciones</span>
+            </div>
+        </div>
+    </div>
+    <canvas class="intro-particles-canvas" id="intro-particles" aria-hidden="true"></canvas>
+
+    <!-- CAPA PARA DESTELLOS DE ESTRELLITAS 2D DORADAS AL PULSAR OPCIONES -->
+    <div class="spark-burst-layer" id="spark-burst-layer" aria-hidden="true"></div>
+
+    <!-- SPRITE SVG: ESTRELLA 3D INFLADA + ESTRELLA 2D DORADA -->
     <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden; visibility:hidden;">
         <defs>
             <radialGradient id="puffyGoldBody" cx="36%" cy="30%" r="68%" fx="32%" fy="26%">
@@ -1837,6 +1884,12 @@
                 <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
             </linearGradient>
 
+            <linearGradient id="star2dGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFF9DC"/>
+                <stop offset="45%" stop-color="#EBC871"/>
+                <stop offset="100%" stop-color="#B6832A"/>
+            </linearGradient>
+
             <clipPath id="puffyStarClip">
                 <path d="M60 10 C70 10 71 31 80 40 C89 49 110 50 110 60 C110 70 89 71 80 80 C71 89 70 110 60 110 C50 110 49 89 40 80 C31 71 10 70 10 60 C10 50 31 49 40 40 C49 31 50 10 60 10 Z"/>
             </clipPath>
@@ -1853,6 +1906,14 @@
                     <ellipse cx="48" cy="48" rx="14" ry="9" transform="rotate(-34 48 48)" fill="#FFFFFF" opacity="0.48"/>
                     <ellipse cx="76" cy="78" rx="16" ry="7" transform="rotate(-42 76 78)" fill="#FFE6A3" opacity="0.34"/>
                 </g>
+            </symbol>
+
+            <!-- Estrellita 2D dorada para reacción de clics -->
+            <symbol id="star-2d-gold" viewBox="0 0 32 32">
+                <path d="M16 1 C17.4 10.2 21.8 14.6 31 16 C21.8 17.4 17.4 21.8 16 31 C14.6 21.8 10.2 17.4 1 16 C10.2 14.6 14.6 10.2 16 1 Z"
+                      fill="url(#star2dGold)"
+                      stroke="#FFF7D6"
+                      stroke-width="0.9"/>
             </symbol>
         </defs>
     </svg>
@@ -1931,7 +1992,7 @@
 
     <main>
         <!-- =========================================================
-             PÁGINA 0 · INICIO (PORTADA DEDICADA)
+             PÁGINA 0 · INICIO (BOTONES TRASLÚCIDOS MODERNOS)
              ========================================================= -->
         <section id="page-inicio" class="page-view is-active" data-page="inicio" aria-label="Inicio">
             <div class="hero">
@@ -2004,7 +2065,7 @@
                                 Explorar Catálogo
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                             </button>
-                            <button type="button" class="btn-hero-ghost" data-go-page="agenda">Agenda tu cita</button>
+                            <button type="button" class="btn-hero-ghost shimmer-btn" data-go-page="agenda">Agenda tu cita</button>
                         </div>
                     </div>
                 </div>
@@ -2126,7 +2187,6 @@
                                 </button>
                             </div>
 
-                            <!-- ¿QUÉ INCLUYE? — VISOR DESLIZABLE -->
                             <div class="slide-showcase" id="showcase-diseno" aria-label="Qué incluye Diseño de Oreja">
                                 <div class="showcase-head">
                                     <h4>¿Qué incluye?</h4>
@@ -2257,7 +2317,7 @@
                     </div>
                 </div>
 
-                <!-- SERVICIO 3: PERFORACIONES PARA BEBÉS (CON SLIDES DESLIZABLES) -->
+                <!-- SERVICIO 3: PERFORACIONES PARA BEBÉS -->
                 <div class="service-panel" id="panel-bebes" role="tabpanel">
                     <div class="service-shell sage">
                         <div class="split-service-layout">
@@ -2294,7 +2354,6 @@
                                 </button>
                             </div>
 
-                            <!-- PROCESO EN 4 SLIDES DESLIZABLES (MISMO DISEÑO QUE ¿QUÉ INCLUYE?) -->
                             <div class="slide-showcase sage-theme" id="showcase-bebes" aria-label="Proceso de perforación para bebés">
                                 <div class="showcase-head">
                                     <h4>¿Cómo es la cita?</h4>
@@ -2683,17 +2742,11 @@
         </section>
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER MINIMALISTA -->
     <footer class="site-footer">
         <div class="container footer-inner">
-            <span>Ponte a Brillar · Estudio de Perforación</span>
-            <div class="footer-links">
-                <a href="https://wa.me/525653317595" target="_blank" rel="noopener noreferrer" class="social-link">+52 56 5331 7595</a>
-                <a href="https://www.instagram.com/ponteabrillar_perforaciones/" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg>
-                    @ponteabrillar_perforaciones
-                </a>
-            </div>
+            <span class="footer-brand">Ponte a Brillar · Estudio de Perforación</span>
+            <span class="footer-credit">Estudio de Soluciones Digitales 2026</span>
         </div>
     </footer>
 
@@ -2726,6 +2779,262 @@
         const STUDIO_CONFIG = {
             whatsappNumber: "525653317595"
         };
+
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        /* =========================================================
+           ANIMACIÓN DE INICIO — PUERTA MÁRMOL DORADO + PARTÍCULAS PULSANTES
+           ========================================================= */
+        (function initMarbleDoorIntro() {
+            const curtain = document.getElementById("intro-curtain");
+            const canvas = document.getElementById("intro-particles");
+
+            if (!curtain || !canvas || prefersReducedMotion) {
+                document.body.classList.remove("intro-locked");
+                if (curtain) curtain.classList.add("is-done");
+                if (canvas) canvas.style.display = "none";
+                return;
+            }
+
+            const ctx = canvas.getContext("2d");
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            let W = window.innerWidth;
+            let H = window.innerHeight;
+
+            function resizeCanvas() {
+                W = window.innerWidth;
+                H = window.innerHeight;
+                canvas.width = Math.floor(W * dpr);
+                canvas.height = Math.floor(H * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+            resizeCanvas();
+
+            const particles = [];
+            const GOLD_COLORS = [
+                { r: 255, g: 250, b: 230 },
+                { r: 247, g: 215, b: 132 },
+                { r: 224, g: 178, b: 82 },
+                { r: 189, g: 146, b: 66 }
+            ];
+
+            function spawnSeamParticles(count, burst = false) {
+                for (let i = 0; i < count; i++) {
+                    const color = GOLD_COLORS[Math.floor(Math.random() * GOLD_COLORS.length)];
+                    const spread = burst ? (Math.random() - 0.5) * 6.4 : (Math.random() - 0.5) * 1.4;
+                    particles.push({
+                        x: W * 0.5 + (Math.random() - 0.5) * (burst ? 18 : 6),
+                        y: Math.random() * H,
+                        vx: spread,
+                        vy: (Math.random() - 0.5) * (burst ? 2.4 : 0.9) - 0.35,
+                        size: burst ? (1.8 + Math.random() * 4.4) : (1.2 + Math.random() * 2.6),
+                        alpha: 0.75 + Math.random() * 0.25,
+                        life: 0,
+                        maxLife: burst ? (75 + Math.random() * 65) : (48 + Math.random() * 40),
+                        pulseSpeed: 0.14 + Math.random() * 0.18,
+                        pulsePhase: Math.random() * Math.PI * 2,
+                        glint: Math.random() > 0.55,
+                        color
+                    });
+                }
+            }
+
+            let animId = null;
+            let phase = "closed"; // closed -> opening -> done
+            let frame = 0;
+
+            function drawGlint(x, y, r, alpha) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.fillStyle = `rgba(255, 252, 236, ${alpha})`;
+                ctx.beginPath();
+                ctx.moveTo(0, -r * 2.4);
+                ctx.quadraticCurveTo(r * 0.35, -r * 0.35, r * 2.4, 0);
+                ctx.quadraticCurveTo(r * 0.35, r * 0.35, 0, r * 2.4);
+                ctx.quadraticCurveTo(-r * 0.35, r * 0.35, -r * 2.4, 0);
+                ctx.quadraticCurveTo(-r * 0.35, -r * 0.35, 0, -r * 2.4);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function renderLoop() {
+                frame++;
+                ctx.clearRect(0, 0, W, H);
+
+                if (phase === "closed" && frame % 3 === 0) {
+                    spawnSeamParticles(4, false);
+                } else if (phase === "opening" && frame < 110 && frame % 2 === 0) {
+                    spawnSeamParticles(5, true);
+                }
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.life++;
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vx *= 0.988;
+                    p.vy *= 0.988;
+
+                    const progress = p.life / p.maxLife;
+                    if (progress >= 1) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+
+                    const pulse = 0.52 + 0.48 * Math.sin(p.life * p.pulseSpeed + p.pulsePhase);
+                    const fade = progress < 0.15 ? (progress / 0.15) : (1 - (progress - 0.15) / 0.85);
+                    const finalAlpha = Math.max(0, Math.min(1, p.alpha * fade * pulse));
+                    const rad = p.size * (0.78 + 0.42 * pulse);
+
+                    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad * 3.2);
+                    grad.addColorStop(0, `rgba(255, 253, 240, ${finalAlpha})`);
+                    grad.addColorStop(0.35, `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${finalAlpha * 0.85})`);
+                    grad.addColorStop(1, `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0)`);
+
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, rad * 3.2, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    if (p.glint && rad > 2.2) {
+                        drawGlint(p.x, p.y, rad * 0.85, finalAlpha * 0.9);
+                    }
+                }
+
+                if (phase === "done" && particles.length === 0) {
+                    cancelAnimationFrame(animId);
+                    canvas.style.display = "none";
+                    return;
+                }
+
+                animId = requestAnimationFrame(renderLoop);
+            }
+
+            let started = false;
+            function startDoorSequence() {
+                if (started) return;
+                started = true;
+                curtain.classList.add("is-ready");
+                spawnSeamParticles(24, false);
+                renderLoop();
+
+                setTimeout(() => {
+                    phase = "opening";
+                    curtain.classList.add("is-opening");
+                    document.body.classList.remove("intro-locked");
+                    spawnSeamParticles(78, true);
+                }, 680);
+
+                setTimeout(() => {
+                    phase = "done";
+                    curtain.classList.add("is-done");
+                }, 2050);
+            }
+
+            /* Precarga breve de goldenmarble.png con tiempo máximo de espera para nunca trabar */
+            const imgPreload = new Image();
+            const fallbackStart = setTimeout(startDoorSequence, 420);
+            imgPreload.onload = () => {
+                clearTimeout(fallbackStart);
+                requestAnimationFrame(startDoorSequence);
+            };
+            imgPreload.onerror = () => {
+                clearTimeout(fallbackStart);
+                startDoorSequence();
+            };
+            imgPreload.src = "imagenes/goldenmarble.png";
+
+            /* Seguro absoluto para desbloquear scroll en cualquier caso */
+            setTimeout(() => document.body.classList.remove("intro-locked"), 2400);
+        })();
+
+        /* =========================================================
+           ESTRELLITAS 2D DORADAS GIRANDO EN 3 EJES AL PULSAR OPCIONES
+           ========================================================= */
+        (function initReactiveStars() {
+            if (prefersReducedMotion) return;
+            const layer = document.getElementById("spark-burst-layer");
+            if (!layer) return;
+
+            const INTERACTIVE_SELECTOR = [
+                "button",
+                "summary",
+                ".arrow-link",
+                ".float-ig",
+                ".wa-chip"
+            ].join(",");
+
+            function spawnStarBurst(originX, originY) {
+                const count = 7;
+                for (let i = 0; i < count; i++) {
+                    const wrap = document.createElement("span");
+                    wrap.className = "spark-star-wrap";
+                    wrap.style.left = `${originX}px`;
+                    wrap.style.top = `${originY}px`;
+
+                    const size = 11 + Math.random() * 11;
+                    const svgNS = "http://www.w3.org/2000/svg";
+                    const svg = document.createElementNS(svgNS, "svg");
+                    svg.setAttribute("class", "spark-star-2d");
+                    svg.setAttribute("width", size.toFixed(1));
+                    svg.setAttribute("height", size.toFixed(1));
+                    svg.setAttribute("viewBox", "0 0 32 32");
+                    svg.style.marginLeft = `${(-size / 2).toFixed(1)}px`;
+                    svg.style.marginTop = `${(-size / 2).toFixed(1)}px`;
+
+                    const use = document.createElementNS(svgNS, "use");
+                    use.setAttribute("href", "#star-2d-gold");
+                    svg.appendChild(use);
+                    wrap.appendChild(svg);
+                    layer.appendChild(wrap);
+
+                    const angle = (-Math.PI * 0.92) + (Math.PI * 0.84) * (i / (count - 1)) + (Math.random() - 0.5) * 0.35;
+                    const dist = 36 + Math.random() * 48;
+                    const tx = Math.cos(angle) * dist;
+                    const peakY = Math.sin(angle) * dist - (14 + Math.random() * 20);
+                    const endY = peakY + 28 + Math.random() * 20;
+
+                    const rotX = (Math.random() > 0.5 ? 1 : -1) * (240 + Math.random() * 300);
+                    const rotY = (Math.random() > 0.5 ? 1 : -1) * (280 + Math.random() * 340);
+                    const rotZ = (Math.random() > 0.5 ? 1 : -1) * (180 + Math.random() * 260);
+                    const dur = 640 + Math.random() * 260;
+
+                    const moveAnim = wrap.animate(
+                        [
+                            { transform: "translate3d(0px, 0px, 0px) scale(0.35)", opacity: 0.98, offset: 0 },
+                            { transform: `translate3d(${(tx * 0.58).toFixed(1)}px, ${peakY.toFixed(1)}px, 0px) scale(1.18)`, opacity: 1, offset: 0.42 },
+                            { transform: `translate3d(${tx.toFixed(1)}px, ${endY.toFixed(1)}px, 0px) scale(0.28)`, opacity: 0, offset: 1 }
+                        ],
+                        { duration: dur, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "forwards" }
+                    );
+
+                    svg.animate(
+                        [
+                            { transform: "rotateX(0deg) rotateY(0deg) rotateZ(0deg)" },
+                            { transform: `rotateX(${rotX.toFixed(0)}deg) rotateY(${rotY.toFixed(0)}deg) rotateZ(${rotZ.toFixed(0)}deg)` }
+                        ],
+                        { duration: dur, easing: "linear", fill: "forwards" }
+                    );
+
+                    moveAnim.onfinish = () => wrap.remove();
+                }
+            }
+
+            document.addEventListener("click", (e) => {
+                const target = e.target.closest(INTERACTIVE_SELECTOR);
+                if (!target) return;
+
+                let x = e.clientX;
+                let y = e.clientY;
+                if (x === 0 && y === 0) {
+                    const rect = target.getBoundingClientRect();
+                    x = rect.left + rect.width / 2;
+                    y = rect.top + rect.height / 2;
+                }
+                spawnStarBurst(x, y);
+            }, { passive: true });
+        })();
 
         /* =========================================================
            ENRUTADOR DE PÁGINAS INDEPENDIENTES (SPA + HASH HISTORY)
@@ -3444,7 +3753,6 @@
         window.addEventListener("scroll", updateScrollUI, { passive: true });
         backToTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
-        /* Respetar hash inicial si el cliente entra con enlace directo (#catalogo, #agenda, etc.) */
         const initialHash = window.location.hash.replace("#", "").trim();
         navigateTo(VALID_PAGES.includes(initialHash) ? initialHash : "inicio", { updateHash: false });
     </script>
