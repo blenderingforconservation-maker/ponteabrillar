@@ -74,6 +74,15 @@
             line-height: 1.55;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         h1, h2, h3, h4 {
@@ -100,6 +109,22 @@
             margin: 0 auto;
             padding: 0 1.2rem;
         }
+
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer-btn::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.24) 50%, transparent 75%);
+            transform: translateX(-120%);
+            transition: transform 0.75s var(--ease);
+        }
+
+        .shimmer-btn:hover::after { transform: translateX(120%); }
 
         /* =========================================================
            ESTRELLAS 3D INFLADAS — ZONA SEGURA EN MÓVIL
@@ -164,7 +189,6 @@
             50%      { transform: translateY(-7px); }
         }
 
-        /* Franjas superior e inferior seguras en móvil */
         .star-pos-1 { width: 46px; height: 46px; top: 14px; right: 6%; opacity: 0.78; --spin-dur: 13s; --float-dur: 8.5s; }
         .star-pos-2 { width: 42px; height: 42px; bottom: 14px; left: 7%; opacity: 0.7; --spin-dur: 16s; --float-dur: 10s; --delay: -3s; }
         .star-pos-3 { width: 32px; height: 32px; top: 18px; left: 8%; opacity: 0.64; --spin-dur: 10.5s; --float-dur: 7.5s; --delay: -1.5s; }
@@ -172,7 +196,7 @@
         .star-pos-5 { display: none; }
 
         /* =========================================================
-           HEADER + MENÚ DESPLEGABLE ARRIBA A LA DERECHA
+           HEADER DEPURADO + MENÚ DESPLEGABLE ARRIBA A LA DERECHA
            ========================================================= */
         .site-header {
             position: sticky;
@@ -201,13 +225,13 @@
             align-items: center;
             justify-content: space-between;
             gap: 0.75rem;
-            position: relative;
         }
 
         .brand {
             display: inline-flex;
             align-items: center;
             gap: 0.55rem;
+            text-align: left;
         }
 
         .brand-mark { display: inline-flex; perspective: 260px; }
@@ -232,48 +256,15 @@
             margin-top: 2px;
         }
 
-        .header-actions {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.55rem;
-        }
-
-        .btn-cta-sm {
-            position: relative;
-            overflow: hidden;
-            font-size: 0.75rem;
-            font-weight: 500;
-            padding: 0.5rem 1.05rem;
-            border-radius: var(--radius-pill);
-            background: var(--olive);
-            color: var(--cream-pure);
-            transition: background 0.3s var(--ease);
-            white-space: nowrap;
-        }
-
-        .btn-cta-sm:hover { background: var(--cocoa); }
-
-        .shimmer-btn::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.24) 50%, transparent 75%);
-            transform: translateX(-120%);
-            transition: transform 0.75s var(--ease);
-        }
-
-        .shimmer-btn:hover::after { transform: translateX(120%); }
-
-        /* Botón del menú desplegable (arriba a la derecha) */
         .menu-trigger {
             display: inline-flex;
             align-items: center;
-            gap: 0.45rem;
-            padding: 0.48rem 0.92rem;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
             border-radius: var(--radius-pill);
             border: 1px solid var(--champagne);
-            background: rgba(255, 255, 255, 0.85);
-            font-size: 0.76rem;
+            background: rgba(255, 255, 255, 0.88);
+            font-size: 0.77rem;
             font-weight: 500;
             color: var(--cocoa);
             transition: all 0.25s var(--ease);
@@ -311,7 +302,6 @@
         .menu-trigger[aria-expanded="true"] .menu-burger span:nth-child(2) { opacity: 0; }
         .menu-trigger[aria-expanded="true"] .menu-burger span:nth-child(3) { top: 4.5px; transform: rotate(-45deg); }
 
-        /* Overlay + Panel Desplegable */
         .menu-backdrop {
             position: fixed;
             inset: 0;
@@ -324,19 +314,16 @@
             transition: opacity 0.3s var(--ease);
         }
 
-        .menu-backdrop.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .menu-backdrop.open { opacity: 1; pointer-events: auto; }
 
         .nav-dropdown {
             position: fixed;
             top: calc(var(--header-h) + 10px);
             right: 1rem;
             width: min(350px, calc(100vw - 2rem));
-            max-height: calc(100vh - var(--header-h) - 24px);
+            max-height: calc(100dvh - var(--header-h) - 24px);
             overflow-y: auto;
-            background: rgba(255, 255, 255, 0.96);
+            background: rgba(255, 255, 255, 0.97);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--champagne);
@@ -367,7 +354,6 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Bloque destacado del catálogo por partes del cuerpo */
         .dd-catalog-box {
             background: var(--cream);
             border: 1px solid var(--line);
@@ -391,12 +377,7 @@
             color: var(--cocoa);
         }
 
-        .dd-catalog-all {
-            font-size: 0.7rem;
-            color: var(--olive);
-            font-weight: 600;
-        }
-
+        .dd-catalog-all { font-size: 0.7rem; color: var(--olive); font-weight: 600; }
         .dd-catalog-all:hover { text-decoration: underline; }
 
         .dd-body-grid {
@@ -419,10 +400,7 @@
             transition: all 0.22s var(--ease);
         }
 
-        .dd-body-btn span {
-            font-size: 0.66rem;
-            color: var(--cocoa-faint);
-        }
+        .dd-body-btn span { font-size: 0.66rem; color: var(--cocoa-faint); }
 
         .dd-body-btn:hover {
             border-color: var(--gold);
@@ -439,6 +417,7 @@
         }
 
         .dd-nav-link {
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -449,25 +428,22 @@
             transition: background 0.2s ease, color 0.2s ease;
         }
 
-        .dd-nav-link small {
-            font-size: 0.68rem;
-            color: var(--cocoa-faint);
-        }
+        .dd-nav-link small { font-size: 0.68rem; color: var(--cocoa-faint); }
 
-        .dd-nav-link:hover {
+        .dd-nav-link:hover,
+        .dd-nav-link.is-current {
             background: var(--olive-soft);
             color: var(--olive);
+            font-weight: 600;
         }
 
-        .dd-divider {
-            height: 1px;
-            background: var(--line);
-            margin: 0.6rem 0 0.8rem;
-        }
+        .dd-nav-link.is-current small { color: var(--olive); opacity: 0.8; }
+
+        .dd-divider { height: 1px; background: var(--line); margin: 0.6rem 0 0.8rem; }
 
         .dd-cta-btn {
             width: 100%;
-            padding: 0.76rem 1rem;
+            padding: 0.78rem 1rem;
             border-radius: var(--radius-pill);
             background: var(--cocoa);
             color: var(--cream-pure);
@@ -480,14 +456,86 @@
             transition: background 0.25s ease;
         }
 
-        .dd-cta-btn:hover { background: var(--olive); }
+        .dd-cta-btn:hover,
+        .dd-cta-btn.is-current { background: var(--olive); }
 
         /* =========================================================
-           PORTADA / HERO
+           SISTEMA DE PÁGINAS INDEPENDIENTES (SPA)
+           ========================================================= */
+        .page-view {
+            display: none;
+            flex: 1;
+            animation: pageEnter 0.38s var(--ease);
+        }
+
+        .page-view.is-active {
+            display: block;
+        }
+
+        @keyframes pageEnter {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .inner-page {
+            padding: clamp(2rem, 4.5vw, 3.25rem) 0 clamp(3.25rem, 6vw, 4.5rem);
+        }
+
+        .page-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.35rem;
+        }
+
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.74rem;
+            font-weight: 500;
+            color: var(--cocoa-soft);
+            padding: 0.34rem 0.72rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.75);
+            transition: all 0.22s var(--ease);
+        }
+
+        .back-home-btn:hover {
+            border-color: var(--gold);
+            color: var(--olive);
+            background: var(--cream-pure);
+        }
+
+        .section-head {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .section-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.64rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--gold-deep);
+            font-weight: 600;
+        }
+
+        .section-title { font-size: clamp(2rem, 5vw, 2.85rem); color: var(--cocoa); }
+        .section-desc { font-size: 0.86rem; color: var(--cocoa-soft); max-width: 52ch; }
+
+        /* =========================================================
+           PÁGINA 0 · INICIO (PORTADA + ACCESOS LIMPIOS)
            ========================================================= */
         .hero {
             position: relative;
-            padding: 5.15rem 0 4.85rem;
+            padding: 5.2rem 0 4.65rem;
             border-bottom: 1px solid var(--line);
             overflow: hidden;
             text-align: center;
@@ -559,7 +607,7 @@
             font-size: 0.87rem;
             color: var(--cocoa-soft);
             max-width: 42ch;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 1.55rem;
         }
 
         .hero-quick-actions {
@@ -570,13 +618,11 @@
         }
 
         .btn-hero-main {
-            position: relative;
-            overflow: hidden;
-            padding: 0.72rem 1.35rem;
+            padding: 0.74rem 1.4rem;
             border-radius: var(--radius-pill);
             background: var(--olive);
             color: var(--cream-pure);
-            font-size: 0.8rem;
+            font-size: 0.81rem;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
@@ -587,53 +633,92 @@
         .btn-hero-main:hover { background: var(--cocoa); transform: translateY(-1px); }
 
         .btn-hero-ghost {
-            padding: 0.72rem 1.3rem;
+            padding: 0.74rem 1.32rem;
             border-radius: var(--radius-pill);
             border: 1px solid var(--champagne);
-            background: rgba(255, 255, 255, 0.82);
+            background: rgba(255, 255, 255, 0.84);
             color: var(--cocoa);
-            font-size: 0.8rem;
+            font-size: 0.81rem;
             font-weight: 500;
             transition: border-color 0.25s ease, color 0.25s ease;
         }
 
         .btn-hero-ghost:hover { border-color: var(--gold); color: var(--olive); }
 
-        /* =========================================================
-           SECCIONES DE CONTENIDO
-           ========================================================= */
-        .page-section {
-            padding: clamp(2.85rem, 6vw, 4.25rem) 0;
-            border-bottom: 1px solid var(--line);
-            scroll-margin-top: calc(var(--header-h) + 8px);
+        /* Accesos elegantes en portada (sin saturar) */
+        .home-hub {
+            padding: 2.25rem 0 3.25rem;
         }
 
-        .page-section.tint {
-            background: rgba(239, 232, 220, 0.34);
+        .home-hub-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
         }
 
-        .section-head {
+        .hub-card {
+            background: var(--cream-pure);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1.25rem;
+            text-align: left;
             display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-            margin-bottom: 1.65rem;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: transform 0.28s var(--ease), border-color 0.25s ease, box-shadow 0.28s var(--ease);
         }
 
-        .section-kicker {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.64rem;
+        .hub-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 24px rgba(59, 42, 32, 0.05);
+        }
+
+        .hub-card-kicker {
+            display: block;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 0.18em;
+            letter-spacing: 0.15em;
             color: var(--gold-deep);
             font-weight: 600;
+            margin-bottom: 0.16rem;
         }
 
-        .section-title { font-size: clamp(2rem, 5vw, 2.85rem); color: var(--cocoa); }
-        .section-desc { font-size: 0.86rem; color: var(--cocoa-soft); max-width: 52ch; }
+        .hub-card h3 {
+            font-size: 1.38rem;
+            color: var(--cocoa);
+            margin-bottom: 0.12rem;
+        }
 
-        /* Marcos de imagen con estrella 3D de respaldo */
+        .hub-card p {
+            font-size: 0.76rem;
+            color: var(--cocoa-soft);
+        }
+
+        .hub-arrow {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--cream);
+            color: var(--olive);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        }
+
+        .hub-card:hover .hub-arrow {
+            background: var(--olive);
+            border-color: var(--olive);
+            color: var(--cream-pure);
+        }
+
+        /* =========================================================
+           IMÁGENES CON RESPALDO EN ESTRELLA 3D
+           ========================================================= */
         .media-frame {
             position: relative;
             overflow: hidden;
@@ -675,7 +760,7 @@
         }
 
         /* =========================================================
-           01 · SERVICIOS (SOLO 3: DISEÑO DE OREJA, PERFORACIONES, BEBÉS)
+           PÁGINA 1 · SERVICIOS (DISEÑO OREJA · PERFORACIONES · BEBÉS)
            ========================================================= */
         .service-tabs {
             display: grid;
@@ -705,33 +790,14 @@
             box-shadow: 0 10px 22px rgba(66, 82, 43, 0.16);
         }
 
-        .service-tab-kicker {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--gold-deep);
-            font-weight: 600;
-        }
-
+        .service-tab-kicker { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); font-weight: 600; }
         .service-tab.active .service-tab-kicker { color: var(--gold-bright); }
-
-        .service-tab-title {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 1.32rem;
-            line-height: 1.15;
-        }
-
+        .service-tab-title { font-family: var(--font-serif); font-style: italic; font-size: 1.32rem; line-height: 1.15; }
         .service-tab-sub { font-size: 0.72rem; color: var(--cocoa-soft); }
         .service-tab.active .service-tab-sub { color: rgba(255, 255, 255, 0.8); }
 
-        .service-panel { display: none; animation: panelIn 0.38s var(--ease); }
+        .service-panel { display: none; animation: pageEnter 0.36s var(--ease); }
         .service-panel.active { display: block; }
-
-        @keyframes panelIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
 
         .service-shell {
             background: var(--cream-pure);
@@ -746,8 +812,6 @@
         }
 
         .btn-primary {
-            position: relative;
-            overflow: hidden;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -762,10 +826,30 @@
 
         .btn-primary:hover { background: var(--olive); transform: translateY(-1px); }
 
-        /* Diseño de Oreja */
-        .design-layout { display: grid; gap: 1.75rem; }
+        .btn-olive {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            padding: 0.76rem 1.35rem;
+            border-radius: var(--radius-pill);
+            background: var(--olive);
+            color: var(--cream-pure);
+            font-size: 0.81rem;
+            font-weight: 500;
+            width: fit-content;
+            transition: background 0.25s ease, transform 0.25s var(--ease);
+        }
 
-        .design-hero-media {
+        .btn-olive:hover { background: var(--cocoa); transform: translateY(-1px); }
+
+        /* Diseño de Oreja + Bebés (Layout simétrico 2 columnas) */
+        .split-service-layout {
+            display: grid;
+            gap: 1.75rem;
+        }
+
+        .service-hero-media {
             display: grid;
             grid-template-columns: 88px 1fr;
             gap: 1rem;
@@ -773,7 +857,7 @@
             margin-bottom: 1rem;
         }
 
-        .design-thumb { width: 88px; height: 88px; border-radius: 50%; flex-shrink: 0; }
+        .service-thumb { width: 88px; height: 88px; border-radius: 50%; flex-shrink: 0; }
 
         .pill-meta {
             display: inline-flex;
@@ -821,8 +905,38 @@
         .zone-chip-box span { display: block; font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); font-weight: 600; }
         .zone-chip-box strong { font-family: var(--font-serif); font-style: italic; font-size: 1rem; font-weight: 500; }
 
-        /* ¿Qué incluye? deslizable */
-        .includes-showcase {
+        /* Badges + aviso bebés */
+        .babies-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.42rem;
+            margin: 0.85rem 0 1.05rem;
+        }
+
+        .babies-badge {
+            font-size: 0.71rem;
+            padding: 0.28rem 0.7rem;
+            border-radius: var(--radius-pill);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--olive-line);
+            color: var(--olive);
+            font-weight: 500;
+        }
+
+        .no-gun-note {
+            padding: 0.82rem 0.98rem;
+            background: var(--clay-bg);
+            border-left: 3px solid var(--clay);
+            border-radius: var(--radius-sm);
+            color: var(--clay);
+            font-size: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        /* =========================================================
+           COMPONENTE REUTILIZABLE: VISOR DESLIZABLE (OREJA + BEBÉS)
+           ========================================================= */
+        .slide-showcase {
             background: linear-gradient(160deg, var(--cream) 0%, #F4ECE0 100%);
             border: 1px solid var(--champagne);
             border-radius: var(--radius-md);
@@ -835,20 +949,38 @@
             -webkit-user-select: none;
         }
 
-        .includes-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; }
-        .includes-head h4 { font-size: 1.38rem; color: var(--olive); }
-        .includes-head span { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); font-weight: 600; }
+        .slide-showcase.sage-theme {
+            background: rgba(255, 255, 255, 0.58);
+            border-color: var(--olive-line);
+        }
 
-        .includes-stage {
+        .showcase-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.6rem;
+        }
+
+        .showcase-head h4 { font-size: 1.38rem; color: var(--olive); }
+
+        .showcase-head span {
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--gold-deep);
+            font-weight: 600;
+        }
+
+        .showcase-stage {
             position: relative;
-            min-height: 174px;
+            min-height: 176px;
             touch-action: pan-y;
             cursor: grab;
         }
 
-        .includes-stage:active { cursor: grabbing; }
+        .showcase-stage:active { cursor: grabbing; }
 
-        .include-slide {
+        .showcase-slide {
             position: absolute;
             inset: 0;
             background: var(--cream-pure);
@@ -866,11 +998,11 @@
             box-shadow: 0 10px 24px rgba(59, 42, 32, 0.04);
         }
 
-        .include-slide.is-active { opacity: 1; transform: translateX(0) scale(1); pointer-events: auto; z-index: 2; }
-        .include-slide.is-leaving-left { opacity: 0; transform: translateX(-18px) scale(0.985); z-index: 1; }
-        .include-slide.is-leaving-right { opacity: 0; transform: translateX(18px) scale(0.985); z-index: 1; }
+        .showcase-slide.is-active { opacity: 1; transform: translateX(0) scale(1); pointer-events: auto; z-index: 2; }
+        .showcase-slide.is-leaving-left { opacity: 0; transform: translateX(-18px) scale(0.985); z-index: 1; }
+        .showcase-slide.is-leaving-right { opacity: 0; transform: translateX(18px) scale(0.985); z-index: 1; }
 
-        .include-corner-num {
+        .slide-corner-num {
             position: absolute;
             top: 0.78rem;
             right: 1rem;
@@ -882,7 +1014,15 @@
             pointer-events: none;
         }
 
-        .include-slide-title {
+        .slide-kicker-tag {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--olive);
+            font-weight: 600;
+        }
+
+        .slide-title {
             font-family: var(--font-serif);
             font-style: italic;
             font-size: 1.34rem;
@@ -892,11 +1032,16 @@
             padding-right: 2.2rem;
         }
 
-        .include-slide-desc { font-size: 0.84rem; color: var(--cocoa-soft); line-height: 1.5; }
+        .slide-desc { font-size: 0.84rem; color: var(--cocoa-soft); line-height: 1.5; }
 
-        .includes-nav-bar { display: flex; align-items: center; justify-content: center; gap: 0.55rem; }
+        .showcase-nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+        }
 
-        .include-arrow-dot {
+        .slide-arrow-dot {
             width: 26px;
             height: 26px;
             border-radius: 50%;
@@ -911,19 +1056,31 @@
             transition: all 0.25s var(--ease);
         }
 
-        .include-arrow-dot:hover { background: rgba(66, 82, 43, 0.14); border-color: var(--gold); color: var(--olive); }
-
-        .includes-dots { display: inline-flex; align-items: center; gap: 0.36rem; padding: 0 0.2rem; }
-        .include-dot { width: 7px; height: 7px; border-radius: var(--radius-pill); background: rgba(59, 42, 32, 0.18); transition: width 0.35s var(--ease), background 0.35s var(--ease); }
-        .include-dot:hover { background: rgba(189, 146, 66, 0.6); }
-        .include-dot.active { width: 22px; background: var(--gold); }
-
-        /* Servicio: Perforaciones individuales */
-        .piercings-service-grid {
-            display: grid;
-            gap: 1.5rem;
+        .slide-arrow-dot:hover {
+            background: rgba(66, 82, 43, 0.14);
+            border-color: var(--gold);
+            color: var(--olive);
         }
 
+        .showcase-dots {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.36rem;
+            padding: 0 0.2rem;
+        }
+
+        .slide-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: var(--radius-pill);
+            background: rgba(59, 42, 32, 0.18);
+            transition: width 0.35s var(--ease), background 0.35s var(--ease);
+        }
+
+        .slide-dot:hover { background: rgba(189, 146, 66, 0.6); }
+        .slide-dot.active { width: 22px; background: var(--gold); }
+
+        /* Servicio: Perforaciones individuales */
         .service-highlights {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -938,19 +1095,8 @@
             padding: 0.72rem 0.65rem;
         }
 
-        .highlight-box strong {
-            display: block;
-            font-size: 0.78rem;
-            color: var(--cocoa);
-            margin-bottom: 0.1rem;
-        }
-
-        .highlight-box span {
-            font-size: 0.7rem;
-            color: var(--cocoa-soft);
-            line-height: 1.3;
-            display: block;
-        }
+        .highlight-box strong { display: block; font-size: 0.78rem; color: var(--cocoa); margin-bottom: 0.1rem; }
+        .highlight-box span { font-size: 0.7rem; color: var(--cocoa-soft); line-height: 1.3; display: block; }
 
         .body-shortcuts {
             background: var(--cream);
@@ -959,17 +1105,8 @@
             padding: 1.2rem;
         }
 
-        .body-shortcuts-title {
-            font-size: 1.28rem;
-            color: var(--olive);
-            margin-bottom: 0.25rem;
-        }
-
-        .body-shortcuts-sub {
-            font-size: 0.78rem;
-            color: var(--cocoa-soft);
-            margin-bottom: 0.9rem;
-        }
+        .body-shortcuts-title { font-size: 1.28rem; color: var(--olive); margin-bottom: 0.25rem; }
+        .body-shortcuts-sub { font-size: 0.78rem; color: var(--cocoa-soft); margin-bottom: 0.9rem; }
 
         .body-cards-grid {
             display: grid;
@@ -989,83 +1126,15 @@
             transition: all 0.25s var(--ease);
         }
 
-        .body-shortcut-card strong {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 1.15rem;
-            font-weight: 500;
-            color: var(--cocoa);
-        }
+        .body-shortcut-card strong { font-family: var(--font-serif); font-style: italic; font-size: 1.15rem; font-weight: 500; color: var(--cocoa); }
+        .body-shortcut-card span { font-size: 0.68rem; color: var(--cocoa-faint); }
 
-        .body-shortcut-card span {
-            font-size: 0.68rem;
-            color: var(--cocoa-faint);
-        }
-
-        .body-shortcut-card:hover {
-            border-color: var(--gold);
-            background: var(--olive);
-            transform: translateY(-2px);
-        }
-
+        .body-shortcut-card:hover { border-color: var(--gold); background: var(--olive); transform: translateY(-2px); }
         .body-shortcut-card:hover strong { color: var(--cream-pure); }
         .body-shortcut-card:hover span { color: var(--gold-bright); }
 
-        /* Bebés */
-        .babies-top { display: grid; gap: 1rem; }
-        .babies-media { display: flex; align-items: center; gap: 1rem; }
-        .babies-thumb { width: 84px; height: 84px; border-radius: 50%; flex-shrink: 0; border-color: var(--olive-line); }
-        .babies-badges { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-        .babies-badge { font-size: 0.7rem; padding: 0.26rem 0.68rem; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.88); border: 1px solid var(--olive-line); color: var(--olive); font-weight: 500; }
-
-        .steps-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1.25rem; }
-
-        .step-card {
-            background: rgba(255, 255, 255, 0.92);
-            border: 1px solid var(--olive-line);
-            border-radius: var(--radius-sm);
-            padding: 1rem;
-            transition: transform 0.3s var(--ease), border-color 0.25s ease;
-        }
-
-        .step-card:hover { transform: translateY(-2px); border-color: var(--gold); }
-        .step-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.35rem; }
-        .step-num { font-family: var(--font-serif); font-style: italic; font-size: 1.35rem; color: var(--gold-deep); line-height: 1; }
-        .step-chip { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--olive); opacity: 0.8; }
-        .step-card h5 { font-size: 0.86rem; font-weight: 600; color: var(--cocoa); margin-bottom: 0.2rem; }
-        .step-card p { font-size: 0.8rem; color: var(--cocoa-soft); }
-
-        .no-gun-banner {
-            margin-top: 1.15rem;
-            padding: 0.95rem 1.1rem;
-            background: var(--clay-bg);
-            border-left: 3px solid var(--clay);
-            border-radius: var(--radius-sm);
-            color: var(--clay);
-            font-size: 0.81rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .btn-olive {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.66rem 1.2rem;
-            border-radius: var(--radius-pill);
-            background: var(--olive);
-            color: var(--cream-pure);
-            font-size: 0.78rem;
-            font-weight: 500;
-            width: fit-content;
-            transition: background 0.25s ease;
-        }
-
-        .btn-olive:hover { background: var(--cocoa); }
-
         /* =========================================================
-           02 · CATÁLOGO POR PARTES DEL CUERPO (FICHAS COMPLETAS)
+           PÁGINA 2 · CATÁLOGO POR PARTES DEL CUERPO
            ========================================================= */
         .body-filter-bar {
             display: flex;
@@ -1111,24 +1180,10 @@
             margin-bottom: 0.1rem;
         }
 
-        .catalog-group-heading h3 {
-            font-size: 1.5rem;
-            color: var(--olive);
-            white-space: nowrap;
-        }
+        .catalog-group-heading h3 { font-size: 1.5rem; color: var(--olive); white-space: nowrap; }
+        .catalog-group-heading::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
-        .catalog-group-heading::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--line);
-        }
-
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.95rem;
-        }
+        .catalog-grid { display: grid; grid-template-columns: 1fr; gap: 0.95rem; }
 
         .piercing-card {
             background: var(--cream-pure);
@@ -1186,19 +1241,8 @@
         .spec-k { font-size: 0.57rem; text-transform: uppercase; letter-spacing: 0.11em; color: var(--cocoa-faint); }
         .spec-v { font-size: 0.74rem; color: var(--cocoa); font-weight: 500; line-height: 1.25; }
 
-        .pain-bar {
-            display: inline-flex;
-            gap: 2.5px;
-            margin-top: 2px;
-        }
-
-        .pain-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--champagne);
-        }
-
+        .pain-bar { display: inline-flex; gap: 2.5px; margin-top: 2px; }
+        .pain-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--champagne); }
         .pain-dot.on { background: var(--gold); }
 
         .no-hoop-pill {
@@ -1213,7 +1257,6 @@
             width: fit-content;
         }
 
-        /* Matriz completa de los 3 materiales directamente en cada ficha */
         .card-prices-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1230,11 +1273,7 @@
         }
 
         .price-opt:hover { border-color: var(--gold); }
-
-        .price-opt.selected {
-            background: var(--olive-soft);
-            border-color: var(--olive);
-        }
+        .price-opt.selected { background: var(--olive-soft); border-color: var(--olive); }
 
         .price-opt-mat {
             display: block;
@@ -1275,10 +1314,7 @@
             padding-top: 0.2rem;
         }
 
-        .card-unit-label {
-            font-size: 0.64rem;
-            color: var(--cocoa-faint);
-        }
+        .card-unit-label { font-size: 0.64rem; color: var(--cocoa-faint); }
 
         .btn-card-book {
             padding: 0.46rem 0.92rem;
@@ -1312,7 +1348,7 @@
         .catalog-footnote strong { color: var(--cocoa); }
 
         /* =========================================================
-           03 · PROMOS TITANIO (SECCIÓN INDEPENDIENTE)
+           PÁGINA 3 · PROMOS TITANIO
            ========================================================= */
         .promos-grid { display: grid; grid-template-columns: 1fr; gap: 0.9rem; }
 
@@ -1320,28 +1356,24 @@
             background: var(--cream-pure);
             border: 1px solid var(--champagne);
             border-radius: var(--radius-md);
-            padding: 1.35rem;
+            padding: 1.4rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            gap: 0.85rem;
+            gap: 0.9rem;
             transition: border-color 0.25s ease, transform 0.3s var(--ease);
         }
 
         .promo-card:hover { border-color: var(--gold); transform: translateY(-2px); }
         .promo-day { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--olive); font-weight: 600; }
-        .promo-big { font-family: var(--font-serif); font-style: italic; font-size: 2.6rem; font-weight: 600; color: var(--gold-deep); line-height: 1; margin: 0.3rem 0; }
-        .promo-desc { font-size: 0.83rem; color: var(--cocoa-soft); }
-        .promo-foot { margin-top: 1rem; font-size: 0.73rem; color: var(--cocoa-faint); }
+        .promo-big { font-family: var(--font-serif); font-style: italic; font-size: 2.7rem; font-weight: 600; color: var(--gold-deep); line-height: 1; margin: 0.3rem 0; }
+        .promo-desc { font-size: 0.84rem; color: var(--cocoa-soft); }
+        .promo-foot { margin-top: 1.1rem; font-size: 0.74rem; color: var(--cocoa-faint); }
 
         /* =========================================================
-           04 · GUÍA Y CUIDADOS (SECCIÓN INDEPENDIENTE)
+           PÁGINA 4 · GUÍA Y CUIDADOS
            ========================================================= */
-        .care-layout {
-            display: grid;
-            gap: 1.25rem;
-        }
-
+        .care-layout { display: grid; gap: 1.25rem; }
         .faq-grid { display: grid; gap: 0.6rem; }
 
         .faq-item {
@@ -1382,19 +1414,13 @@
 
         .care-card h3 { font-size: 1.55rem; color: var(--olive); }
 
-        .care-list {
-            list-style: none;
-            display: grid;
-            gap: 0.55rem;
-            font-size: 0.81rem;
-            color: var(--cocoa-soft);
-        }
+        .care-list { list-style: none; display: grid; gap: 0.55rem; font-size: 0.81rem; color: var(--cocoa-soft); }
 
         .care-list li {
             display: flex;
             align-items: flex-start;
             gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.78);
+            background: rgba(255, 255, 255, 0.82);
             border: 1px solid var(--olive-line);
             padding: 0.55rem 0.75rem;
             border-radius: 10px;
@@ -1403,13 +1429,13 @@
         .care-list strong { color: var(--cocoa); }
 
         /* =========================================================
-           05 · AGENDA TU CITA
+           PÁGINA 5 · AGENDA TU CITA
            ========================================================= */
         .agenda-card {
             background: var(--cream-pure);
             border: 1px solid var(--champagne);
             border-radius: var(--radius-md);
-            padding: clamp(1.3rem, 3.5vw, 2.2rem);
+            padding: clamp(1.3rem, 3.5vw, 2.25rem);
             display: grid;
             gap: 1.5rem;
             transition: box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
@@ -1478,7 +1504,7 @@
             border-radius: var(--radius-sm);
             padding: 0.88rem 0.95rem;
             gap: 0.75rem;
-            animation: panelIn 0.28s var(--ease);
+            animation: pageEnter 0.28s var(--ease);
         }
 
         .sub-options-box.is-open { display: grid; }
@@ -1504,7 +1530,7 @@
             gap: 0.65rem;
             padding: 0.58rem 0.85rem;
             border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.88);
+            background: rgba(255, 255, 255, 0.9);
             border: 1px dashed rgba(189, 146, 66, 0.55);
             font-size: 0.78rem;
         }
@@ -1529,8 +1555,6 @@
         .field select:focus { outline: none; border-color: var(--gold); }
 
         .btn-wa-submit {
-            position: relative;
-            overflow: hidden;
             width: 100%;
             padding: 0.88rem 1.15rem;
             border-radius: var(--radius-pill);
@@ -1548,23 +1572,17 @@
         .btn-wa-submit:hover { background: var(--cocoa); }
 
         /* =========================================================
-           06 · CONÓCENOS (IDENTIDAD + SUCURSALES)
+           PÁGINA 6 · CONÓCENOS
            ========================================================= */
         .about-banner {
             background: var(--cream-pure);
             border: 1px solid var(--champagne);
             border-radius: var(--radius-md);
-            padding: clamp(1.3rem, 3.2vw, 2rem);
-            display: grid;
-            gap: 1.25rem;
+            padding: clamp(1.25rem, 3.2vw, 1.9rem);
             margin-bottom: 1.35rem;
         }
 
-        .about-pillars {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.7rem;
-        }
+        .about-pillars { display: grid; grid-template-columns: 1fr; gap: 0.7rem; }
 
         .about-pillar {
             background: var(--cream);
@@ -1573,15 +1591,7 @@
             padding: 0.9rem 1rem;
         }
 
-        .about-pillar strong {
-            display: block;
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 1.15rem;
-            color: var(--olive);
-            margin-bottom: 0.15rem;
-        }
-
+        .about-pillar strong { display: block; font-family: var(--font-serif); font-style: italic; font-size: 1.15rem; color: var(--olive); margin-bottom: 0.15rem; }
         .about-pillar span { font-size: 0.78rem; color: var(--cocoa-soft); }
 
         .locations-grid { display: grid; grid-template-columns: 1fr; gap: 0.9rem; }
@@ -1629,21 +1639,21 @@
         .arrow-link:hover { color: var(--gold-deep); gap: 0.45rem; }
 
         /* =========================================================
-           FOOTER + BOTONES FLOTANTES (INSTAGRAM + IR ARRIBA)
+           FOOTER + BOTONES FLOTANTES (INSTAGRAM BLANCO/DORADO + ARRIBA)
            ========================================================= */
         .site-footer {
-            padding: 2rem 0 2.5rem;
+            border-top: 1px solid var(--line);
+            padding: 1.65rem 0 2rem;
             font-size: 0.76rem;
             color: var(--cocoa-faint);
+            background: rgba(250, 247, 242, 0.75);
         }
 
-        .footer-inner { display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-inner { display: flex; flex-direction: column; gap: 0.7rem; }
         .footer-links { display: flex; flex-wrap: wrap; gap: 1.1rem; align-items: center; }
-
         .social-link { display: inline-flex; align-items: center; gap: 0.38rem; color: var(--cocoa); font-weight: 500; transition: color 0.2s ease; }
         .social-link:hover { color: var(--gold-deep); }
 
-        /* Stack flotante inferior derecho: Ir arriba + Instagram */
         .floating-dock {
             position: fixed;
             right: 18px;
@@ -1662,26 +1672,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: transform 0.3s var(--ease), background 0.25s ease, border-color 0.25s ease, opacity 0.3s var(--ease);
+            transition: transform 0.3s var(--ease), background 0.25s ease, border-color 0.25s ease, opacity 0.3s var(--ease), box-shadow 0.25s ease;
         }
 
+        /* Botón Instagram: blanco puro con ícono dorado */
         .float-ig {
-            background: rgba(59, 42, 32, 0.88);
-            border: 1px solid rgba(232, 202, 126, 0.55);
-            color: var(--cream-pure);
-            box-shadow: 0 10px 26px rgba(59, 42, 32, 0.22);
+            background: var(--cream-pure);
+            border: 1.5px solid rgba(189, 146, 66, 0.48);
+            color: var(--gold);
+            box-shadow: 0 10px 24px rgba(59, 42, 32, 0.14);
         }
 
         .float-ig:hover {
-            background: var(--olive);
-            border-color: var(--gold-bright);
-            transform: translateY(-2px) scale(1.04);
+            background: var(--cream-pure);
+            border-color: var(--gold);
+            color: var(--gold-deep);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 14px 28px rgba(189, 146, 66, 0.24);
         }
 
         .back-to-top {
-            background: rgba(250, 247, 242, 0.68);
+            background: rgba(250, 247, 242, 0.72);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(189, 146, 66, 0.48);
             color: var(--cocoa);
             box-shadow: 0 8px 22px rgba(59, 42, 32, 0.12);
@@ -1690,17 +1703,8 @@
             transform: translateY(10px) scale(0.92);
         }
 
-        .back-to-top.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0) scale(1);
-        }
-
-        .back-to-top:hover {
-            background: rgba(255, 255, 255, 0.9);
-            border-color: var(--gold);
-            color: var(--olive);
-        }
+        .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+        .back-to-top:hover { background: var(--cream-pure); border-color: var(--gold); color: var(--olive); }
 
         .toast {
             position: fixed;
@@ -1726,7 +1730,7 @@
         .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
         @media (prefers-reduced-motion: reduce) {
-            .star-3d-wrap, .star-3d-spinner, .service-panel, .include-slide, .nav-dropdown {
+            .star-3d-wrap, .star-3d-spinner, .page-view, .service-panel, .showcase-slide, .nav-dropdown {
                 animation: none !important;
                 transition: none !important;
             }
@@ -1737,10 +1741,10 @@
            RESPONSIVE
            ========================================================= */
         @media (min-width: 640px) {
+            .home-hub-grid { grid-template-columns: repeat(2, 1fr); }
             .service-tabs { grid-template-columns: repeat(3, 1fr); }
             .body-cards-grid { grid-template-columns: repeat(3, 1fr); }
             .catalog-grid { grid-template-columns: repeat(2, 1fr); }
-            .steps-grid   { grid-template-columns: repeat(2, 1fr); }
             .promos-grid  { grid-template-columns: repeat(3, 1fr); }
             .about-pillars { grid-template-columns: repeat(3, 1fr); }
         }
@@ -1767,15 +1771,15 @@
                 --delay: -2.2s;
             }
 
-            .design-layout,
-            .piercings-service-grid {
+            .home-hub-grid { grid-template-columns: repeat(4, 1fr); }
+
+            .split-service-layout {
                 grid-template-columns: 0.96fr 1.04fr;
                 align-items: stretch;
                 gap: 2.2rem;
             }
 
-            .includes-stage { min-height: 205px; }
-            .no-gun-banner { flex-direction: row; align-items: center; justify-content: space-between; }
+            .showcase-stage { min-height: 205px; }
 
             .care-layout {
                 grid-template-columns: 1.15fr 0.85fr;
@@ -1798,7 +1802,6 @@
         }
 
         @media (min-width: 1024px) {
-            .steps-grid   { grid-template-columns: repeat(4, 1fr); }
             .catalog-grid { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
@@ -1854,10 +1857,10 @@
         </defs>
     </svg>
 
-    <!-- ENCABEZADO + MENÚ DESPLEGABLE ARRIBA A LA DERECHA -->
+    <!-- ENCABEZADO DEPURADO (MARCA + MENÚ DESPLEGABLE) -->
     <header class="site-header">
         <div class="container header-inner">
-            <a href="#inicio" class="brand">
+            <button type="button" class="brand" data-go-page="inicio" aria-label="Ir al inicio de Ponte a Brillar">
                 <span class="brand-mark" aria-hidden="true">
                     <svg class="star-ui" width="24" height="24"><use href="#star-metallic-3d"/></svg>
                 </span>
@@ -1865,15 +1868,12 @@
                     <span class="brand-name">Ponte a Brillar</span>
                     <span class="brand-sub">Perforaciones</span>
                 </span>
-            </a>
+            </button>
 
-            <div class="header-actions">
-                <a href="#agenda" class="btn-cta-sm shimmer-btn">Agendar</a>
-                <button type="button" class="menu-trigger" id="menu-trigger" aria-expanded="false" aria-controls="nav-dropdown" aria-label="Abrir menú">
-                    <span>Menú</span>
-                    <span class="menu-burger" aria-hidden="true"><span></span><span></span><span></span></span>
-                </button>
-            </div>
+            <button type="button" class="menu-trigger" id="menu-trigger" aria-expanded="false" aria-controls="nav-dropdown" aria-label="Abrir menú">
+                <span>Menú</span>
+                <span class="menu-burger" aria-hidden="true"><span></span><span></span><span></span></span>
+            </button>
         </div>
         <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     </header>
@@ -1882,7 +1882,6 @@
     <div class="menu-backdrop" id="menu-backdrop" aria-hidden="true"></div>
 
     <nav class="nav-dropdown" id="nav-dropdown" aria-label="Menú principal">
-        <!-- Acceso directo al Catálogo por partes del cuerpo -->
         <div class="dd-catalog-box">
             <div class="dd-catalog-head">
                 <strong>Catálogo de Perforaciones</strong>
@@ -1898,119 +1897,171 @@
             </div>
         </div>
 
-        <span class="dd-group-label">Explorar estudio</span>
+        <span class="dd-group-label">Páginas</span>
         <div class="dd-nav-list">
-            <a href="#servicios" class="dd-nav-link" data-close-menu>
+            <button type="button" class="dd-nav-link is-current" data-go-page="inicio">
+                <span>Inicio</span>
+                <small>Portada</small>
+            </button>
+            <button type="button" class="dd-nav-link" data-go-page="servicios">
                 <span>Servicios</span>
                 <small>Oreja · Perforaciones · Bebés</small>
-            </a>
-            <a href="#promos" class="dd-nav-link" data-close-menu>
+            </button>
+            <button type="button" class="dd-nav-link" data-go-page="promos">
                 <span>Promos Titanio</span>
                 <small>Lun · Mar · Mié</small>
-            </a>
-            <a href="#cuidados" class="dd-nav-link" data-close-menu>
+            </button>
+            <button type="button" class="dd-nav-link" data-go-page="cuidados">
                 <span>Guía y Cuidados</span>
                 <small>FAQ y garantía</small>
-            </a>
-            <a href="#conocenos" class="dd-nav-link" data-close-menu>
+            </button>
+            <button type="button" class="dd-nav-link" data-go-page="conocenos">
                 <span>Conócenos</span>
                 <small>Estudio y sucursales</small>
-            </a>
+            </button>
         </div>
 
         <div class="dd-divider"></div>
 
-        <a href="#agenda" class="dd-cta-btn shimmer-btn" data-close-menu>
+        <button type="button" class="dd-cta-btn shimmer-btn" data-go-page="agenda">
             Agenda tu cita
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
+        </button>
     </nav>
 
     <main>
         <!-- =========================================================
-             PORTADA / HERO
+             PÁGINA 0 · INICIO (PORTADA DEDICADA)
              ========================================================= -->
-        <section id="inicio" class="hero">
-            <div class="hero-stars-bg" aria-hidden="true">
-                <div class="star-3d-wrap star-pos-1">
-                    <div class="star-3d-spinner">
-                        <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
+        <section id="page-inicio" class="page-view is-active" data-page="inicio" aria-label="Inicio">
+            <div class="hero">
+                <div class="hero-stars-bg" aria-hidden="true">
+                    <div class="star-3d-wrap star-pos-1">
+                        <div class="star-3d-spinner">
+                            <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
+                        </div>
+                    </div>
+                    <div class="star-3d-wrap star-pos-2">
+                        <div class="star-3d-spinner">
+                            <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
+                        </div>
+                    </div>
+                    <div class="star-3d-wrap star-pos-3">
+                        <div class="star-3d-spinner">
+                            <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
+                        </div>
+                    </div>
+                    <div class="star-3d-wrap star-pos-4">
+                        <div class="star-3d-spinner">
+                            <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
+                        </div>
+                    </div>
+                    <div class="star-3d-wrap star-pos-5">
+                        <div class="star-3d-spinner">
+                            <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
+                        </div>
                     </div>
                 </div>
-                <div class="star-3d-wrap star-pos-2">
-                    <div class="star-3d-spinner">
-                        <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
-                    </div>
-                </div>
-                <div class="star-3d-wrap star-pos-3">
-                    <div class="star-3d-spinner">
-                        <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
-                    </div>
-                </div>
-                <div class="star-3d-wrap star-pos-4">
-                    <div class="star-3d-spinner">
-                        <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
-                    </div>
-                </div>
-                <div class="star-3d-wrap star-pos-5">
-                    <div class="star-3d-spinner">
-                        <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
+
+                <div class="container">
+                    <div class="hero-content">
+                        <div class="hero-brand-lockup">
+                            <span class="hero-eyebrow">
+                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
+                                Tu estudio de confianza
+                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
+                            </span>
+                            <h1 class="hero-wordmark">Ponte a Brillar</h1>
+                            <div class="hero-wordmark-rule" aria-hidden="true"></div>
+                            <span class="hero-wordmark-sub">Perforaciones</span>
+                        </div>
+
+                        <p class="hero-slogan">Es más que una <em>perforación.</em></p>
+                        <p class="hero-lead">Aguja estéril de uso único, joyería biocompatible y diseño corporal guiado.</p>
+
+                        <div class="hero-quick-actions">
+                            <button type="button" class="btn-hero-main shimmer-btn" data-go-page="catalogo">
+                                Explorar Catálogo
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </button>
+                            <button type="button" class="btn-hero-ghost" data-go-page="agenda">Agenda tu cita</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-brand-lockup">
-                        <span class="hero-eyebrow">
-                            <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                            Tu estudio de confianza
-                            <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                        </span>
-                        <h1 class="hero-wordmark">Ponte a Brillar</h1>
-                        <div class="hero-wordmark-rule" aria-hidden="true"></div>
-                        <span class="hero-wordmark-sub">Perforaciones</span>
-                    </div>
+            <div class="home-hub">
+                <div class="container">
+                    <div class="home-hub-grid">
+                        <button type="button" class="hub-card" data-go-page="servicios">
+                            <div>
+                                <span class="hub-card-kicker">Estudio</span>
+                                <h3>Servicios</h3>
+                                <p>Diseño de oreja, perforaciones y bebés</p>
+                            </div>
+                            <span class="hub-arrow" aria-hidden="true">→</span>
+                        </button>
 
-                    <p class="hero-slogan">Es más que una <em>perforación.</em></p>
-                    <p class="hero-lead">Aguja estéril de uso único, joyería biocompatible y diseño corporal guiado.</p>
+                        <button type="button" class="hub-card" data-go-page="promos">
+                            <div>
+                                <span class="hub-card-kicker">Beneficios</span>
+                                <h3>Promos Titanio</h3>
+                                <p>Lunes 20%, Martes 2×1, Miércoles 3×2</p>
+                            </div>
+                            <span class="hub-arrow" aria-hidden="true">→</span>
+                        </button>
 
-                    <div class="hero-quick-actions">
-                        <a href="#catalogo" class="btn-hero-main shimmer-btn">
-                            Explorar Catálogo
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                        </a>
-                        <a href="#servicios" class="btn-hero-ghost">Ver Servicios</a>
+                        <button type="button" class="hub-card" data-go-page="cuidados">
+                            <div>
+                                <span class="hub-card-kicker">Información</span>
+                                <h3>Guía y Cuidados</h3>
+                                <p>FAQ, tarjeta física y 45 días</p>
+                            </div>
+                            <span class="hub-arrow" aria-hidden="true">→</span>
+                        </button>
+
+                        <button type="button" class="hub-card" data-go-page="conocenos">
+                            <div>
+                                <span class="hub-card-kicker">Visítanos</span>
+                                <h3>Conócenos</h3>
+                                <p>Filosofía y 3 sucursales</p>
+                            </div>
+                            <span class="hub-arrow" aria-hidden="true">→</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- =========================================================
-             01 · SERVICIOS (DISEÑO DE OREJA · PERFORACIONES · BEBÉS)
+             PÁGINA 1 · SERVICIOS (DISEÑO DE OREJA · PERFORACIONES · BEBÉS)
              ========================================================= -->
-        <section id="servicios" class="page-section">
+        <section id="page-servicios" class="page-view inner-page" data-page="servicios" aria-label="Servicios">
             <div class="container">
+                <div class="page-top-bar">
+                    <button type="button" class="back-home-btn" data-go-page="inicio">← Inicio</button>
+                </div>
+
                 <div class="section-head">
                     <span class="section-kicker">
                         <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
@@ -2042,10 +2093,10 @@
                 <!-- SERVICIO 1: DISEÑO DE OREJA -->
                 <div class="service-panel active" id="panel-diseno" role="tabpanel">
                     <div class="service-shell">
-                        <div class="design-layout">
+                        <div class="split-service-layout">
                             <div>
-                                <div class="design-hero-media">
-                                    <div class="media-frame design-thumb">
+                                <div class="service-hero-media">
+                                    <div class="media-frame service-thumb">
                                         <img src="img/diseno-oreja.jpg" alt="Diseño de oreja Ponte a Brillar" onerror="this.classList.add('is-missing')">
                                         <div class="media-fallback">
                                             <svg class="star-ui" width="24" height="24"><use href="#star-metallic-3d"/></svg>
@@ -2075,73 +2126,63 @@
                                 </button>
                             </div>
 
-                            <!-- ¿QUÉ INCLUYE? — DESLIZABLE -->
-                            <div class="includes-showcase" id="includes-showcase" aria-label="Qué incluye Diseño de Oreja">
-                                <div class="includes-head">
+                            <!-- ¿QUÉ INCLUYE? — VISOR DESLIZABLE -->
+                            <div class="slide-showcase" id="showcase-diseno" aria-label="Qué incluye Diseño de Oreja">
+                                <div class="showcase-head">
                                     <h4>¿Qué incluye?</h4>
                                     <span>Titanio Grado Implante</span>
                                 </div>
 
-                                <div class="includes-stage" id="includes-stage" aria-live="polite">
-                                    <article class="include-slide is-active">
-                                        <span class="include-corner-num">01</span>
-                                        <h5 class="include-slide-title">3 perforaciones</h5>
-                                        <p class="include-slide-desc">Armonizadas en zona baja, media y alta de tu oreja.</p>
+                                <div class="showcase-stage" aria-live="polite">
+                                    <article class="showcase-slide is-active">
+                                        <span class="slide-corner-num">01</span>
+                                        <h5 class="slide-title">3 perforaciones</h5>
+                                        <p class="slide-desc">Armonizadas en zona baja, media y alta de tu oreja.</p>
                                     </article>
 
-                                    <article class="include-slide">
-                                        <span class="include-corner-num">02</span>
-                                        <h5 class="include-slide-title">3 joyas de diseño en Titanio</h5>
-                                        <p class="include-slide-desc">Grado implante, 100% biocompatible y ligero para cicatrizar mejor.</p>
+                                    <article class="showcase-slide">
+                                        <span class="slide-corner-num">02</span>
+                                        <h5 class="slide-title">3 joyas de diseño en Titanio</h5>
+                                        <p class="slide-desc">Grado implante, 100% biocompatible y ligero para cicatrizar mejor.</p>
                                     </article>
 
-                                    <article class="include-slide">
-                                        <span class="include-corner-num">03</span>
-                                        <h5 class="include-slide-title">Asesoría personalizada</h5>
-                                        <p class="include-slide-desc">Ubicación anatómica, estilo y composición guiada.</p>
+                                    <article class="showcase-slide">
+                                        <span class="slide-corner-num">03</span>
+                                        <h5 class="slide-title">Asesoría personalizada</h5>
+                                        <p class="slide-desc">Ubicación anatómica, estilo y composición guiada.</p>
                                     </article>
 
-                                    <article class="include-slide">
-                                        <span class="include-corner-num">04</span>
-                                        <h5 class="include-slide-title">Tarjeta + kit de limpieza</h5>
-                                        <p class="include-slide-desc">Cuidados impresos y kit de limpieza para 3 meses.</p>
+                                    <article class="showcase-slide">
+                                        <span class="slide-corner-num">04</span>
+                                        <h5 class="slide-title">Tarjeta + kit de limpieza</h5>
+                                        <p class="slide-desc">Cuidados impresos y kit de limpieza para 3 meses.</p>
                                     </article>
 
-                                    <article class="include-slide">
-                                        <span class="include-corner-num">05</span>
-                                        <h5 class="include-slide-title">Garantía de 3 meses</h5>
-                                        <p class="include-slide-desc">Respaldo directo en la calidad y enrosque de tus joyas.</p>
+                                    <article class="showcase-slide">
+                                        <span class="slide-corner-num">05</span>
+                                        <h5 class="slide-title">Garantía de 3 meses</h5>
+                                        <p class="slide-desc">Respaldo directo en la calidad y enrosque de tus joyas.</p>
                                     </article>
 
-                                    <article class="include-slide">
-                                        <span class="include-corner-num">06</span>
-                                        <h5 class="include-slide-title">1 valoración post-piercing</h5>
-                                        <p class="include-slide-desc">Revisión de seguimiento para verificar tu cicatrización.</p>
+                                    <article class="showcase-slide">
+                                        <span class="slide-corner-num">06</span>
+                                        <h5 class="slide-title">1 valoración post-piercing</h5>
+                                        <p class="slide-desc">Revisión de seguimiento para verificar tu cicatrización.</p>
                                     </article>
 
-                                    <article class="include-slide">
-                                        <span class="include-corner-num">07</span>
-                                        <h5 class="include-slide-title">Aretes de regalo en par</h5>
-                                        <p class="include-slide-desc">Obsequio pensado para tus perforaciones de nacimiento.</p>
+                                    <article class="showcase-slide">
+                                        <span class="slide-corner-num">07</span>
+                                        <h5 class="slide-title">Aretes de regalo en par</h5>
+                                        <p class="slide-desc">Obsequio pensado para tus perforaciones de nacimiento.</p>
                                     </article>
                                 </div>
 
-                                <div class="includes-nav-bar">
-                                    <button type="button" class="include-arrow-dot" id="include-prev" aria-label="Anterior">
+                                <div class="showcase-nav-bar">
+                                    <button type="button" class="slide-arrow-dot" data-slide-prev aria-label="Anterior">
                                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
                                     </button>
-
-                                    <div class="includes-dots" id="includes-dots" role="tablist" aria-label="Beneficios">
-                                        <button type="button" class="include-dot active" data-goto="0" aria-label="Beneficio 1"></button>
-                                        <button type="button" class="include-dot" data-goto="1" aria-label="Beneficio 2"></button>
-                                        <button type="button" class="include-dot" data-goto="2" aria-label="Beneficio 3"></button>
-                                        <button type="button" class="include-dot" data-goto="3" aria-label="Beneficio 4"></button>
-                                        <button type="button" class="include-dot" data-goto="4" aria-label="Beneficio 5"></button>
-                                        <button type="button" class="include-dot" data-goto="5" aria-label="Beneficio 6"></button>
-                                        <button type="button" class="include-dot" data-goto="6" aria-label="Beneficio 7"></button>
-                                    </div>
-
-                                    <button type="button" class="include-arrow-dot" id="include-next" aria-label="Siguiente">
+                                    <div class="showcase-dots" role="tablist" aria-label="Beneficios incluidos"></div>
+                                    <button type="button" class="slide-arrow-dot" data-slide-next aria-label="Siguiente">
                                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
                                     </button>
                                 </div>
@@ -2153,7 +2194,7 @@
                 <!-- SERVICIO 2: PERFORACIONES -->
                 <div class="service-panel" id="panel-perforaciones" role="tabpanel">
                     <div class="service-shell">
-                        <div class="piercings-service-grid">
+                        <div class="split-service-layout">
                             <div>
                                 <span class="pill-meta">Servicio Individual</span>
                                 <h3 class="panel-title">Perforaciones</h3>
@@ -2184,7 +2225,7 @@
 
                             <div class="body-shortcuts">
                                 <h4 class="body-shortcuts-title">Elige tu zona corporal</h4>
-                                <p class="body-shortcuts-sub">Consulta precios, dolor y cicatrización por zona:</p>
+                                <p class="body-shortcuts-sub">Abre directamente las fichas con precios, dolor y cicatrización:</p>
                                 <div class="body-cards-grid">
                                     <button type="button" class="body-shortcut-card" data-jump-zone="oreja">
                                         <strong>Oreja</strong>
@@ -2216,61 +2257,90 @@
                     </div>
                 </div>
 
-                <!-- SERVICIO 3: PERFORACIONES PARA BEBÉS -->
+                <!-- SERVICIO 3: PERFORACIONES PARA BEBÉS (CON SLIDES DESLIZABLES) -->
                 <div class="service-panel" id="panel-bebes" role="tabpanel">
                     <div class="service-shell sage">
-                        <div class="babies-top">
-                            <div class="babies-media">
-                                <div class="media-frame babies-thumb">
-                                    <img src="img/bebes.jpg" alt="Perforaciones a bebés Ponte a Brillar" onerror="this.classList.add('is-missing')">
-                                    <div class="media-fallback">
-                                        <svg class="star-ui" width="24" height="24"><use href="#star-metallic-3d"/></svg>
-                                        <span>Bebés</span>
+                        <div class="split-service-layout">
+                            <div>
+                                <div class="service-hero-media">
+                                    <div class="media-frame service-thumb" style="border-color: var(--olive-line);">
+                                        <img src="img/bebes.jpg" alt="Perforaciones a bebés Ponte a Brillar" onerror="this.classList.add('is-missing')">
+                                        <div class="media-fallback">
+                                            <svg class="star-ui" width="24" height="24"><use href="#star-metallic-3d"/></svg>
+                                            <span>Bebés</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="pill-meta" style="background: rgba(255,255,255,0.9);">By Vanya G. · +6 meses</span>
+                                        <h3 class="panel-title" style="color: var(--olive);">A un paso de brillar</h3>
+                                        <p class="panel-tagline">Primeros aretes sin prisas ni trauma</p>
                                     </div>
                                 </div>
-                                <div>
-                                    <span class="pill-meta" style="background: rgba(255,255,255,0.88);">By Vanya G. · +6 meses</span>
-                                    <h3 class="panel-title" style="color: var(--olive);">A un paso de brillar</h3>
+
+                                <div class="babies-badges">
+                                    <span class="babies-badge">Duración: 1 hora</span>
+                                    <span class="babies-badge">Exclusivo con cita</span>
+                                    <span class="babies-badge">90% menos dolor</span>
+                                    <span class="babies-badge">Cánula estéril</span>
+                                </div>
+
+                                <div class="no-gun-note">
+                                    <strong>Nunca con pistola.</strong> Utilizamos cánula de bisel fino 100% desechable y estéril para el bienestar de tu bebé.
+                                </div>
+
+                                <button type="button" class="btn-olive shimmer-btn" data-book-category="bebes">
+                                    Agendar cita bebé
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                                </button>
+                            </div>
+
+                            <!-- PROCESO EN 4 SLIDES DESLIZABLES (MISMO DISEÑO QUE ¿QUÉ INCLUYE?) -->
+                            <div class="slide-showcase sage-theme" id="showcase-bebes" aria-label="Proceso de perforación para bebés">
+                                <div class="showcase-head">
+                                    <h4>¿Cómo es la cita?</h4>
+                                    <span>Paso a paso</span>
+                                </div>
+
+                                <div class="showcase-stage" aria-live="polite">
+                                    <article class="showcase-slide is-active">
+                                        <span class="slide-corner-num">01</span>
+                                        <span class="slide-kicker-tag">Bienvenida</span>
+                                        <h5 class="slide-title">Presentación</h5>
+                                        <p class="slide-desc">Conocen a nuestra perforadora y resolvemos cada duda con calma antes de pasar a cabina.</p>
+                                    </article>
+
+                                    <article class="showcase-slide">
+                                        <span class="slide-corner-num">02</span>
+                                        <span class="slide-kicker-tag">Lidocaína tópica</span>
+                                        <h5 class="slide-title">Preparación</h5>
+                                        <p class="slide-desc">Limpieza delicada en las orejas del bebé, aplicación de lidocaína tópica y recubrimiento protector.</p>
+                                    </article>
+
+                                    <article class="showcase-slide">
+                                        <span class="slide-corner-num">03</span>
+                                        <span class="slide-kicker-tag">30 minutos</span>
+                                        <h5 class="slide-title">Paseo por la plaza</h5>
+                                        <p class="slide-desc">Espera tranquila de 30 minutos para lograr un servicio 90% menos doloroso y sereno.</p>
+                                    </article>
+
+                                    <article class="showcase-slide">
+                                        <span class="slide-corner-num">04</span>
+                                        <span class="slide-kicker-tag">Pausa de 15 min</span>
+                                        <h5 class="slide-title">Perforación con calma</h5>
+                                        <p class="slide-desc">Al volver, damos una pausa de 15 minutos tras el primer arete por si el bebé necesita relajarse.</p>
+                                    </article>
+                                </div>
+
+                                <div class="showcase-nav-bar">
+                                    <button type="button" class="slide-arrow-dot" data-slide-prev aria-label="Paso anterior">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                                    </button>
+                                    <div class="showcase-dots" role="tablist" aria-label="Pasos del proceso"></div>
+                                    <button type="button" class="slide-arrow-dot" data-slide-next aria-label="Siguiente paso">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                                    </button>
                                 </div>
                             </div>
-
-                            <div class="babies-badges">
-                                <span class="babies-badge">Duración: 1 hora</span>
-                                <span class="babies-badge">Solo bajo cita</span>
-                                <span class="babies-badge">90% menos dolor</span>
-                                <span class="babies-badge">Cánula estéril</span>
-                            </div>
-                        </div>
-
-                        <div class="steps-grid">
-                            <article class="step-card">
-                                <div class="step-head"><span class="step-num">01</span><span class="step-chip">Inicio</span></div>
-                                <h5>Presentación</h5>
-                                <p>Resolvemos dudas con nuestra perforadora antes de iniciar.</p>
-                            </article>
-
-                            <article class="step-card">
-                                <div class="step-head"><span class="step-num">02</span><span class="step-chip">Lidocaína</span></div>
-                                <h5>Preparación</h5>
-                                <p>Limpieza y aplicación de lidocaína tópica protectora.</p>
-                            </article>
-
-                            <article class="step-card">
-                                <div class="step-head"><span class="step-num">03</span><span class="step-chip">30 min</span></div>
-                                <h5>Paseo tranquilo</h5>
-                                <p>Espera de 30 min para un proceso 90% menos doloroso.</p>
-                            </article>
-
-                            <article class="step-card">
-                                <div class="step-head"><span class="step-num">04</span><span class="step-chip">Pausa 15 min</span></div>
-                                <h5>Perforación</h5>
-                                <p>Pausa de 15 min tras el primer arete si el bebé necesita calma.</p>
-                            </article>
-                        </div>
-
-                        <div class="no-gun-banner">
-                            <div><strong>Nunca con pistola.</strong> Cánula desechable y estéril de bisel fino.</div>
-                            <button type="button" class="btn-olive" data-book-category="bebes">Agendar cita bebé</button>
                         </div>
                     </div>
                 </div>
@@ -2278,20 +2348,23 @@
         </section>
 
         <!-- =========================================================
-             02 · CATÁLOGO DE PERFORACIONES POR PARTES DEL CUERPO
+             PÁGINA 2 · CATÁLOGO DE PERFORACIONES POR PARTES DEL CUERPO
              ========================================================= -->
-        <section id="catalogo" class="page-section tint">
+        <section id="page-catalogo" class="page-view inner-page" data-page="catalogo" aria-label="Catálogo de Perforaciones">
             <div class="container">
+                <div class="page-top-bar">
+                    <button type="button" class="back-home-btn" data-go-page="inicio">← Inicio</button>
+                </div>
+
                 <div class="section-head">
                     <span class="section-kicker">
                         <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
                         Fichas Individuales
                     </span>
                     <h2 class="section-title">Catálogo de Perforaciones</h2>
-                    <p class="section-desc">Organizado por zona corporal. Cada ficha incluye pieza inicial, nivel de dolor, cicatrización y precios con joya básica + servicio.</p>
+                    <p class="section-desc">Elige la parte del cuerpo. Cada ficha muestra pieza inicial, nivel de dolor, cicatrización y los 3 precios con joya básica + servicio.</p>
                 </div>
 
-                <!-- Filtros por parte del cuerpo -->
                 <div class="body-filter-bar" id="zone-tabs" role="tablist" aria-label="Filtrar catálogo por zona corporal">
                     <button type="button" class="zone-tab active" data-zone="oreja" role="tab" aria-selected="true">Oreja <span>14</span></button>
                     <button type="button" class="zone-tab" data-zone="nariz" role="tab" aria-selected="false">Nariz <span>4</span></button>
@@ -2312,16 +2385,21 @@
         </section>
 
         <!-- =========================================================
-             03 · PROMOS TITANIO (SEPARADO DE SERVICIOS)
+             PÁGINA 3 · PROMOS TITANIO
              ========================================================= -->
-        <section id="promos" class="page-section">
+        <section id="page-promos" class="page-view inner-page" data-page="promos" aria-label="Promos Titanio">
             <div class="container">
+                <div class="page-top-bar">
+                    <button type="button" class="back-home-btn" data-go-page="inicio">← Inicio</button>
+                </div>
+
                 <div class="section-head">
                     <span class="section-kicker">
                         <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
                         Beneficios en Estudio
                     </span>
                     <h2 class="section-title">Promos Titanio</h2>
+                    <p class="section-desc">Promociones exclusivas para que elijas Titanio grado implante en tus perforaciones.</p>
                 </div>
 
                 <div class="promos-grid">
@@ -2358,10 +2436,14 @@
         </section>
 
         <!-- =========================================================
-             04 · GUÍA Y CUIDADOS (SEPARADO DE SERVICIOS)
+             PÁGINA 4 · GUÍA Y CUIDADOS
              ========================================================= -->
-        <section id="cuidados" class="page-section tint">
+        <section id="page-cuidados" class="page-view inner-page" data-page="cuidados" aria-label="Guía y Cuidados">
             <div class="container">
+                <div class="page-top-bar">
+                    <button type="button" class="back-home-btn" data-go-page="inicio">← Inicio</button>
+                </div>
+
                 <div class="section-head">
                     <span class="section-kicker">
                         <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
@@ -2412,17 +2494,21 @@
         </section>
 
         <!-- =========================================================
-             05 · AGENDA TU CITA
+             PÁGINA 5 · AGENDA TU CITA
              ========================================================= -->
-        <section id="agenda" class="page-section">
+        <section id="page-agenda" class="page-view inner-page" data-page="agenda" aria-label="Agenda tu cita">
             <div class="container">
+                <div class="page-top-bar">
+                    <button type="button" class="back-home-btn" data-go-page="inicio">← Inicio</button>
+                </div>
+
                 <div class="agenda-card" id="agenda-card">
                     <div>
                         <span class="section-kicker" style="margin-bottom: 0.3rem;">
                             <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
                             Reservación Directa
                         </span>
-                        <h2 class="section-title" style="font-size: clamp(1.9rem, 4.5vw, 2.5rem);">Agenda tu cita</h2>
+                        <h2 class="section-title" style="font-size: clamp(1.9rem, 4.5vw, 2.55rem);">Agenda tu cita</h2>
                         <p class="section-desc" style="margin-top: 0.4rem;">
                             Selecciona servicio y sucursal para enviar tu solicitud precargada por WhatsApp.
                         </p>
@@ -2518,10 +2604,14 @@
         </section>
 
         <!-- =========================================================
-             06 · CONÓCENOS (ESTUDIO + SUCURSALES)
+             PÁGINA 6 · CONÓCENOS
              ========================================================= -->
-        <section id="conocenos" class="page-section tint" style="border-bottom: none;">
+        <section id="page-conocenos" class="page-view inner-page" data-page="conocenos" aria-label="Conócenos">
             <div class="container">
+                <div class="page-top-bar">
+                    <button type="button" class="back-home-btn" data-go-page="inicio">← Inicio</button>
+                </div>
+
                 <div class="section-head">
                     <span class="section-kicker">
                         <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
@@ -2539,7 +2629,7 @@
                         </div>
                         <div class="about-pillar">
                             <strong>Equipo experto</strong>
-                            <span>Perforadoras capacitadas lideradas con 8 años de trayectoria y visión de diseño.</span>
+                            <span>Perforadoras capacitadas con 8 años de trayectoria y visión de diseño.</span>
                         </div>
                         <div class="about-pillar">
                             <strong>Seguimiento real</strong>
@@ -2607,7 +2697,7 @@
         </div>
     </footer>
 
-    <!-- BOTONES FLOTANTES: IR ARRIBA + INSTAGRAM -->
+    <!-- BOTONES FLOTANTES: IR ARRIBA + INSTAGRAM (BLANCO CON ÍCONO DORADO) -->
     <div class="floating-dock">
         <button type="button" class="float-btn back-to-top" id="back-to-top" aria-label="Volver arriba" title="Volver arriba">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -2622,10 +2712,10 @@
            class="float-btn float-ig"
            aria-label="Instagram Ponte a Brillar"
            title="Síguenos en Instagram @ponteabrillar_perforaciones">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
                 <circle cx="12" cy="12" r="4.2"/>
-                <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
             </svg>
         </a>
     </div>
@@ -2638,8 +2728,11 @@
         };
 
         /* =========================================================
-           MENÚ DESPLEGABLE ARRIBA A LA DERECHA
+           ENRUTADOR DE PÁGINAS INDEPENDIENTES (SPA + HASH HISTORY)
            ========================================================= */
+        const VALID_PAGES = ["inicio", "servicios", "catalogo", "promos", "cuidados", "agenda", "conocenos"];
+        let activePage = "inicio";
+
         const menuTrigger = document.getElementById("menu-trigger");
         const navDropdown = document.getElementById("nav-dropdown");
         const menuBackdrop = document.getElementById("menu-backdrop");
@@ -2651,22 +2744,53 @@
         }
 
         menuTrigger.addEventListener("click", () => {
-            const isOpen = navDropdown.classList.contains("open");
-            setMenuOpen(!isOpen);
+            setMenuOpen(!navDropdown.classList.contains("open"));
         });
-
         menuBackdrop.addEventListener("click", () => setMenuOpen(false));
-
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") setMenuOpen(false);
         });
 
-        document.querySelectorAll("[data-close-menu]").forEach(el => {
-            el.addEventListener("click", () => setMenuOpen(false));
+        function navigateTo(pageName, { updateHash = true } = {}) {
+            const target = VALID_PAGES.includes(pageName) ? pageName : "inicio";
+            activePage = target;
+            setMenuOpen(false);
+
+            document.querySelectorAll(".page-view").forEach(view => {
+                view.classList.toggle("is-active", view.dataset.page === target);
+            });
+
+            document.querySelectorAll("#nav-dropdown [data-go-page]").forEach(btn => {
+                const isCur = btn.dataset.goPage === target;
+                btn.classList.toggle("is-current", isCur);
+                if (isCur) btn.setAttribute("aria-current", "page");
+                else btn.removeAttribute("aria-current");
+            });
+
+            if (updateHash && window.location.hash !== `#${target}`) {
+                history.pushState(null, "", `#${target}`);
+            }
+
+            window.scrollTo({ top: 0, behavior: "instant" });
+            updateScrollUI();
+        }
+
+        document.addEventListener("click", (e) => {
+            const goBtn = e.target.closest("[data-go-page]");
+            if (goBtn) {
+                navigateTo(goBtn.dataset.goPage);
+            }
+        });
+
+        window.addEventListener("hashchange", () => {
+            const hashPage = window.location.hash.replace("#", "").trim();
+            if (hashPage && hashPage !== activePage) {
+                navigateTo(hashPage, { updateHash: false });
+            }
         });
 
         /* =========================================================
-           PESTAÑAS DE SERVICIOS (3 SERVICIOS PRINCIPALES)
+           PESTAÑAS INTERNAS DE SERVICIOS (3 SERVICIOS)
            ========================================================= */
         document.querySelectorAll(".service-tab").forEach(tab => {
             tab.addEventListener("click", () => {
@@ -2683,17 +2807,24 @@
         });
 
         /* =========================================================
-           ¿QUÉ INCLUYE? — DESVANECIMIENTO + DESLIZABLE
+           COMPONENTE REUTILIZABLE DE SLIDES (DISEÑO OREJA + BEBÉS)
            ========================================================= */
-        (function initIncludesShowcase() {
-            const showcase = document.getElementById("includes-showcase");
-            const stage = document.getElementById("includes-stage");
-            const slides = Array.from(document.querySelectorAll(".include-slide"));
-            const dots = Array.from(document.querySelectorAll(".include-dot"));
-            const prevBtn = document.getElementById("include-prev");
-            const nextBtn = document.getElementById("include-next");
+        function createShowcaseSlider(containerId, isVisibleFn, duration = 4200) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
 
-            const DURATION = 4200;
+            const stage = container.querySelector(".showcase-stage");
+            const slides = Array.from(container.querySelectorAll(".showcase-slide"));
+            const dotsWrap = container.querySelector(".showcase-dots");
+            const prevBtn = container.querySelector("[data-slide-prev]");
+            const nextBtn = container.querySelector("[data-slide-next]");
+
+            dotsWrap.innerHTML = slides.map((_, idx) =>
+                `<button type="button" class="slide-dot ${idx === 0 ? "active" : ""}" data-goto="${idx}" aria-label="Diapositiva ${idx + 1}"></button>`
+            ).join("");
+
+            const dots = Array.from(dotsWrap.querySelectorAll(".slide-dot"));
+
             let currentIndex = 0;
             let timerId = null;
             let isPaused = false;
@@ -2723,11 +2854,9 @@
                 clearTimeout(timerId);
                 if (isPaused) return;
                 timerId = setTimeout(() => {
-                    if (document.getElementById("panel-diseno").classList.contains("active")) {
-                        goToSlide(currentIndex + 1, 1);
-                    }
+                    if (isVisibleFn()) goToSlide(currentIndex + 1, 1);
                     scheduleNext();
-                }, DURATION);
+                }, duration);
             }
 
             dots.forEach(dot => {
@@ -2748,25 +2877,42 @@
                 clearTimeout(timerId);
             });
 
-            window.addEventListener("pointerup", (e) => {
+            function finishDrag(clientX, shouldEvaluate = true) {
                 if (!isDragging) return;
                 isDragging = false;
-                const diff = e.clientX - startX;
-                if (Math.abs(diff) > 35) {
-                    goToSlide(diff < 0 ? currentIndex + 1 : currentIndex - 1, diff < 0 ? 1 : -1);
+                if (shouldEvaluate) {
+                    const diff = clientX - startX;
+                    if (Math.abs(diff) > 34) {
+                        goToSlide(diff < 0 ? currentIndex + 1 : currentIndex - 1, diff < 0 ? 1 : -1);
+                    }
                 }
                 isPaused = false;
                 scheduleNext();
-            });
+            }
 
-            showcase.addEventListener("mouseenter", () => { isPaused = true; clearTimeout(timerId); });
-            showcase.addEventListener("mouseleave", () => { isPaused = false; scheduleNext(); });
+            window.addEventListener("pointerup", (e) => finishDrag(e.clientX, true));
+            window.addEventListener("pointercancel", () => finishDrag(0, false));
+
+            container.addEventListener("mouseenter", () => { isPaused = true; clearTimeout(timerId); });
+            container.addEventListener("mouseleave", () => { isPaused = false; scheduleNext(); });
 
             scheduleNext();
-        })();
+        }
+
+        createShowcaseSlider(
+            "showcase-diseno",
+            () => activePage === "servicios" && document.getElementById("panel-diseno").classList.contains("active"),
+            4200
+        );
+
+        createShowcaseSlider(
+            "showcase-bebes",
+            () => activePage === "servicios" && document.getElementById("panel-bebes").classList.contains("active"),
+            4500
+        );
 
         /* =========================================================
-           CATÁLOGO COMPLETO DEL PDF (26 FICHAS — 6 PARTES DEL CUERPO)
+           CATÁLOGO COMPLETO (26 FICHAS — 6 PARTES DEL CUERPO)
            ========================================================= */
         const ZONE_ORDER = ["oreja", "nariz", "labio", "ceja", "ombligo", "pezon"];
         const ZONE_TITLES = {
@@ -2809,7 +2955,6 @@
                 nota: "Pieza de diseño (Acero, Titanio u Oro): costo pieza + $120 servicio."
             },
             {
-                // Precios exactos según PDF ($250 acero / $380 color / $250 titanio)
                 id: "conch", nombre: "Conch", grupo: "oreja", zona: "Zona interna / media",
                 img: "img/oreja-conch.jpg", pieza: "Recta / Poste", noAros: true,
                 dolorNum: 4, tiempo: "9–12 meses",
@@ -3080,7 +3225,7 @@
             }
         }
 
-        function setCatalogZone(zone, { scroll = false } = {}) {
+        function setCatalogZone(zone, { openPage = false } = {}) {
             activeCatalogZone = zone;
             document.querySelectorAll("#zone-tabs .zone-tab").forEach(tab => {
                 const active = tab.dataset.zone === zone;
@@ -3088,10 +3233,10 @@
                 tab.setAttribute("aria-selected", active);
             });
             renderCatalog();
-
-            if (scroll) {
-                const el = document.getElementById("catalogo");
-                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+            if (openPage) {
+                navigateTo("catalogo");
+            } else {
+                updateScrollUI();
             }
         }
 
@@ -3099,15 +3244,12 @@
             tab.addEventListener("click", () => setCatalogZone(tab.dataset.zone));
         });
 
-        /* Accesos directos por parte del cuerpo (menú desplegable y sección Servicios) */
         document.querySelectorAll("[data-jump-zone]").forEach(btn => {
             btn.addEventListener("click", () => {
-                setMenuOpen(false);
-                setCatalogZone(btn.dataset.jumpZone, { scroll: true });
+                setCatalogZone(btn.dataset.jumpZone, { openPage: true });
             });
         });
 
-        /* Selección de material dentro de cada ficha individual */
         catalogGrid.addEventListener("click", (e) => {
             const matBtn = e.target.closest("[data-pick-mat]");
             if (!matBtn) return;
@@ -3228,14 +3370,16 @@
             btn.addEventListener("click", () => { bookingState.branch = btn.dataset.branch; syncBookingUI(); });
         });
 
-        function focusAgenda(toastMsg) {
-            document.getElementById("agenda").scrollIntoView({ behavior: "smooth", block: "center" });
-            agendaCard.classList.remove("pulse-focus");
-            void agendaCard.offsetWidth;
-            agendaCard.classList.add("pulse-focus");
-            setTimeout(() => agendaCard.classList.remove("pulse-focus"), 1400);
+        function openAgendaPage(toastMsg) {
+            navigateTo("agenda");
+            requestAnimationFrame(() => {
+                agendaCard.classList.remove("pulse-focus");
+                void agendaCard.offsetWidth;
+                agendaCard.classList.add("pulse-focus");
+                setTimeout(() => agendaCard.classList.remove("pulse-focus"), 1400);
+            });
             if (toastMsg) showToast(toastMsg);
-            setTimeout(() => nameInput.focus({ preventScroll: true }), 550);
+            setTimeout(() => nameInput.focus({ preventScroll: true }), 260);
         }
 
         document.addEventListener("click", (e) => {
@@ -3244,7 +3388,7 @@
                 bookingState.category = catBtn.dataset.bookCategory;
                 if (catBtn.dataset.bookPromo) bookingState.promo = catBtn.dataset.bookPromo;
                 syncBookingUI();
-                focusAgenda(`Seleccionado: ${getSelectedServiceLabel()}`);
+                openAgendaPage(`Seleccionado: ${getSelectedServiceLabel()}`);
                 return;
             }
 
@@ -3256,7 +3400,7 @@
                 bookingState.material = cardMaterialSelection[id] || "titanio";
                 populateBookingPiercings(bookingState.zone, id);
                 syncBookingUI();
-                focusAgenda(`Seleccionado: ${getSelectedServiceLabel()}`);
+                openAgendaPage(`Seleccionado: ${getSelectedServiceLabel()}`);
                 return;
             }
 
@@ -3264,7 +3408,7 @@
             if (brBtn) {
                 bookingState.branch = brBtn.dataset.selectBranch;
                 syncBookingUI();
-                focusAgenda(`Sucursal: ${bookingState.branch}`);
+                openAgendaPage(`Sucursal: ${bookingState.branch}`);
             }
         });
 
@@ -3284,7 +3428,7 @@
         });
 
         /* =========================================================
-           PROGRESO DE SCROLL + BOTÓN IR ARRIBA
+           PROGRESO DE SCROLL + BOTÓN IR ARRIBA + CARGA INICIAL
            ========================================================= */
         const progressBar = document.getElementById("scroll-progress");
         const backToTopBtn = document.getElementById("back-to-top");
@@ -3294,12 +3438,15 @@
             const max = h.scrollHeight - h.clientHeight;
             const pct = max > 0 ? Math.min(100, (h.scrollTop / max) * 100) : 0;
             progressBar.style.width = `${pct}%`;
-            backToTopBtn.classList.toggle("visible", window.scrollY > 240);
+            backToTopBtn.classList.toggle("visible", window.scrollY > 200);
         }
 
         window.addEventListener("scroll", updateScrollUI, { passive: true });
-        updateScrollUI();
         backToTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+        /* Respetar hash inicial si el cliente entra con enlace directo (#catalogo, #agenda, etc.) */
+        const initialHash = window.location.hash.replace("#", "").trim();
+        navigateTo(VALID_PAGES.includes(initialHash) ? initialHash : "inicio", { updateHash: false });
     </script>
 </body>
 </html>
