@@ -171,7 +171,6 @@
             box-shadow: inset 1px 0 0 rgba(232, 202, 126, 0.85), -8px 0 28px rgba(59, 42, 32, 0.16);
         }
 
-        /* Imagen completa recortada al 50% exacto por hoja para empate perfecto */
         .intro-door-img {
             position: absolute;
             top: 0;
@@ -196,7 +195,6 @@
             transform: translateX(104%);
         }
 
-        /* Línea de luz dorada en la unión central antes de abrir */
         .intro-seam-glow {
             position: absolute;
             top: 0;
@@ -286,37 +284,19 @@
         }
 
         /* =========================================================
-           CAPA DE ESTRELLITAS 2D DORADAS REACTIVAS (GIRO 3 EJES)
+           CANVAS DE PULSO REACTIVO — ESTRELLAS DORADAS FLUIDAS
            ========================================================= */
-        .spark-burst-layer {
+        .spark-burst-canvas {
             position: fixed;
             inset: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 2100;
-            overflow: hidden;
-            perspective: 680px;
-        }
-
-        .spark-star-wrap {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 0;
-            height: 0;
-            pointer-events: none;
-            transform-style: preserve-3d;
-            will-change: transform, opacity;
-        }
-
-        .spark-star-2d {
-            display: block;
-            transform-style: preserve-3d;
-            will-change: transform;
-            filter: drop-shadow(0 0 6px rgba(232, 202, 126, 0.85));
         }
 
         /* =========================================================
-           ESTRELLAS 3D INFLADAS EN PORTADA — ZONA SEGURA EN MÓVIL
+           ESTRELLAS GIF EN PORTADA (INTEGRACIÓN SUAVE CON EL FONDO)
            ========================================================= */
         .star-ui {
             display: inline-block;
@@ -333,56 +313,73 @@
             z-index: 0;
         }
 
-        .star-3d-wrap {
+        .hero-star-gif-wrap {
             position: absolute;
-            perspective: 820px;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-select: none;
             will-change: transform;
-            animation: floatDrift var(--float-dur, 9s) ease-in-out infinite;
+            animation: floatSway var(--float-dur, 11s) ease-in-out infinite;
             animation-delay: var(--delay, 0s);
         }
 
-        .star-3d-spinner {
-            position: relative;
+        .hero-star-gif {
+            display: block;
             width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            animation: spinPuffy3D var(--spin-dur, 12s) linear infinite;
-            animation-delay: var(--delay, 0s);
+            height: auto;
+            mix-blend-mode: multiply;
+            filter: brightness(1.05) contrast(1.04) saturate(1.08);
+            transform: var(--gif-transform, none);
+            pointer-events: none;
         }
 
-        .star-3d-face {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            backface-visibility: visible;
+        @keyframes floatSway {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50%      { transform: translate3d(var(--drift-x, 3px), -5px, 0); }
         }
 
-        .star-3d-face.l-front {
-            transform: translateZ(4.5px) scale(0.95);
-            filter: drop-shadow(0 12px 20px rgba(138, 97, 30, 0.22));
-        }
-        .star-3d-face.l-mid-front { transform: translateZ(2.2px) scale(0.99); filter: brightness(0.96); }
-        .star-3d-face.l-core      { transform: translateZ(0px) scale(1.01); filter: brightness(0.82) saturate(1.18); }
-        .star-3d-face.l-mid-back  { transform: rotateY(180deg) translateZ(2.2px) scale(0.99); filter: brightness(0.94); }
-        .star-3d-face.l-back      { transform: rotateY(180deg) translateZ(4.5px) scale(0.95); }
-
-        @keyframes spinPuffy3D {
-            0%   { transform: rotateX(14deg) rotateY(0deg) rotateZ(-6deg); }
-            50%  { transform: rotateX(-14deg) rotateY(180deg) rotateZ(6deg); }
-            100% { transform: rotateX(14deg) rotateY(360deg) rotateZ(-6deg); }
+        /* Posiciones seguras en móvil */
+        .star-gif-1 {
+            width: 78px;
+            top: 8px;
+            right: 2%;
+            opacity: 0.9;
+            --float-dur: 10s;
+            --drift-x: -3px;
         }
 
-        @keyframes floatDrift {
-            0%, 100% { transform: translateY(0px); }
-            50%      { transform: translateY(-7px); }
+        .star-gif-2 {
+            width: 74px;
+            bottom: 8px;
+            left: 2%;
+            opacity: 0.85;
+            --float-dur: 12s;
+            --delay: -3.5s;
+            --drift-x: 3px;
+            --gif-transform: scaleX(-1) rotate(-6deg);
         }
 
-        .star-pos-1 { width: 46px; height: 46px; top: 14px; right: 6%; opacity: 0.78; --spin-dur: 13s; --float-dur: 8.5s; }
-        .star-pos-2 { width: 42px; height: 42px; bottom: 14px; left: 7%; opacity: 0.7; --spin-dur: 16s; --float-dur: 10s; --delay: -3s; }
-        .star-pos-3 { width: 32px; height: 32px; top: 18px; left: 8%; opacity: 0.64; --spin-dur: 10.5s; --float-dur: 7.5s; --delay: -1.5s; }
-        .star-pos-4 { width: 32px; height: 32px; bottom: 16px; right: 8%; opacity: 0.62; --spin-dur: 11.5s; --float-dur: 9.2s; --delay: -5s; }
-        .star-pos-5 { display: none; }
+        .star-gif-3 {
+            width: 52px;
+            top: 14px;
+            left: 3%;
+            opacity: 0.66;
+            --float-dur: 9.5s;
+            --delay: -1.8s;
+            --drift-x: 2px;
+            --gif-transform: scaleX(-1) rotate(8deg);
+        }
+
+        .star-gif-4 {
+            width: 54px;
+            bottom: 12px;
+            right: 3%;
+            opacity: 0.64;
+            --float-dur: 11.2s;
+            --delay: -5.2s;
+            --drift-x: -2px;
+            --gif-transform: rotate(10deg);
+        }
 
         /* =========================================================
            HEADER DEPURADO + MENÚ DESPLEGABLE ARRIBA A LA DERECHA
@@ -1767,7 +1764,7 @@
         .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
         @media (prefers-reduced-motion: reduce) {
-            .star-3d-wrap, .star-3d-spinner, .page-view, .service-panel, .showcase-slide, .nav-dropdown, .intro-door {
+            .hero-star-gif-wrap, .page-view, .service-panel, .showcase-slide, .nav-dropdown, .intro-door {
                 animation: none !important;
                 transition: none !important;
             }
@@ -1792,21 +1789,10 @@
 
             .nav-dropdown { right: max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem)); }
 
-            .star-pos-1 { width: clamp(90px, 11vw, 130px); height: clamp(90px, 11vw, 130px); top: 10%; right: 5%; }
-            .star-pos-2 { width: clamp(72px, 9vw, 104px); height: clamp(72px, 9vw, 104px); bottom: 12%; left: 5%; }
-            .star-pos-3 { width: clamp(46px, 5.5vw, 62px); height: clamp(46px, 5.5vw, 62px); top: 16%; left: 13%; }
-            .star-pos-4 { width: clamp(40px, 4.5vw, 52px); height: clamp(40px, 4.5vw, 52px); bottom: 16%; right: 14%; }
-            .star-pos-5 {
-                display: block;
-                width: 34px;
-                height: 34px;
-                top: 48%;
-                right: 18%;
-                opacity: 0.45;
-                --spin-dur: 9s;
-                --float-dur: 6.8s;
-                --delay: -2.2s;
-            }
+            .star-gif-1 { width: clamp(135px, 16vw, 195px); top: 6%; right: 4%; opacity: 0.92; }
+            .star-gif-2 { width: clamp(120px, 14vw, 172px); bottom: 8%; left: 4%; opacity: 0.88; }
+            .star-gif-3 { width: clamp(76px, 9vw, 110px); top: 14%; left: 10%; opacity: 0.72; }
+            .star-gif-4 { width: clamp(72px, 8.2vw, 102px); bottom: 14%; right: 11%; opacity: 0.68; }
 
             .home-hub-grid { grid-template-columns: repeat(4, 1fr); }
 
@@ -1852,10 +1838,10 @@
     </div>
     <canvas class="intro-particles-canvas" id="intro-particles" aria-hidden="true"></canvas>
 
-    <!-- CAPA PARA DESTELLOS DE ESTRELLITAS 2D DORADAS AL PULSAR OPCIONES -->
-    <div class="spark-burst-layer" id="spark-burst-layer" aria-hidden="true"></div>
+    <!-- CANVAS DE PULSO REACTIVO CON ESTRELLAS DORADAS FLUIDAS -->
+    <canvas class="spark-burst-canvas" id="spark-burst-canvas" aria-hidden="true"></canvas>
 
-    <!-- SPRITE SVG: ESTRELLA 3D INFLADA + ESTRELLA 2D DORADA -->
+    <!-- SPRITE SVG PARA ÍCONOS DE INTERFAZ -->
     <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden; visibility:hidden;">
         <defs>
             <radialGradient id="puffyGoldBody" cx="36%" cy="30%" r="68%" fx="32%" fy="26%">
@@ -1884,12 +1870,6 @@
                 <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
             </linearGradient>
 
-            <linearGradient id="star2dGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFF9DC"/>
-                <stop offset="45%" stop-color="#EBC871"/>
-                <stop offset="100%" stop-color="#B6832A"/>
-            </linearGradient>
-
             <clipPath id="puffyStarClip">
                 <path d="M60 10 C70 10 71 31 80 40 C89 49 110 50 110 60 C110 70 89 71 80 80 C71 89 70 110 60 110 C50 110 49 89 40 80 C31 71 10 70 10 60 C10 50 31 49 40 40 C49 31 50 10 60 10 Z"/>
             </clipPath>
@@ -1906,14 +1886,6 @@
                     <ellipse cx="48" cy="48" rx="14" ry="9" transform="rotate(-34 48 48)" fill="#FFFFFF" opacity="0.48"/>
                     <ellipse cx="76" cy="78" rx="16" ry="7" transform="rotate(-42 76 78)" fill="#FFE6A3" opacity="0.34"/>
                 </g>
-            </symbol>
-
-            <!-- Estrellita 2D dorada para reacción de clics -->
-            <symbol id="star-2d-gold" viewBox="0 0 32 32">
-                <path d="M16 1 C17.4 10.2 21.8 14.6 31 16 C21.8 17.4 17.4 21.8 16 31 C14.6 21.8 10.2 17.4 1 16 C10.2 14.6 14.6 10.2 16 1 Z"
-                      fill="url(#star2dGold)"
-                      stroke="#FFF7D6"
-                      stroke-width="0.9"/>
             </symbol>
         </defs>
     </svg>
@@ -1992,55 +1964,22 @@
 
     <main>
         <!-- =========================================================
-             PÁGINA 0 · INICIO (BOTONES TRASLÚCIDOS MODERNOS)
+             PÁGINA 0 · INICIO (ESTRELLAS GIF + BOTONES TRASLÚCIDOS)
              ========================================================= -->
         <section id="page-inicio" class="page-view is-active" data-page="inicio" aria-label="Inicio">
             <div class="hero">
                 <div class="hero-stars-bg" aria-hidden="true">
-                    <div class="star-3d-wrap star-pos-1">
-                        <div class="star-3d-spinner">
-                            <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
-                        </div>
+                    <div class="hero-star-gif-wrap star-gif-1">
+                        <img class="hero-star-gif" src="imagenes/estrellas%20redondas.gif" alt="" decoding="async">
                     </div>
-                    <div class="star-3d-wrap star-pos-2">
-                        <div class="star-3d-spinner">
-                            <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
-                        </div>
+                    <div class="hero-star-gif-wrap star-gif-2">
+                        <img class="hero-star-gif" src="imagenes/estrellas%20redondas.gif" alt="" decoding="async">
                     </div>
-                    <div class="star-3d-wrap star-pos-3">
-                        <div class="star-3d-spinner">
-                            <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
-                        </div>
+                    <div class="hero-star-gif-wrap star-gif-3">
+                        <img class="hero-star-gif" src="imagenes/estrellas%20redondas.gif" alt="" decoding="async">
                     </div>
-                    <div class="star-3d-wrap star-pos-4">
-                        <div class="star-3d-spinner">
-                            <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
-                        </div>
-                    </div>
-                    <div class="star-3d-wrap star-pos-5">
-                        <div class="star-3d-spinner">
-                            <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
-                            <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
-                        </div>
+                    <div class="hero-star-gif-wrap star-gif-4">
+                        <img class="hero-star-gif" src="imagenes/estrellas%20redondas.gif" alt="" decoding="async">
                     </div>
                 </div>
 
@@ -2840,7 +2779,7 @@
             }
 
             let animId = null;
-            let phase = "closed"; // closed -> opening -> done
+            let phase = "closed";
             let frame = 0;
 
             function drawGlint(x, y, r, alpha) {
@@ -2932,7 +2871,6 @@
                 }, 2050);
             }
 
-            /* Precarga breve de goldenmarble.png con tiempo máximo de espera para nunca trabar */
             const imgPreload = new Image();
             const fallbackStart = setTimeout(startDoorSequence, 420);
             imgPreload.onload = () => {
@@ -2945,17 +2883,32 @@
             };
             imgPreload.src = "imagenes/goldenmarble.png";
 
-            /* Seguro absoluto para desbloquear scroll en cualquier caso */
             setTimeout(() => document.body.classList.remove("intro-locked"), 2400);
         })();
 
         /* =========================================================
-           ESTRELLITAS 2D DORADAS GIRANDO EN 3 EJES AL PULSAR OPCIONES
+           PULSO REACTIVO EN CANVAS — ESTRELLAS DORADAS FLUIDAS
            ========================================================= */
         (function initReactiveStars() {
             if (prefersReducedMotion) return;
-            const layer = document.getElementById("spark-burst-layer");
-            if (!layer) return;
+            const canvas = document.getElementById("spark-burst-canvas");
+            if (!canvas) return;
+
+            const ctx = canvas.getContext("2d");
+            let W = 0;
+            let H = 0;
+            let dpr = 1;
+
+            function resize() {
+                dpr = Math.min(window.devicePixelRatio || 1, 2);
+                W = window.innerWidth;
+                H = window.innerHeight;
+                canvas.width = Math.floor(W * dpr);
+                canvas.height = Math.floor(H * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+            resize();
+            window.addEventListener("resize", resize, { passive: true });
 
             const INTERACTIVE_SELECTOR = [
                 "button",
@@ -2965,59 +2918,234 @@
                 ".wa-chip"
             ].join(",");
 
+            const rings = [];
+            const stars = [];
+            const motes = [];
+            let rafId = null;
+            let lastTime = 0;
+
+            function drawGoldenStar(s, alpha) {
+                const r = s.size * s.scale;
+                if (r <= 0.4 || alpha <= 0.01) return;
+
+                // Giro 3D suave sin colapsar a 1px
+                const flipX = 0.34 + 0.66 * Math.abs(Math.cos(s.yaw));
+                const flipY = 0.42 + 0.58 * Math.abs(Math.cos(s.pitch));
+                const sheen = 0.5 + 0.5 * Math.sin(s.yaw * 2 + s.pitch);
+
+                ctx.save();
+                ctx.translate(s.x, s.y);
+                ctx.rotate(s.rotZ);
+                ctx.globalAlpha = alpha;
+
+                // Halo cálido suave
+                const halo = ctx.createRadialGradient(0, 0, 0, 0, 0, r * 2.1);
+                halo.addColorStop(0, `rgba(255, 245, 205, ${0.42 + sheen * 0.25})`);
+                halo.addColorStop(0.5, "rgba(224, 178, 82, 0.16)");
+                halo.addColorStop(1, "rgba(224, 178, 82, 0)");
+                ctx.fillStyle = halo;
+                ctx.beginPath();
+                ctx.arc(0, 0, r * 2.1, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.scale(flipX, flipY);
+
+                // Silueta de estrella de 4 puntas estilizada y suave
+                const w = r * 0.34;
+                ctx.beginPath();
+                ctx.moveTo(0, -r);
+                ctx.quadraticCurveTo(w * 0.68, -w * 0.68, r, 0);
+                ctx.quadraticCurveTo(w * 0.68, w * 0.68, 0, r);
+                ctx.quadraticCurveTo(-w * 0.68, w * 0.68, -r, 0);
+                ctx.quadraticCurveTo(-w * 0.68, -w * 0.68, 0, -r);
+                ctx.closePath();
+
+                const bodyGrad = ctx.createRadialGradient(-r * 0.22, -r * 0.25, r * 0.05, 0, 0, r * 1.15);
+                bodyGrad.addColorStop(0, "#FFFDF4");
+                bodyGrad.addColorStop(0.32, sheen > 0.55 ? "#FCE49C" : "#F3D27A");
+                bodyGrad.addColorStop(0.74, "#C9963B");
+                bodyGrad.addColorStop(1, "#8E621C");
+
+                ctx.fillStyle = bodyGrad;
+                ctx.fill();
+
+                ctx.lineWidth = Math.max(0.65, r * 0.08);
+                ctx.strokeStyle = `rgba(255, 250, 224, ${0.55 + sheen * 0.35})`;
+                ctx.stroke();
+
+                // Destello central especular
+                const ir = r * 0.44;
+                const iw = ir * 0.28;
+                ctx.beginPath();
+                ctx.moveTo(0, -ir);
+                ctx.quadraticCurveTo(iw, -iw, ir, 0);
+                ctx.quadraticCurveTo(iw, iw, 0, ir);
+                ctx.quadraticCurveTo(-iw, iw, -ir, 0);
+                ctx.quadraticCurveTo(-iw, -iw, 0, -ir);
+                ctx.closePath();
+                ctx.fillStyle = `rgba(255, 253, 242, ${0.45 + sheen * 0.45})`;
+                ctx.fill();
+
+                ctx.restore();
+            }
+
             function spawnStarBurst(originX, originY) {
-                const count = 7;
+                // Onda sutil de pulso dorado en el punto de contacto
+                rings.push({
+                    x: originX,
+                    y: originY,
+                    age: 0,
+                    life: 0.46,
+                    maxRadius: 46 + Math.random() * 14
+                });
+
+                // 9–10 estrellas con dispersión radial equilibrada (~55px a ~125px)
+                const count = 10;
+                const baseOffset = Math.random() * Math.PI * 2;
                 for (let i = 0; i < count; i++) {
-                    const wrap = document.createElement("span");
-                    wrap.className = "spark-star-wrap";
-                    wrap.style.left = `${originX}px`;
-                    wrap.style.top = `${originY}px`;
+                    const angle = baseOffset + (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.38;
+                    const speed = 185 + Math.random() * 195;
+                    const isHero = i % 3 === 0;
 
-                    const size = 11 + Math.random() * 11;
-                    const svgNS = "http://www.w3.org/2000/svg";
-                    const svg = document.createElementNS(svgNS, "svg");
-                    svg.setAttribute("class", "spark-star-2d");
-                    svg.setAttribute("width", size.toFixed(1));
-                    svg.setAttribute("height", size.toFixed(1));
-                    svg.setAttribute("viewBox", "0 0 32 32");
-                    svg.style.marginLeft = `${(-size / 2).toFixed(1)}px`;
-                    svg.style.marginTop = `${(-size / 2).toFixed(1)}px`;
+                    stars.push({
+                        x: originX + Math.cos(angle) * 5,
+                        y: originY + Math.sin(angle) * 5,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed - (32 + Math.random() * 34),
+                        size: isHero ? (9.5 + Math.random() * 3.5) : (5.5 + Math.random() * 3.5),
+                        scale: 0.2,
+                        rotZ: Math.random() * Math.PI * 2,
+                        spinZ: (Math.random() > 0.5 ? 1 : -1) * (2.6 + Math.random() * 3.4),
+                        yaw: Math.random() * Math.PI * 2,
+                        spinYaw: (Math.random() > 0.5 ? 1 : -1) * (4.2 + Math.random() * 4.4),
+                        pitch: Math.random() * Math.PI * 2,
+                        spinPitch: (Math.random() > 0.5 ? 1 : -1) * (2.4 + Math.random() * 3.2),
+                        age: 0,
+                        life: 0.78 + Math.random() * 0.28,
+                        drag: 2.95 + Math.random() * 0.55
+                    });
+                }
 
-                    const use = document.createElementNS(svgNS, "use");
-                    use.setAttribute("href", "#star-2d-gold");
-                    svg.appendChild(use);
-                    wrap.appendChild(svg);
-                    layer.appendChild(wrap);
+                // Micro-partículas de brillo acompañando la expansión
+                for (let j = 0; j < 8; j++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = 210 + Math.random() * 190;
+                    motes.push({
+                        x: originX,
+                        y: originY,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed - 25,
+                        r: 1.3 + Math.random() * 1.6,
+                        age: 0,
+                        life: 0.65 + Math.random() * 0.35,
+                        twinkle: Math.random() * Math.PI * 2
+                    });
+                }
 
-                    const angle = (-Math.PI * 0.92) + (Math.PI * 0.84) * (i / (count - 1)) + (Math.random() - 0.5) * 0.35;
-                    const dist = 36 + Math.random() * 48;
-                    const tx = Math.cos(angle) * dist;
-                    const peakY = Math.sin(angle) * dist - (14 + Math.random() * 20);
-                    const endY = peakY + 28 + Math.random() * 20;
+                if (!rafId) {
+                    lastTime = performance.now();
+                    rafId = requestAnimationFrame(tick);
+                }
+            }
 
-                    const rotX = (Math.random() > 0.5 ? 1 : -1) * (240 + Math.random() * 300);
-                    const rotY = (Math.random() > 0.5 ? 1 : -1) * (280 + Math.random() * 340);
-                    const rotZ = (Math.random() > 0.5 ? 1 : -1) * (180 + Math.random() * 260);
-                    const dur = 640 + Math.random() * 260;
+            function tick(now) {
+                const dt = Math.min((now - lastTime) / 1000, 0.05);
+                lastTime = now;
 
-                    const moveAnim = wrap.animate(
-                        [
-                            { transform: "translate3d(0px, 0px, 0px) scale(0.35)", opacity: 0.98, offset: 0 },
-                            { transform: `translate3d(${(tx * 0.58).toFixed(1)}px, ${peakY.toFixed(1)}px, 0px) scale(1.18)`, opacity: 1, offset: 0.42 },
-                            { transform: `translate3d(${tx.toFixed(1)}px, ${endY.toFixed(1)}px, 0px) scale(0.28)`, opacity: 0, offset: 1 }
-                        ],
-                        { duration: dur, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "forwards" }
-                    );
+                ctx.clearRect(0, 0, W, H);
 
-                    svg.animate(
-                        [
-                            { transform: "rotateX(0deg) rotateY(0deg) rotateZ(0deg)" },
-                            { transform: `rotateX(${rotX.toFixed(0)}deg) rotateY(${rotY.toFixed(0)}deg) rotateZ(${rotZ.toFixed(0)}deg)` }
-                        ],
-                        { duration: dur, easing: "linear", fill: "forwards" }
-                    );
+                // 1. Ondas de pulso
+                for (let i = rings.length - 1; i >= 0; i--) {
+                    const ring = rings[i];
+                    ring.age += dt;
+                    const t = ring.age / ring.life;
+                    if (t >= 1) {
+                        rings.splice(i, 1);
+                        continue;
+                    }
+                    const easeOut = 1 - Math.pow(1 - t, 3);
+                    const radius = 8 + ring.maxRadius * easeOut;
+                    const alpha = (1 - t) * 0.42;
 
-                    moveAnim.onfinish = () => wrap.remove();
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(ring.x, ring.y, radius, 0, Math.PI * 2);
+                    ctx.strokeStyle = `rgba(215, 167, 76, ${alpha})`;
+                    ctx.lineWidth = 1.6 * (1 - t * 0.65);
+                    ctx.stroke();
+                    ctx.restore();
+                }
+
+                // 2. Micro-destellos dorados
+                for (let i = motes.length - 1; i >= 0; i--) {
+                    const m = motes[i];
+                    m.age += dt;
+                    const t = m.age / m.life;
+                    if (t >= 1) {
+                        motes.splice(i, 1);
+                        continue;
+                    }
+                    const damp = Math.exp(-3.1 * dt);
+                    m.vx *= damp;
+                    m.vy = m.vy * damp + 95 * dt;
+                    m.x += m.vx * dt;
+                    m.y += m.vy * dt;
+
+                    const twinkle = 0.55 + 0.45 * Math.sin(m.age * 18 + m.twinkle);
+                    const alpha = (1 - t * t) * twinkle * 0.85;
+                    const grad = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r * 2.6);
+                    grad.addColorStop(0, `rgba(255, 252, 234, ${alpha})`);
+                    grad.addColorStop(0.5, `rgba(232, 202, 126, ${alpha * 0.7})`);
+                    grad.addColorStop(1, "rgba(232, 202, 126, 0)");
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.arc(m.x, m.y, m.r * 2.6, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // 3. Estrellas doradas con giro fluido
+                for (let i = stars.length - 1; i >= 0; i--) {
+                    const s = stars[i];
+                    s.age += dt;
+                    const t = s.age / s.life;
+                    if (t >= 1) {
+                        stars.splice(i, 1);
+                        continue;
+                    }
+
+                    const damp = Math.exp(-s.drag * dt);
+                    s.vx *= damp;
+                    s.vy = s.vy * damp + 125 * dt;
+                    s.x += s.vx * dt;
+                    s.y += s.vy * dt;
+
+                    // Desaceleración suave del giro al final
+                    const spinFactor = 1 - t * 0.35;
+                    s.rotZ += s.spinZ * spinFactor * dt;
+                    s.yaw += s.spinYaw * spinFactor * dt;
+                    s.pitch += s.spinPitch * spinFactor * dt;
+
+                    // Curva suave de entrada (pop) y salida (fade)
+                    if (t < 0.16) {
+                        const p = t / 0.16;
+                        s.scale = 0.25 + 0.9 * (1 - Math.pow(1 - p, 3));
+                    } else {
+                        const p = (t - 0.16) / 0.84;
+                        s.scale = 1.15 - 0.72 * Math.pow(p, 1.6);
+                    }
+
+                    const alpha = t < 0.12
+                        ? t / 0.12
+                        : Math.max(0, 1 - Math.pow((t - 0.12) / 0.88, 2.2));
+
+                    drawGoldenStar(s, alpha);
+                }
+
+                if (rings.length || stars.length || motes.length) {
+                    rafId = requestAnimationFrame(tick);
+                } else {
+                    ctx.clearRect(0, 0, W, H);
+                    rafId = null;
                 }
             }
 
