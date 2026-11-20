@@ -8,7 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500;1,6..96,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         /* =========================================================
@@ -29,7 +29,7 @@
             --olive-line: rgba(66, 82, 43, 0.16);
 
             --gold: #BD9242;
-            --gold-bright: #E3C27A;
+            --gold-bright: #E8CA7E;
             --gold-deep: #8A611E;
             --gold-soft: rgba(189, 146, 66, 0.14);
 
@@ -39,11 +39,12 @@
             --line: rgba(59, 42, 32, 0.1);
             --line-strong: rgba(59, 42, 32, 0.2);
 
-            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-script: 'Allura', cursive;
+            --font-serif: 'Bodoni Moda', Georgia, serif;
             --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
-            --radius-sm: 10px;
-            --radius-md: 18px;
+            --radius-sm: 12px;
+            --radius-md: 20px;
             --radius-pill: 999px;
 
             --max-w: 1080px;
@@ -68,18 +69,19 @@
             background-color: var(--cream);
             background-image:
                 radial-gradient(ellipse 80% 50% at 85% 0%, rgba(223, 210, 189, 0.42), transparent 60%),
-                radial-gradient(ellipse 65% 45% at 10% 35%, rgba(239, 232, 220, 0.5), transparent 60%);
+                radial-gradient(ellipse 65% 45% at 10% 35%, rgba(239, 232, 220, 0.52), transparent 60%);
             color: var(--cocoa);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            padding-bottom: 84px;
+            padding-bottom: 92px;
         }
 
         h1, h2, h3, h4 {
             font-family: var(--font-serif);
+            font-style: italic;
             font-weight: 500;
-            line-height: 1.08;
+            line-height: 1.1;
             letter-spacing: -0.01em;
         }
 
@@ -101,13 +103,13 @@
         }
 
         /* =========================================================
-           ESTRELLAS METÁLICAS 3D (UI + FONDO ANIMADO)
+           ESTRELLAS METÁLICAS 3D INFLADAS Y REDONDEADAS
            ========================================================= */
         .star-ui {
             display: inline-block;
             vertical-align: middle;
             flex-shrink: 0;
-            filter: drop-shadow(0 2px 4px rgba(138, 97, 30, 0.28));
+            filter: drop-shadow(0 2px 5px rgba(138, 97, 30, 0.32));
         }
 
         .hero-stars-bg {
@@ -120,7 +122,7 @@
 
         .star-3d-wrap {
             position: absolute;
-            perspective: 750px;
+            perspective: 820px;
             will-change: transform;
             animation: floatDrift var(--float-dur, 9s) ease-in-out infinite;
             animation-delay: var(--delay, 0s);
@@ -131,7 +133,7 @@
             width: 100%;
             height: 100%;
             transform-style: preserve-3d;
-            animation: spinMetal3D var(--spin-dur, 12s) linear infinite;
+            animation: spinPuffy3D var(--spin-dur, 12s) linear infinite;
             animation-delay: var(--delay, 0s);
         }
 
@@ -140,29 +142,34 @@
             inset: 0;
             width: 100%;
             height: 100%;
-            backface-visibility: hidden;
-            filter: drop-shadow(0 12px 22px rgba(138, 97, 30, 0.22));
-        }
-
-        .star-3d-face.front {
-            transform: translateZ(3px);
-        }
-
-        .star-3d-face.mid {
-            transform: translateZ(0px) scale(0.985);
             backface-visibility: visible;
-            opacity: 0.72;
-            filter: brightness(0.76) saturate(1.15);
         }
 
-        .star-3d-face.back {
-            transform: rotateY(180deg) translateZ(3px);
+        /* Capas de volumen inflado en el eje Z */
+        .star-3d-face.l-front {
+            transform: translateZ(4.5px) scale(0.95);
+            filter: drop-shadow(0 14px 24px rgba(138, 97, 30, 0.24));
+        }
+        .star-3d-face.l-mid-front {
+            transform: translateZ(2.2px) scale(0.99);
+            filter: brightness(0.96);
+        }
+        .star-3d-face.l-core {
+            transform: translateZ(0px) scale(1.01);
+            filter: brightness(0.82) saturate(1.18);
+        }
+        .star-3d-face.l-mid-back {
+            transform: rotateY(180deg) translateZ(2.2px) scale(0.99);
+            filter: brightness(0.94);
+        }
+        .star-3d-face.l-back {
+            transform: rotateY(180deg) translateZ(4.5px) scale(0.95);
         }
 
-        @keyframes spinMetal3D {
-            0%   { transform: rotateX(12deg) rotateY(0deg) rotateZ(-6deg); }
-            50%  { transform: rotateX(-12deg) rotateY(180deg) rotateZ(6deg); }
-            100% { transform: rotateX(12deg) rotateY(360deg) rotateZ(-6deg); }
+        @keyframes spinPuffy3D {
+            0%   { transform: rotateX(14deg) rotateY(0deg) rotateZ(-6deg); }
+            50%  { transform: rotateX(-14deg) rotateY(180deg) rotateZ(6deg); }
+            100% { transform: rotateX(14deg) rotateY(360deg) rotateZ(-6deg); }
         }
 
         @keyframes floatDrift {
@@ -170,70 +177,69 @@
             50%      { transform: translateY(-14px); }
         }
 
-        /* Posición y escala orgánica de las 5 estrellas 3D en portada */
         .star-pos-1 {
-            width: clamp(84px, 14vw, 138px);
-            height: clamp(84px, 14vw, 138px);
+            width: clamp(86px, 14vw, 138px);
+            height: clamp(86px, 14vw, 138px);
             top: 8%;
             right: 6%;
-            opacity: 0.72;
+            opacity: 0.78;
             --spin-dur: 13s;
             --float-dur: 8.5s;
         }
 
         .star-pos-2 {
-            width: clamp(64px, 11vw, 108px);
-            height: clamp(64px, 11vw, 108px);
-            bottom: 14%;
+            width: clamp(66px, 11vw, 110px);
+            height: clamp(66px, 11vw, 110px);
+            bottom: 12%;
             left: 5%;
-            opacity: 0.62;
+            opacity: 0.68;
             --spin-dur: 16s;
             --float-dur: 10s;
             --delay: -3s;
         }
 
         .star-pos-3 {
-            width: clamp(40px, 6.5vw, 62px);
-            height: clamp(40px, 6.5vw, 62px);
-            top: 16%;
+            width: clamp(42px, 6.5vw, 64px);
+            height: clamp(42px, 6.5vw, 64px);
+            top: 15%;
             left: 14%;
-            opacity: 0.55;
+            opacity: 0.62;
             --spin-dur: 10.5s;
             --float-dur: 7.5s;
             --delay: -1.5s;
         }
 
         .star-pos-4 {
-            width: clamp(34px, 5vw, 52px);
-            height: clamp(34px, 5vw, 52px);
-            bottom: 22%;
-            right: 16%;
-            opacity: 0.52;
+            width: clamp(36px, 5vw, 54px);
+            height: clamp(36px, 5vw, 54px);
+            bottom: 18%;
+            right: 15%;
+            opacity: 0.58;
             --spin-dur: 11.5s;
             --float-dur: 9.2s;
             --delay: -5s;
         }
 
         .star-pos-5 {
-            width: clamp(24px, 3.6vw, 34px);
-            height: clamp(24px, 3.6vw, 34px);
-            top: 52%;
-            right: 26%;
-            opacity: 0.36;
+            width: clamp(26px, 3.8vw, 38px);
+            height: clamp(26px, 3.8vw, 38px);
+            top: 50%;
+            right: 25%;
+            opacity: 0.44;
             --spin-dur: 9s;
             --float-dur: 6.8s;
             --delay: -2.2s;
         }
 
         /* =========================================================
-           HEADER
+           HEADER MINIMALISTA (SIN BARRA DE MENÚ SUPERIOR)
            ========================================================= */
         .site-header {
             position: sticky;
             top: 0;
             z-index: 500;
             height: var(--header-h);
-            background: rgba(250, 247, 242, 0.88);
+            background: rgba(250, 247, 242, 0.86);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--line);
@@ -260,7 +266,7 @@
         .brand {
             display: inline-flex;
             align-items: center;
-            gap: 0.55rem;
+            gap: 0.6rem;
         }
 
         .brand-mark {
@@ -279,60 +285,24 @@
         .brand-text {
             display: flex;
             flex-direction: column;
-            line-height: 1.05;
+            line-height: 1;
         }
 
         .brand-name {
-            font-family: var(--font-serif);
-            font-size: 1.4rem;
-            font-weight: 600;
+            font-family: var(--font-script);
+            font-size: 1.9rem;
+            font-weight: 400;
+            color: var(--cocoa);
+            letter-spacing: 0.01em;
+            line-height: 0.92;
         }
 
         .brand-sub {
-            font-size: 0.6rem;
+            font-size: 0.56rem;
             text-transform: uppercase;
-            letter-spacing: 0.22em;
+            letter-spacing: 0.28em;
             color: var(--cocoa-faint);
-        }
-
-        /* 3 Menús principales (Escritorio) */
-        .desktop-nav {
-            display: none;
-            align-items: center;
-            gap: 2.25rem;
-        }
-
-        .desktop-nav button {
-            font-size: 0.86rem;
-            color: var(--cocoa-soft);
-            position: relative;
-            padding: 0.3rem 0;
-            transition: color 0.25s ease;
-        }
-
-        .desktop-nav button::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -2px;
-            width: 100%;
-            height: 1.5px;
-            background: var(--gold);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.35s var(--ease);
-        }
-
-        .desktop-nav button:hover,
-        .desktop-nav button.active {
-            color: var(--cocoa);
-            font-weight: 500;
-        }
-
-        .desktop-nav button:hover::after,
-        .desktop-nav button.active::after {
-            transform: scaleX(1);
-            transform-origin: left;
+            margin-top: 2px;
         }
 
         .btn-cta-sm {
@@ -340,7 +310,7 @@
             overflow: hidden;
             font-size: 0.78rem;
             font-weight: 500;
-            padding: 0.56rem 1.15rem;
+            padding: 0.56rem 1.2rem;
             border-radius: var(--radius-pill);
             background: var(--olive);
             color: var(--cream-pure);
@@ -362,11 +332,11 @@
         .shimmer-btn:hover::after { transform: translateX(120%); }
 
         /* =========================================================
-           PORTADA / HERO — PROTAGONISMO DE IDENTIDAD Y MARCA
+           PORTADA / HERO — IDENTIDAD Y ESTRELLAS INFLADAS 3D
            ========================================================= */
         .hero {
             position: relative;
-            padding: clamp(4.25rem, 11vw, 7rem) 0 clamp(2.75rem, 6vw, 4rem);
+            padding: clamp(4.25rem, 11vw, 6.75rem) 0 clamp(3rem, 7vw, 4.5rem);
             border-bottom: 1px solid var(--line);
             overflow: hidden;
             text-align: center;
@@ -378,14 +348,14 @@
             max-width: 720px;
             margin: 0 auto;
             padding: 1.25rem 0.5rem;
-            background: radial-gradient(ellipse 75% 75% at 50% 50%, rgba(250, 247, 242, 0.84) 0%, rgba(250, 247, 242, 0) 100%);
+            background: radial-gradient(ellipse 75% 75% at 50% 50%, rgba(250, 247, 242, 0.85) 0%, rgba(250, 247, 242, 0) 100%);
         }
 
         .hero-brand-lockup {
             display: inline-flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 1.65rem;
+            margin-bottom: 1.5rem;
         }
 
         .hero-eyebrow {
@@ -397,44 +367,47 @@
             letter-spacing: 0.24em;
             color: var(--gold-deep);
             font-weight: 600;
-            margin-bottom: 0.9rem;
+            margin-bottom: 0.75rem;
         }
 
         .hero-wordmark {
-            font-family: var(--font-serif);
-            font-size: clamp(3.3rem, 10.5vw, 5.9rem);
-            font-weight: 500;
-            line-height: 0.96;
-            letter-spacing: -0.02em;
+            font-family: var(--font-script);
+            font-style: normal;
+            font-size: clamp(3.9rem, 12.5vw, 6.8rem);
+            font-weight: 400;
+            line-height: 0.94;
+            letter-spacing: 0.01em;
             color: var(--cocoa);
         }
 
         .hero-wordmark-rule {
             width: min(260px, 65%);
             height: 1px;
-            margin: 0.85rem auto 0.65rem;
+            margin: 0.65rem auto 0.65rem;
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
         }
 
         .hero-wordmark-sub {
-            font-size: clamp(0.72rem, 1.8vw, 0.86rem);
+            font-size: clamp(0.72rem, 1.8vw, 0.84rem);
             text-transform: uppercase;
-            letter-spacing: 0.42em;
-            padding-left: 0.42em;
+            letter-spacing: 0.44em;
+            padding-left: 0.44em;
             color: var(--olive);
             font-weight: 600;
         }
 
         .hero-slogan {
             font-family: var(--font-serif);
-            font-size: clamp(1.65rem, 4.5vw, 2.55rem);
+            font-style: italic;
+            font-size: clamp(1.55rem, 4.3vw, 2.35rem);
             font-weight: 400;
             color: var(--olive);
-            margin-bottom: 0.95rem;
+            margin-bottom: 0.85rem;
         }
 
         .hero-slogan em {
             font-style: italic;
+            font-weight: 500;
             color: var(--cocoa);
         }
 
@@ -445,53 +418,13 @@
             margin: 0 auto;
         }
 
-        /* Selector visual de los 3 menús en la base de la portada */
-        .view-switcher-bar {
-            position: relative;
-            z-index: 3;
-            margin-top: clamp(2.25rem, 5vw, 3.25rem);
-            display: inline-grid;
-            grid-template-columns: repeat(3, 1fr);
-            background: rgba(255, 255, 255, 0.78);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--champagne);
-            border-radius: var(--radius-pill);
-            padding: 5px;
-            width: 100%;
-            max-width: 460px;
-            box-shadow: 0 10px 28px rgba(59, 42, 32, 0.06);
-        }
-
-        .view-switch-btn {
-            position: relative;
-            padding: 0.68rem 0.8rem;
-            border-radius: var(--radius-pill);
-            font-size: 0.82rem;
-            font-weight: 500;
-            color: var(--cocoa-soft);
-            transition: all 0.3s var(--ease);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.35rem;
-        }
-
-        .view-switch-btn:hover { color: var(--cocoa); }
-
-        .view-switch-btn.active {
-            background: var(--olive);
-            color: var(--cream-pure);
-            box-shadow: 0 4px 14px rgba(66, 82, 43, 0.24);
-        }
-
         /* =========================================================
-           CONTENEDOR DE VISTA ÚNICA (SOLO EL MENÚ ELEGIDO)
+           CONTENEDOR DE VISTA ÚNICA
            ========================================================= */
         .view-section {
             display: none;
-            padding: 3.25rem 0 4.5rem;
-            min-height: 62vh;
+            padding: 3rem 0 4.25rem;
+            min-height: 60vh;
             animation: viewEnter 0.45s var(--ease);
         }
 
@@ -523,7 +456,7 @@
         }
 
         .section-title {
-            font-size: clamp(2.1rem, 5.5vw, 3rem);
+            font-size: clamp(2.15rem, 5.5vw, 3.05rem);
             color: var(--cocoa);
         }
 
@@ -534,7 +467,7 @@
         }
 
         /* =========================================================
-           IMÁGENES CON RESPALDO EN ESTRELLA 3D
+           IMÁGENES CON RESPALDO EN ESTRELLA 3D INFLADA
            ========================================================= */
         .media-frame {
             position: relative;
@@ -563,7 +496,7 @@
             justify-content: center;
             text-align: center;
             padding: 0.55rem;
-            gap: 0.22rem;
+            gap: 0.25rem;
         }
 
         .media-frame img.is-missing + .media-fallback { display: flex; }
@@ -572,82 +505,86 @@
             font-family: var(--font-serif);
             font-style: italic;
             font-size: 0.8rem;
-            line-height: 1.1;
+            line-height: 1.15;
             color: var(--cocoa);
         }
 
         /* =========================================================
-           VISTA 01 · SERVICIOS (MÓDULOS + AGENDA TU CITA)
+           VISTA SERVICIOS (SIN ETIQUETAS DE "MÓDULO")
            ========================================================= */
-        .module-tabs {
+        .service-tabs {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 0.6rem;
+            gap: 0.65rem;
             margin-bottom: 1.5rem;
         }
 
-        .module-tab {
+        .service-tab {
             text-align: left;
-            padding: 0.9rem 1rem;
+            padding: 0.95rem 1.05rem;
             border-radius: var(--radius-sm);
             border: 1px solid var(--line);
             background: var(--cream-pure);
             display: flex;
             flex-direction: column;
-            gap: 0.15rem;
+            gap: 0.18rem;
             transition: all 0.3s var(--ease);
         }
 
-        .module-tab:hover {
+        .service-tab:hover {
             border-color: var(--gold);
         }
 
-        .module-tab.active {
+        .service-tab.active {
             background: var(--olive);
             border-color: var(--olive);
             color: var(--cream-pure);
             box-shadow: 0 8px 22px rgba(66, 82, 43, 0.16);
         }
 
-        .module-tab-num {
-            font-size: 0.62rem;
+        .service-tab-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.32rem;
+            font-size: 0.61rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--gold);
+            color: var(--gold-deep);
             font-weight: 600;
         }
 
-        .module-tab.active .module-tab-num { color: var(--gold-bright); }
+        .service-tab.active .service-tab-kicker { color: var(--gold-bright); }
 
-        .module-tab-title {
+        .service-tab-title {
             font-family: var(--font-serif);
-            font-size: 1.25rem;
-            line-height: 1.15;
+            font-style: italic;
+            font-size: 1.28rem;
+            line-height: 1.18;
             font-weight: 500;
         }
 
-        .module-tab-sub {
+        .service-tab-sub {
             font-size: 0.72rem;
             color: var(--cocoa-soft);
         }
 
-        .module-tab.active .module-tab-sub { color: rgba(255, 255, 255, 0.8); }
+        .service-tab.active .service-tab-sub { color: rgba(255, 255, 255, 0.8); }
 
-        .module-panel {
+        .service-panel {
             display: none;
             animation: viewEnter 0.4s var(--ease);
         }
 
-        .module-panel.active { display: block; }
+        .service-panel.active { display: block; }
 
-        .module-shell {
+        .service-shell {
             background: var(--cream-pure);
             border: 1px solid var(--champagne);
             border-radius: var(--radius-md);
             padding: clamp(1.35rem, 3.5vw, 2.35rem);
         }
 
-        .module-shell.sage {
+        .service-shell.sage {
             background: var(--olive-soft);
             border-color: var(--olive-line);
         }
@@ -672,20 +609,20 @@
             transform: translateY(-1px);
         }
 
-        /* Módulo Diseño de Oreja */
+        /* Diseño de Oreja */
         .design-layout { display: grid; gap: 2rem; }
 
         .design-hero-media {
             display: grid;
-            grid-template-columns: 104px 1fr;
+            grid-template-columns: 102px 1fr;
             gap: 1.1rem;
             align-items: center;
             margin-bottom: 1.15rem;
         }
 
         .design-thumb {
-            width: 104px;
-            height: 104px;
+            width: 102px;
+            height: 102px;
             border-radius: 50%;
             flex-shrink: 0;
         }
@@ -705,12 +642,12 @@
             margin-bottom: 0.4rem;
         }
 
-        .module-title {
+        .panel-title {
             font-size: clamp(1.85rem, 4.5vw, 2.45rem);
             color: var(--cocoa);
         }
 
-        .module-tagline {
+        .panel-tagline {
             font-size: 0.82rem;
             color: var(--gold-deep);
             font-weight: 500;
@@ -720,8 +657,8 @@
         .vanya-quote {
             font-family: var(--font-serif);
             font-style: italic;
-            font-size: 1.36rem;
-            line-height: 1.32;
+            font-size: 1.24rem;
+            line-height: 1.42;
             color: var(--cocoa);
             border-left: 2px solid var(--gold);
             padding-left: 1rem;
@@ -754,61 +691,221 @@
 
         .zone-chip-box strong {
             font-family: var(--font-serif);
-            font-size: 1.06rem;
+            font-style: italic;
+            font-size: 1.05rem;
             font-weight: 500;
         }
 
-        .includes-card {
-            background: var(--cream);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-sm);
+        /* =========================================================
+           ¿QUÉ INCLUYE? — VISOR EN TRANSICIÓN (7 CUADROS)
+           ========================================================= */
+        .includes-showcase {
+            background: linear-gradient(155deg, var(--cream) 0%, #F5EFE4 100%);
+            border: 1px solid var(--champagne);
+            border-radius: var(--radius-md);
             padding: 1.35rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .includes-head {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            padding-bottom: 0.8rem;
+            gap: 0.75rem;
+            padding-bottom: 0.85rem;
             border-bottom: 1px solid var(--line);
-            margin-bottom: 0.25rem;
         }
 
-        .includes-head h4 { font-size: 1.4rem; color: var(--olive); }
+        .includes-head h4 {
+            font-size: 1.45rem;
+            color: var(--olive);
+        }
 
         .includes-head span {
-            font-size: 0.65rem;
+            font-size: 0.64rem;
             text-transform: uppercase;
             letter-spacing: 0.14em;
             color: var(--gold-deep);
             font-weight: 600;
+            white-space: nowrap;
         }
 
-        .includes-list { list-style: none; }
-
-        .includes-list li {
-            display: grid;
-            grid-template-columns: 24px 1fr;
-            gap: 0.65rem;
-            padding: 0.7rem 0;
-            border-bottom: 1px solid var(--line);
-            font-size: 0.85rem;
-            color: var(--cocoa-soft);
-            align-items: baseline;
+        .includes-stage {
+            position: relative;
+            min-height: 218px;
         }
 
-        .includes-list li:last-child { border-bottom: none; padding-bottom: 0.1rem; }
+        .include-slide {
+            position: absolute;
+            inset: 0;
+            background: var(--cream-pure);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            padding: 1.4rem 1.35rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.55rem;
+            opacity: 0;
+            transform: translateY(10px) scale(0.985);
+            pointer-events: none;
+            transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+            box-shadow: 0 10px 26px rgba(59, 42, 32, 0.04);
+        }
 
-        .includes-list .n {
+        .include-slide.is-active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+            z-index: 2;
+        }
+
+        .include-slide.is-leaving {
+            opacity: 0;
+            transform: translateY(-10px) scale(0.985);
+            z-index: 1;
+        }
+
+        .include-slide-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .include-slide-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.66rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--gold-deep);
+            font-weight: 600;
+        }
+
+        .include-slide-num {
             font-family: var(--font-serif);
             font-style: italic;
-            font-size: 1.02rem;
-            color: var(--gold-deep);
+            font-size: 1.95rem;
+            line-height: 1;
+            color: rgba(189, 146, 66, 0.42);
         }
 
-        .includes-list strong { color: var(--cocoa); font-weight: 600; }
+        .include-slide-title {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.38rem;
+            line-height: 1.22;
+            color: var(--cocoa);
+            font-weight: 500;
+        }
 
-        /* Módulo Bebés */
+        .include-slide-desc {
+            font-size: 0.86rem;
+            color: var(--cocoa-soft);
+            line-height: 1.55;
+        }
+
+        .includes-progress-track {
+            width: 100%;
+            height: 2px;
+            background: rgba(59, 42, 32, 0.08);
+            border-radius: var(--radius-pill);
+            overflow: hidden;
+        }
+
+        .includes-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--olive), var(--gold), var(--gold-bright));
+        }
+
+        .includes-progress-fill.animating {
+            animation: includeProgress var(--slide-dur, 4200ms) linear forwards;
+        }
+
+        .includes-showcase.is-paused .includes-progress-fill.animating {
+            animation-play-state: paused;
+        }
+
+        @keyframes includeProgress {
+            from { width: 0%; }
+            to   { width: 100%; }
+        }
+
+        .includes-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .includes-dots {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            flex-wrap: wrap;
+        }
+
+        .include-dot {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.7);
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 0.72rem;
+            color: var(--cocoa-soft);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s var(--ease);
+        }
+
+        .include-dot:hover {
+            border-color: var(--gold);
+            color: var(--cocoa);
+        }
+
+        .include-dot.active {
+            background: var(--olive);
+            border-color: var(--olive);
+            color: var(--cream-pure);
+            transform: scale(1.06);
+        }
+
+        .includes-arrows {
+            display: inline-flex;
+            gap: 0.35rem;
+        }
+
+        .include-arrow {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid var(--line-strong);
+            background: var(--cream-pure);
+            color: var(--cocoa);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s var(--ease);
+        }
+
+        .include-arrow:hover {
+            border-color: var(--gold);
+            background: var(--olive);
+            color: var(--cream-pure);
+        }
+
+        /* Bebés */
         .babies-top { display: grid; gap: 1.15rem; }
         .babies-media { display: flex; align-items: center; gap: 1.1rem; }
 
@@ -912,7 +1009,7 @@
 
         .btn-olive:hover { background: var(--cocoa); }
 
-        /* Módulo Promos */
+        /* Promos */
         .promos-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -944,11 +1041,12 @@
 
         .promo-big {
             font-family: var(--font-serif);
-            font-size: 2.55rem;
+            font-style: italic;
+            font-size: 2.6rem;
             font-weight: 600;
             color: var(--gold-deep);
             line-height: 1;
-            margin: 0.35rem 0 0.4rem;
+            margin: 0.35rem 0 0.45rem;
         }
 
         .promo-desc { font-size: 0.84rem; color: var(--cocoa-soft); }
@@ -963,7 +1061,7 @@
             gap: 0.5rem;
         }
 
-        /* Módulo FAQ */
+        /* Guía / FAQ */
         .faq-grid { display: grid; gap: 0.7rem; margin-top: 1.15rem; }
 
         .faq-item {
@@ -1015,7 +1113,9 @@
             border-radius: var(--radius-pill);
         }
 
-        /* Agenda tu cita (dentro de Servicios) */
+        /* =========================================================
+           AGENDA TU CITA — DESPLIEGUE SIMPLIFICADO Y ELEGANTE
+           ========================================================= */
         .agenda-wrap {
             margin-top: 2.25rem;
             scroll-margin-top: calc(var(--header-h) + 18px);
@@ -1079,19 +1179,114 @@
             border-radius: var(--radius-sm);
             padding: 1.35rem;
             display: grid;
-            gap: 0.9rem;
+            gap: 1.05rem;
         }
 
         .form-row-2 { display: grid; grid-template-columns: 1fr; gap: 0.9rem; }
 
-        .field { display: flex; flex-direction: column; gap: 0.34rem; }
+        .field { display: flex; flex-direction: column; gap: 0.42rem; }
 
-        .field label {
-            font-size: 0.66rem;
+        .field-label {
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 0.14em;
+            letter-spacing: 0.15em;
             color: var(--cocoa-faint);
             font-weight: 600;
+        }
+
+        /* Píldoras limpias de selección */
+        .pill-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.42rem;
+        }
+
+        .choice-pill {
+            padding: 0.46rem 0.9rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--line-strong);
+            background: var(--cream-pure);
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--cocoa-soft);
+            transition: all 0.25s var(--ease);
+        }
+
+        .choice-pill:hover {
+            border-color: var(--gold);
+            color: var(--cocoa);
+        }
+
+        .choice-pill.active {
+            background: var(--olive);
+            border-color: var(--olive);
+            color: var(--cream-pure);
+            box-shadow: 0 4px 12px rgba(66, 82, 43, 0.16);
+        }
+
+        /* Subpanel contextual (solo visible cuando requiere detalle) */
+        .sub-options-box {
+            display: none;
+            background: var(--cream-pure);
+            border: 1px solid var(--champagne);
+            border-radius: var(--radius-sm);
+            padding: 0.95rem 1rem;
+            gap: 0.8rem;
+            animation: viewEnter 0.3s var(--ease);
+        }
+
+        .sub-options-box.is-open {
+            display: grid;
+        }
+
+        .mini-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.38rem;
+        }
+
+        .mini-pill {
+            padding: 0.34rem 0.72rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--line);
+            background: var(--cream);
+            font-size: 0.73rem;
+            color: var(--cocoa-soft);
+            transition: all 0.22s var(--ease);
+        }
+
+        .mini-pill:hover { border-color: var(--gold); color: var(--cocoa); }
+
+        .mini-pill.active {
+            background: var(--cocoa);
+            border-color: var(--cocoa);
+            color: var(--cream-pure);
+        }
+
+        .agenda-summary-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.65rem 0.9rem;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px dashed rgba(189, 146, 66, 0.55);
+            font-size: 0.8rem;
+        }
+
+        .agenda-summary-bar span {
+            color: var(--cocoa-faint);
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            white-space: nowrap;
+        }
+
+        .agenda-summary-bar strong {
+            color: var(--cocoa);
+            font-weight: 600;
+            text-align: right;
         }
 
         .field input,
@@ -1102,7 +1297,7 @@
             border-radius: var(--radius-sm);
             background: var(--cream-pure);
             font-family: inherit;
-            font-size: 0.86rem;
+            font-size: 0.85rem;
             color: var(--cocoa);
             transition: border-color 0.2s ease;
         }
@@ -1117,8 +1312,8 @@
             position: relative;
             overflow: hidden;
             width: 100%;
-            margin-top: 0.2rem;
-            padding: 0.9rem 1.2rem;
+            margin-top: 0.15rem;
+            padding: 0.92rem 1.2rem;
             border-radius: var(--radius-pill);
             background: var(--olive);
             color: var(--cream-pure);
@@ -1134,7 +1329,7 @@
         .btn-wa-submit:hover { background: var(--cocoa); }
 
         /* =========================================================
-           VISTA 02 · CATÁLOGO
+           VISTA CATÁLOGO
            ========================================================= */
         .catalog-toolbar {
             display: flex;
@@ -1263,7 +1458,7 @@
             flex-shrink: 0;
         }
 
-        .card-title-group h3 { font-size: 1.48rem; line-height: 1.1; }
+        .card-title-group h3 { font-size: 1.48rem; line-height: 1.12; }
 
         .card-zone-label {
             display: inline-block;
@@ -1338,6 +1533,7 @@
 
         .price-val {
             font-family: var(--font-serif);
+            font-style: italic;
             font-size: 1.75rem;
             font-weight: 600;
             line-height: 1;
@@ -1394,7 +1590,7 @@
         .catalog-footnote strong { color: var(--cocoa); }
 
         /* =========================================================
-           VISTA 03 · SUCURSALES
+           VISTA SUCURSALES
            ========================================================= */
         .locations-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
 
@@ -1461,11 +1657,11 @@
         .arrow-link:hover { color: var(--gold-deep); gap: 0.48rem; }
 
         /* =========================================================
-           FOOTER + NAVEGACIÓN MÓVIL
+           FOOTER + ÚNICA BARRA DE NAVEGACIÓN EN LA BASE
            ========================================================= */
         .site-footer {
             border-top: 1px solid var(--line);
-            padding: 2rem 0;
+            padding: 2rem 0 2.25rem;
             font-size: 0.78rem;
             color: var(--cocoa-faint);
         }
@@ -1484,34 +1680,38 @@
 
         .social-link:hover { color: var(--gold-deep); }
 
-        .mobile-nav {
+        /* Barra única de navegación en la base (Móvil + Escritorio) */
+        .bottom-nav {
             position: fixed;
             left: 0;
             right: 0;
             bottom: 0;
             z-index: 600;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-top: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid var(--champagne);
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             padding: 0.48rem 0.5rem calc(0.48rem + env(safe-area-inset-bottom));
+            box-shadow: 0 -8px 28px rgba(59, 42, 32, 0.06);
         }
 
-        .mobile-nav-item {
+        .bottom-nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 0.22rem;
-            padding: 0.36rem 0.25rem;
-            font-size: 0.68rem;
+            padding: 0.38rem 0.5rem;
+            font-size: 0.7rem;
             color: var(--cocoa-faint);
             position: relative;
-            transition: color 0.2s ease;
+            border-radius: var(--radius-pill);
+            transition: color 0.25s ease, background 0.25s ease;
         }
 
-        .mobile-nav-item svg {
+        .bottom-nav-item svg {
             width: 19px;
             height: 19px;
             stroke: currentColor;
@@ -1519,16 +1719,20 @@
             fill: none;
         }
 
-        .mobile-nav-item.active {
+        .bottom-nav-item:hover {
+            color: var(--cocoa);
+        }
+
+        .bottom-nav-item.active {
             color: var(--olive);
             font-weight: 600;
         }
 
-        .mobile-nav-item.active::before {
+        .bottom-nav-item.active::before {
             content: "";
             position: absolute;
             top: -0.48rem;
-            width: 28px;
+            width: 30px;
             height: 2px;
             background: var(--gold);
         }
@@ -1539,12 +1743,12 @@
         .back-to-top {
             position: fixed;
             right: 18px;
-            bottom: calc(80px + env(safe-area-inset-bottom));
+            bottom: calc(82px + env(safe-area-inset-bottom));
             z-index: 700;
             width: 46px;
             height: 46px;
             border-radius: 50%;
-            background: rgba(250, 247, 242, 0.54);
+            background: rgba(250, 247, 242, 0.56);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(189, 146, 66, 0.48);
@@ -1566,29 +1770,24 @@
         }
 
         .back-to-top:hover {
-            background: rgba(255, 255, 255, 0.78);
+            background: rgba(255, 255, 255, 0.8);
             border-color: var(--gold);
             color: var(--olive);
         }
 
-        .back-to-top svg {
-            transition: transform 0.3s var(--ease);
-        }
-
-        .back-to-top:hover svg {
-            transform: translateY(-2.5px);
-        }
+        .back-to-top svg { transition: transform 0.3s var(--ease); }
+        .back-to-top:hover svg { transform: translateY(-2.5px); }
 
         /* Toast */
         .toast {
             position: fixed;
             left: 50%;
-            bottom: 84px;
+            bottom: 88px;
             transform: translate(-50%, 16px);
             background: var(--cocoa);
             color: var(--cream-pure);
             font-size: 0.78rem;
-            padding: 0.6rem 1.1rem;
+            padding: 0.6rem 1.15rem;
             border-radius: var(--radius-pill);
             box-shadow: 0 10px 26px rgba(59, 42, 32, 0.22);
             opacity: 0;
@@ -1604,9 +1803,9 @@
         .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
         @media (prefers-reduced-motion: reduce) {
-            .star-3d-wrap, .star-3d-spinner, .view-section, .module-panel {
-                animation: none;
-                transition: none;
+            .star-3d-wrap, .star-3d-spinner, .view-section, .service-panel, .include-slide, .includes-progress-fill {
+                animation: none !important;
+                transition: none !important;
             }
             html { scroll-behavior: auto; }
         }
@@ -1621,25 +1820,62 @@
         }
 
         @media (min-width: 768px) {
-            body { padding-bottom: 0; }
+            body { padding-bottom: 108px; }
             .container { padding: 0 2rem; }
-            .desktop-nav { display: flex; }
-            .mobile-nav { display: none; }
-            .toast { bottom: 26px; }
+
+            /* Cápsula elegante flotante en la base en escritorio */
+            .bottom-nav {
+                left: 50%;
+                right: auto;
+                bottom: 20px;
+                transform: translateX(-50%);
+                width: min(470px, calc(100% - 3rem));
+                border-radius: var(--radius-pill);
+                border: 1px solid var(--champagne);
+                padding: 6px;
+                background: rgba(255, 255, 255, 0.88);
+                box-shadow: 0 14px 36px rgba(59, 42, 32, 0.12);
+            }
+
+            .bottom-nav-item {
+                flex-direction: row;
+                gap: 0.45rem;
+                padding: 0.65rem 1.05rem;
+                font-size: 0.8rem;
+            }
+
+            .bottom-nav-item svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .bottom-nav-item.active {
+                background: var(--olive);
+                color: var(--cream-pure);
+                box-shadow: 0 4px 14px rgba(66, 82, 43, 0.22);
+            }
+
+            .bottom-nav-item.active::before { display: none; }
+
+            .toast { bottom: 92px; }
 
             .back-to-top {
                 right: 28px;
-                bottom: 28px;
+                bottom: 24px;
                 width: 50px;
                 height: 50px;
             }
 
-            .module-tabs { grid-template-columns: repeat(4, 1fr); }
+            .service-tabs { grid-template-columns: repeat(4, 1fr); }
 
             .design-layout {
                 grid-template-columns: 0.96fr 1.04fr;
-                align-items: start;
-                gap: 2.5rem;
+                align-items: stretch;
+                gap: 2.35rem;
+            }
+
+            .includes-stage {
+                min-height: 240px;
             }
 
             .no-gun-banner {
@@ -1649,7 +1885,7 @@
             }
 
             .agenda-card {
-                grid-template-columns: 0.88fr 1.12fr;
+                grid-template-columns: 0.84fr 1.16fr;
                 align-items: start;
                 gap: 2.25rem;
             }
@@ -1680,70 +1916,77 @@
 </head>
 <body>
 
-    <!-- SPRITE SVG: ESTRELLA METÁLICA 3D FACETADA EN ORO -->
+    <!-- SPRITE SVG: ESTRELLA METÁLICA 3D INFLADA Y REDONDEADA (ORO 18K) -->
     <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden; visibility:hidden;">
         <defs>
-            <linearGradient id="goldLightFacet" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFF8E2"/>
-                <stop offset="45%" stop-color="#E8C677"/>
-                <stop offset="100%" stop-color="#BD8D38"/>
-            </linearGradient>
-            <linearGradient id="goldShadeFacet" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#D4A64E"/>
-                <stop offset="55%" stop-color="#A67626"/>
-                <stop offset="100%" stop-color="#6F4B12"/>
-            </linearGradient>
-            <linearGradient id="goldWarmFacet" x1="0%" y1="100%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#9A6C22"/>
-                <stop offset="50%" stop-color="#D7AE5A"/>
-                <stop offset="100%" stop-color="#FFF2CC"/>
-            </linearGradient>
-            <radialGradient id="goldCoreGlow" cx="45%" cy="42%" r="55%">
-                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.88"/>
-                <stop offset="45%" stop-color="#F2D488" stop-opacity="0.35"/>
-                <stop offset="100%" stop-color="#BD8D38" stop-opacity="0"/>
+            <!-- Volumen inflado principal (efecto globo / charm metálico) -->
+            <radialGradient id="puffyGoldBody" cx="36%" cy="30%" r="68%" fx="32%" fy="26%">
+                <stop offset="0%" stop-color="#FFFDF5"/>
+                <stop offset="18%" stop-color="#F8DF98"/>
+                <stop offset="48%" stop-color="#D7A74C"/>
+                <stop offset="78%" stop-color="#A67422"/>
+                <stop offset="100%" stop-color="#6F4910"/>
             </radialGradient>
 
-            <!-- Símbolo reutilizable de estrella 3D de 4 puntas (8 facetas metálicas) -->
-            <symbol id="star-metallic-3d" viewBox="0 0 100 100">
-                <!-- Brazo superior: faceta izquierda iluminada / derecha sombreada -->
-                <path d="M50 4 C48 26 44 38 36 44 L50 50 Z" fill="url(#goldLightFacet)"/>
-                <path d="M50 4 C52 26 56 38 64 44 L50 50 Z" fill="url(#goldShadeFacet)"/>
-                <!-- Brazo derecho -->
-                <path d="M96 50 C74 48 62 44 56 36 L50 50 Z" fill="url(#goldWarmFacet)"/>
-                <path d="M96 50 C74 52 62 56 56 64 L50 50 Z" fill="url(#goldShadeFacet)"/>
-                <!-- Brazo inferior -->
-                <path d="M50 96 C52 74 56 62 64 56 L50 50 Z" fill="url(#goldShadeFacet)"/>
-                <path d="M50 96 C48 74 44 62 36 56 L50 50 Z" fill="url(#goldWarmFacet)"/>
-                <!-- Brazo izquierdo -->
-                <path d="M4 50 C26 52 38 56 44 64 L50 50 Z" fill="url(#goldShadeFacet)"/>
-                <path d="M4 50 C26 48 38 44 44 36 L50 50 Z" fill="url(#goldLightFacet)"/>
-                <!-- Aristas centrales y brillo especular -->
-                <path d="M50 8 L50 92 M8 50 L92 50" stroke="#FFF8E2" stroke-opacity="0.45" stroke-width="0.9"/>
-                <circle cx="50" cy="50" r="14" fill="url(#goldCoreGlow)"/>
+            <!-- Brillo especular central suave -->
+            <radialGradient id="puffyGoldDome" cx="38%" cy="32%" r="45%">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.92"/>
+                <stop offset="45%" stop-color="#FFF2C4" stop-opacity="0.42"/>
+                <stop offset="100%" stop-color="#E0B254" stop-opacity="0"/>
+            </radialGradient>
+
+            <!-- Rebote de luz cálida en el borde inferior derecho -->
+            <linearGradient id="puffyRimLight" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFFBE8" stop-opacity="0.88"/>
+                <stop offset="45%" stop-color="#E5BC66" stop-opacity="0.28"/>
+                <stop offset="82%" stop-color="#8B5E18" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="#F6D88C" stop-opacity="0.72"/>
+            </linearGradient>
+
+            <!-- Destello líquido sobre los lóbulos inflados -->
+            <linearGradient id="puffySpecular" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.88"/>
+                <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+            </linearGradient>
+
+            <clipPath id="puffyStarClip">
+                <path d="M60 10 C70 10 71 31 80 40 C89 49 110 50 110 60 C110 70 89 71 80 80 C71 89 70 110 60 110 C50 110 49 89 40 80 C31 71 10 70 10 60 C10 50 31 49 40 40 C49 31 50 10 60 10 Z"/>
+            </clipPath>
+
+            <!-- Símbolo reutilizable: Estrella inflada redondeada 3D -->
+            <symbol id="star-metallic-3d" viewBox="0 0 120 120">
+                <!-- Cuerpo inflado -->
+                <path d="M60 10 C70 10 71 31 80 40 C89 49 110 50 110 60 C110 70 89 71 80 80 C71 89 70 110 60 110 C50 110 49 89 40 80 C31 71 10 70 10 60 C10 50 31 49 40 40 C49 31 50 10 60 10 Z"
+                      fill="url(#puffyGoldBody)"
+                      stroke="url(#puffyRimLight)"
+                      stroke-width="2.4"/>
+
+                <g clip-path="url(#puffyStarClip)">
+                    <!-- Domo de volumen interior -->
+                    <circle cx="52" cy="48" r="46" fill="url(#puffyGoldDome)"/>
+                    <!-- Reflejos suaves en lóbulos inflados -->
+                    <ellipse cx="55" cy="28" rx="6.5" ry="13" transform="rotate(-8 55 28)" fill="url(#puffySpecular)" opacity="0.72"/>
+                    <ellipse cx="30" cy="56" rx="12" ry="6" transform="rotate(-10 30 56)" fill="url(#puffySpecular)" opacity="0.62"/>
+                    <ellipse cx="48" cy="48" rx="14" ry="9" transform="rotate(-34 48 48)" fill="#FFFFFF" opacity="0.48"/>
+                    <!-- Rebote cálido inferior derecho -->
+                    <ellipse cx="76" cy="78" rx="16" ry="7" transform="rotate(-42 76 78)" fill="#FFE6A3" opacity="0.34"/>
+                </g>
             </symbol>
         </defs>
     </svg>
 
-    <!-- ENCABEZADO -->
+    <!-- ENCABEZADO MINIMALISTA (SIN BARRA DE MENÚ SUPERIOR) -->
     <header class="site-header">
         <div class="container header-inner">
             <a href="#inicio" class="brand" id="brand-home">
                 <span class="brand-mark" aria-hidden="true">
-                    <svg class="star-ui" width="24" height="24"><use href="#star-metallic-3d"/></svg>
+                    <svg class="star-ui" width="26" height="26"><use href="#star-metallic-3d"/></svg>
                 </span>
                 <span class="brand-text">
                     <span class="brand-name">Ponte a Brillar</span>
                     <span class="brand-sub">Perforaciones</span>
                 </span>
             </a>
-
-            <!-- 3 MENÚS PRINCIPALES -->
-            <nav class="desktop-nav" aria-label="Navegación principal">
-                <button type="button" class="active" data-view-target="servicios">Servicios</button>
-                <button type="button" data-view-target="catalogo">Catálogo</button>
-                <button type="button" data-view-target="sucursales">Sucursales</button>
-            </nav>
 
             <button type="button" class="btn-cta-sm shimmer-btn" id="header-agenda-btn">Agenda tu cita</button>
         </div>
@@ -1752,44 +1995,53 @@
 
     <main>
         <!-- =========================================================
-             PORTADA / HERO — IDENTIDAD + ESTRELLAS METÁLICAS 3D GIRANDO
+             PORTADA / HERO — IDENTIDAD + ESTRELLAS 3D INFLADAS GIRANDO
              ========================================================= -->
         <section id="inicio" class="hero">
-            <!-- Estrellas metálicas 3D animadas de fondo -->
             <div class="hero-stars-bg" aria-hidden="true">
                 <div class="star-3d-wrap star-pos-1">
                     <div class="star-3d-spinner">
-                        <svg class="star-3d-face front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face mid"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face back"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
                     </div>
                 </div>
                 <div class="star-3d-wrap star-pos-2">
                     <div class="star-3d-spinner">
-                        <svg class="star-3d-face front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face mid"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face back"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
                     </div>
                 </div>
                 <div class="star-3d-wrap star-pos-3">
                     <div class="star-3d-spinner">
-                        <svg class="star-3d-face front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face mid"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face back"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
                     </div>
                 </div>
                 <div class="star-3d-wrap star-pos-4">
                     <div class="star-3d-spinner">
-                        <svg class="star-3d-face front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face mid"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face back"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
                     </div>
                 </div>
                 <div class="star-3d-wrap star-pos-5">
                     <div class="star-3d-spinner">
-                        <svg class="star-3d-face front"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face mid"><use href="#star-metallic-3d"/></svg>
-                        <svg class="star-3d-face back"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-front"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-mid-front"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-core"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-mid-back"><use href="#star-metallic-3d"/></svg>
+                        <svg class="star-3d-face l-back"><use href="#star-metallic-3d"/></svg>
                     </div>
                 </div>
             </div>
@@ -1798,9 +2050,9 @@
                 <div class="hero-content">
                     <div class="hero-brand-lockup">
                         <span class="hero-eyebrow">
-                            <svg class="star-ui" width="15" height="15"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-ui" width="16" height="16"><use href="#star-metallic-3d"/></svg>
                             Tu estudio de confianza
-                            <svg class="star-ui" width="15" height="15"><use href="#star-metallic-3d"/></svg>
+                            <svg class="star-ui" width="16" height="16"><use href="#star-metallic-3d"/></svg>
                         </span>
                         <h1 class="hero-wordmark">Ponte a Brillar</h1>
                         <div class="hero-wordmark-rule" aria-hidden="true"></div>
@@ -1811,76 +2063,82 @@
                     <p class="hero-lead">
                         Perforaciones con aguja estéril de uso único, joyería biocompatible y diseño corporal guiado por especialistas.
                     </p>
-
-                    <!-- Selector de vista única: solo muestra el menú elegido -->
-                    <div class="view-switcher-bar" role="tablist" aria-label="Menús principales">
-                        <button type="button" class="view-switch-btn active" data-view-target="servicios" role="tab" aria-selected="true">Servicios</button>
-                        <button type="button" class="view-switch-btn" data-view-target="catalogo" role="tab" aria-selected="false">Catálogo</button>
-                        <button type="button" class="view-switch-btn" data-view-target="sucursales" role="tab" aria-selected="false">Sucursales</button>
-                    </div>
                 </div>
             </div>
         </section>
 
         <!-- =========================================================
-             VISTA 01 · SERVICIOS (VISIBLE SOLO AL ELEGIR SERVICIOS)
+             VISTA · SERVICIOS
              ========================================================= -->
         <section id="view-servicios" class="view-section is-active" role="tabpanel" aria-label="Servicios">
             <div class="container">
                 <div class="section-head">
                     <span class="section-kicker">
-                        <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                        01 · Servicios y Reservación
+                        <svg class="star-ui" width="15" height="15"><use href="#star-metallic-3d"/></svg>
+                        Estudio &amp; Reservación
                     </span>
                     <h2 class="section-title">Servicios</h2>
                     <p class="section-desc">
-                        Explora cada módulo para conocer los detalles de nuestros servicios especializados, promociones y cuidados antes de agendar tu cita.
+                        Conoce nuestras experiencias especializadas, promociones vigentes y guía de cuidados antes de reservar tu cita.
                     </p>
                 </div>
 
-                <div class="module-tabs" role="tablist" aria-label="Módulos de servicios">
-                    <button type="button" class="module-tab active" data-module="diseno" role="tab" aria-selected="true">
-                        <span class="module-tab-num">Módulo 01</span>
-                        <span class="module-tab-title">Diseño de Oreja</span>
-                        <span class="module-tab-sub">By Vanya G. · 3 zonas</span>
+                <!-- Pestañas limpias SIN "Módulo 1, 2, 3..." -->
+                <div class="service-tabs" role="tablist" aria-label="Categorías de servicios">
+                    <button type="button" class="service-tab active" data-service-panel="diseno" role="tab" aria-selected="true">
+                        <span class="service-tab-kicker">
+                            <svg class="star-ui" width="11" height="11"><use href="#star-metallic-3d"/></svg>
+                            Especialidad
+                        </span>
+                        <span class="service-tab-title">Diseño de Oreja</span>
+                        <span class="service-tab-sub">By Vanya G. · 3 zonas</span>
                     </button>
 
-                    <button type="button" class="module-tab" data-module="bebes" role="tab" aria-selected="false">
-                        <span class="module-tab-num">Módulo 02</span>
-                        <span class="module-tab-title">Bebés</span>
-                        <span class="module-tab-sub">A un paso de brillar</span>
+                    <button type="button" class="service-tab" data-service-panel="bebes" role="tab" aria-selected="false">
+                        <span class="service-tab-kicker">
+                            <svg class="star-ui" width="11" height="11"><use href="#star-metallic-3d"/></svg>
+                            Primeros aretes
+                        </span>
+                        <span class="service-tab-title">Bebés</span>
+                        <span class="service-tab-sub">A un paso de brillar</span>
                     </button>
 
-                    <button type="button" class="module-tab" data-module="promos" role="tab" aria-selected="false">
-                        <span class="module-tab-num">Módulo 03</span>
-                        <span class="module-tab-title">Promos Titanio</span>
-                        <span class="module-tab-sub">Lunes, Martes y Miércoles</span>
+                    <button type="button" class="service-tab" data-service-panel="promos" role="tab" aria-selected="false">
+                        <span class="service-tab-kicker">
+                            <svg class="star-ui" width="11" height="11"><use href="#star-metallic-3d"/></svg>
+                            Beneficios
+                        </span>
+                        <span class="service-tab-title">Promos Titanio</span>
+                        <span class="service-tab-sub">Lunes, Martes y Miércoles</span>
                     </button>
 
-                    <button type="button" class="module-tab" data-module="guia" role="tab" aria-selected="false">
-                        <span class="module-tab-num">Módulo 04</span>
-                        <span class="module-tab-title">Guía y Cuidados</span>
-                        <span class="module-tab-sub">FAQ, garantía y tarjeta</span>
+                    <button type="button" class="service-tab" data-service-panel="guia" role="tab" aria-selected="false">
+                        <span class="service-tab-kicker">
+                            <svg class="star-ui" width="11" height="11"><use href="#star-metallic-3d"/></svg>
+                            Información
+                        </span>
+                        <span class="service-tab-title">Guía y Cuidados</span>
+                        <span class="service-tab-sub">FAQ, garantía y tarjeta</span>
                     </button>
                 </div>
 
-                <!-- MÓDULO 01: DISEÑO DE OREJA -->
-                <div class="module-panel active" id="panel-diseno" role="tabpanel">
-                    <div class="module-shell">
+                <!-- DISEÑO DE OREJA -->
+                <div class="service-panel active" id="panel-diseno" role="tabpanel">
+                    <div class="service-shell">
                         <div class="design-layout">
                             <div>
                                 <div class="design-hero-media">
                                     <div class="media-frame design-thumb">
                                         <img src="img/diseno-oreja.jpg" alt="Diseño de oreja Ponte a Brillar" onerror="this.classList.add('is-missing')">
                                         <div class="media-fallback">
-                                            <svg class="star-ui" width="24" height="24"><use href="#star-metallic-3d"/></svg>
+                                            <svg class="star-ui" width="26" height="26"><use href="#star-metallic-3d"/></svg>
                                             <span>By Vanya G.</span>
                                         </div>
                                     </div>
                                     <div>
                                         <span class="pill-meta">Servicio Guiado</span>
-                                        <h3 class="module-title">Diseño de Oreja</h3>
-                                        <p class="module-tagline">Menos costo × más servicios · ¡Toca ponerte brillo!</p>
+                                        <h3 class="panel-title">Diseño de Oreja</h3>
+                                        <p class="panel-tagline">Menos costo × más servicios · ¡Toca ponerte brillo!</p>
                                     </div>
                                 </div>
 
@@ -1903,67 +2161,148 @@
                                     </div>
                                 </div>
 
-                                <button type="button" class="btn-primary shimmer-btn" data-select-service="Diseño de Oreja (By Vanya G.)">
+                                <button type="button" class="btn-primary shimmer-btn" data-book-category="diseno">
                                     Reservar Diseño de Oreja
                                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                                 </button>
                             </div>
 
-                            <div class="includes-card">
+                            <!-- ¿QUÉ INCLUYE? — 7 CUADROS EN TRANSICIÓN CON DESVANECIMIENTO -->
+                            <div class="includes-showcase" id="includes-showcase" aria-label="Beneficios incluidos en Diseño de Oreja">
                                 <div class="includes-head">
                                     <h4>¿Qué incluye?</h4>
                                     <span>Titanio Grado Implante</span>
                                 </div>
-                                <ol class="includes-list">
-                                    <li>
-                                        <span class="n">01</span>
-                                        <div><strong>3 servicios de perforación</strong> en las 3 zonas de oreja (baja, media y alta).</div>
-                                    </li>
-                                    <li>
-                                        <span class="n">02</span>
-                                        <div><strong>3 joyas de diseño en Titanio grado implante</strong>: más ligero, 100% biocompatible y el material #1 a nivel global para cicatrizar mejor.</div>
-                                    </li>
-                                    <li>
-                                        <span class="n">03</span>
-                                        <div><strong>Asesoría personalizada</strong> en ubicación, diseño y composición.</div>
-                                    </li>
-                                    <li>
-                                        <span class="n">04</span>
-                                        <div><strong>Tarjeta de cuidados impresos</strong> junto con <strong>kit de limpieza para 3 meses</strong>.</div>
-                                    </li>
-                                    <li>
-                                        <span class="n">05</span>
-                                        <div><strong>Garantía de 3 meses</strong> en tu joya.</div>
-                                    </li>
-                                    <li>
-                                        <span class="n">06</span>
-                                        <div><strong>1 valoración post-piercing</strong> de seguimiento.</div>
-                                    </li>
-                                    <li>
-                                        <span class="n">07</span>
-                                        <div><strong>Aretes de regalo en par</strong> para perforaciones de nacimiento.</div>
-                                    </li>
-                                </ol>
+
+                                <div class="includes-stage" id="includes-stage" aria-live="polite">
+                                    <article class="include-slide is-active" data-slide="0">
+                                        <div class="include-slide-top">
+                                            <span class="include-slide-badge">
+                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
+                                                Beneficio 1 de 7
+                                            </span>
+                                            <span class="include-slide-num">01</span>
+                                        </div>
+                                        <h5 class="include-slide-title">3 servicios de perforación</h5>
+                                        <p class="include-slide-desc">Distribuidos de manera armónica en las 3 zonas de tu oreja: baja, media y alta.</p>
+                                    </article>
+
+                                    <article class="include-slide" data-slide="1">
+                                        <div class="include-slide-top">
+                                            <span class="include-slide-badge">
+                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
+                                                Beneficio 2 de 7
+                                            </span>
+                                            <span class="include-slide-num">02</span>
+                                        </div>
+                                        <h5 class="include-slide-title">3 joyas de diseño en Titanio grado implante</h5>
+                                        <p class="include-slide-desc">Más ligero, 100% biocompatible y el material #1 a nivel global para favorecer una cicatrización limpia y segura.</p>
+                                    </article>
+
+                                    <article class="include-slide" data-slide="2">
+                                        <div class="include-slide-top">
+                                            <span class="include-slide-badge">
+                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
+                                                Beneficio 3 de 7
+                                            </span>
+                                            <span class="include-slide-num">03</span>
+                                        </div>
+                                        <h5 class="include-slide-title">Asesoría personalizada</h5>
+                                        <p class="include-slide-desc">Acompañamiento experto en ubicación anatómica, proporciones, estilo y composición integral de tu oreja.</p>
+                                    </article>
+
+                                    <article class="include-slide" data-slide="3">
+                                        <div class="include-slide-top">
+                                            <span class="include-slide-badge">
+                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
+                                                Beneficio 4 de 7
+                                            </span>
+                                            <span class="include-slide-num">04</span>
+                                        </div>
+                                        <h5 class="include-slide-title">Tarjeta de cuidados + kit de limpieza</h5>
+                                        <p class="include-slide-desc">Recibes tu tarjeta física de cuidados impresos junto con un kit completo de limpieza para 3 meses.</p>
+                                    </article>
+
+                                    <article class="include-slide" data-slide="4">
+                                        <div class="include-slide-top">
+                                            <span class="include-slide-badge">
+                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
+                                                Beneficio 5 de 7
+                                            </span>
+                                            <span class="include-slide-num">05</span>
+                                        </div>
+                                        <h5 class="include-slide-title">Garantía de 3 meses en tu joya</h5>
+                                        <p class="include-slide-desc">Respaldo directo en la calidad de tus piezas y enrosque durante los primeros tres meses.</p>
+                                    </article>
+
+                                    <article class="include-slide" data-slide="5">
+                                        <div class="include-slide-top">
+                                            <span class="include-slide-badge">
+                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
+                                                Beneficio 6 de 7
+                                            </span>
+                                            <span class="include-slide-num">06</span>
+                                        </div>
+                                        <h5 class="include-slide-title">1 valoración post-piercing</h5>
+                                        <p class="include-slide-desc">Revisión profesional de seguimiento para verificar el avance de tu cicatrización y resolver cualquier duda.</p>
+                                    </article>
+
+                                    <article class="include-slide" data-slide="6">
+                                        <div class="include-slide-top">
+                                            <span class="include-slide-badge">
+                                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
+                                                Beneficio 7 de 7
+                                            </span>
+                                            <span class="include-slide-num">07</span>
+                                        </div>
+                                        <h5 class="include-slide-title">Aretes de regalo en par</h5>
+                                        <p class="include-slide-desc">Incluye un par de aretes de obsequio pensados para lucir en tus perforaciones de nacimiento.</p>
+                                    </article>
+                                </div>
+
+                                <div class="includes-progress-track" aria-hidden="true">
+                                    <div class="includes-progress-fill" id="includes-progress-fill"></div>
+                                </div>
+
+                                <div class="includes-controls">
+                                    <div class="includes-dots" id="includes-dots" role="tablist" aria-label="Seleccionar beneficio incluido">
+                                        <button type="button" class="include-dot active" data-goto="0" aria-label="Punto 1">1</button>
+                                        <button type="button" class="include-dot" data-goto="1" aria-label="Punto 2">2</button>
+                                        <button type="button" class="include-dot" data-goto="2" aria-label="Punto 3">3</button>
+                                        <button type="button" class="include-dot" data-goto="3" aria-label="Punto 4">4</button>
+                                        <button type="button" class="include-dot" data-goto="4" aria-label="Punto 5">5</button>
+                                        <button type="button" class="include-dot" data-goto="5" aria-label="Punto 6">6</button>
+                                        <button type="button" class="include-dot" data-goto="6" aria-label="Punto 7">7</button>
+                                    </div>
+                                    <div class="includes-arrows">
+                                        <button type="button" class="include-arrow" id="include-prev" aria-label="Beneficio anterior">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 18l-6-6 6-6"/></svg>
+                                        </button>
+                                        <button type="button" class="include-arrow" id="include-next" aria-label="Siguiente beneficio">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18l6-6-6-6"/></svg>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- MÓDULO 02: PERFORACIONES A BEBÉS -->
-                <div class="module-panel" id="panel-bebes" role="tabpanel">
-                    <div class="module-shell sage">
+                <!-- PERFORACIONES A BEBÉS -->
+                <div class="service-panel" id="panel-bebes" role="tabpanel">
+                    <div class="service-shell sage">
                         <div class="babies-top">
                             <div class="babies-media">
                                 <div class="media-frame babies-thumb">
                                     <img src="img/bebes.jpg" alt="Perforaciones a bebés Ponte a Brillar" onerror="this.classList.add('is-missing')">
                                     <div class="media-fallback">
-                                        <svg class="star-ui" width="24" height="24"><use href="#star-metallic-3d"/></svg>
+                                        <svg class="star-ui" width="26" height="26"><use href="#star-metallic-3d"/></svg>
                                         <span>Primeros Aretes</span>
                                     </div>
                                 </div>
                                 <div>
                                     <span class="pill-meta" style="background: rgba(255,255,255,0.85);">By Vanya G. · Brillo sin dolor</span>
-                                    <h3 class="module-title" style="color: var(--olive); font-style: italic;">A un paso de brillar</h3>
+                                    <h3 class="panel-title" style="color: var(--olive);">A un paso de brillar</h3>
                                     <p class="section-desc" style="margin-top: 0.25rem;">
                                         Apoyamos que los primeros aretes se realicen después de los <strong>6 meses</strong>, en un espacio confiable, seguro y en manos de una experta.
                                     </p>
@@ -2020,18 +2359,18 @@
                             <div>
                                 <strong>En contra de los piercings con pistola.</strong> Trabajamos con cánula (aguja de bisel fino y alargado para un trabajo delicado), material 100% desechable y estéril.
                             </div>
-                            <button type="button" class="btn-olive" data-select-service="Perforación a Bebés — A un paso de brillar">
+                            <button type="button" class="btn-olive" data-book-category="bebes">
                                 Agendar cita bebé
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- MÓDULO 03: PROMOS TITANIO -->
-                <div class="module-panel" id="panel-promos" role="tabpanel">
-                    <div class="module-shell">
+                <!-- PROMOS TITANIO -->
+                <div class="service-panel" id="panel-promos" role="tabpanel">
+                    <div class="service-shell">
                         <span class="pill-meta">Beneficios en Estudio</span>
-                        <h3 class="module-title">Promos Titanio</h3>
+                        <h3 class="panel-title">Promos Titanio</h3>
                         <p class="section-desc" style="margin-top: 0.3rem;">
                             Beneficios pensados para que elijas Titanio grado implante en tus perforaciones.
                         </p>
@@ -2043,7 +2382,7 @@
                                     <div class="promo-big">20%</div>
                                     <p class="promo-desc">De descuento en todos los servicios realizados en <strong>Titanio</strong>.</p>
                                 </div>
-                                <button type="button" class="arrow-link" data-select-service="Promo Lunes — 20% en Titanio">
+                                <button type="button" class="arrow-link" data-book-category="promos" data-book-promo="lunes">
                                     Consultar / Agendar →
                                 </button>
                             </article>
@@ -2054,7 +2393,7 @@
                                     <div class="promo-big">2×1</div>
                                     <p class="promo-desc">En todos los servicios en <strong>Titanio</strong> para <strong>estudiantes y cumpleañeros</strong>.</p>
                                 </div>
-                                <button type="button" class="arrow-link" data-select-service="Promo Martes — 2x1 Estudiantes / Cumpleañeros">
+                                <button type="button" class="arrow-link" data-book-category="promos" data-book-promo="martes">
                                     Consultar / Agendar →
                                 </button>
                             </article>
@@ -2065,7 +2404,7 @@
                                     <div class="promo-big">3×2</div>
                                     <p class="promo-desc">En todos los servicios realizados en <strong>Titanio</strong>.</p>
                                 </div>
-                                <button type="button" class="arrow-link" data-select-service="Promo Miércoles — 3x2 en Titanio">
+                                <button type="button" class="arrow-link" data-book-category="promos" data-book-promo="miercoles">
                                     Consultar / Agendar →
                                 </button>
                             </article>
@@ -2078,11 +2417,11 @@
                     </div>
                 </div>
 
-                <!-- MÓDULO 04: GUÍA, FAQ Y CUIDADOS -->
-                <div class="module-panel" id="panel-guia" role="tabpanel">
-                    <div class="module-shell">
+                <!-- GUÍA, FAQ Y CUIDADOS -->
+                <div class="service-panel" id="panel-guia" role="tabpanel">
+                    <div class="service-shell">
                         <span class="pill-meta">Antes y Después de tu Perforación</span>
-                        <h3 class="module-title">Preguntas Frecuentes y Cuidados</h3>
+                        <h3 class="panel-title">Preguntas Frecuentes y Cuidados</h3>
 
                         <div class="faq-grid">
                             <details class="faq-item" open>
@@ -2145,17 +2484,19 @@
                     </div>
                 </div>
 
-                <!-- AGENDA TU CITA (DENTRO DE SERVICIOS) -->
+                <!-- =========================================================
+                     AGENDA TU CITA — VISTA SIMPLIFICADA Y ELEGANTE
+                     ========================================================= -->
                 <div id="agenda" class="agenda-wrap">
                     <div class="agenda-card" id="agenda-card">
                         <div>
                             <span class="section-kicker" style="margin-bottom: 0.35rem;">
-                                <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
+                                <svg class="star-ui" width="15" height="15"><use href="#star-metallic-3d"/></svg>
                                 Reservación Directa
                             </span>
-                            <h3 class="module-title">Agenda tu cita</h3>
+                            <h3 class="panel-title">Agenda tu cita</h3>
                             <p class="section-desc" style="margin-top: 0.45rem;">
-                                Selecciona el servicio o perforación y tu sucursal. Enviaremos tu solicitud precargada por WhatsApp para confirmar horario.
+                                Elige el tipo de servicio y tu sucursal en segundos. Prepararemos tu solicitud lista para confirmar horario por WhatsApp.
                             </p>
 
                             <ul class="agenda-bullets">
@@ -2176,40 +2517,82 @@
                         </div>
 
                         <form class="agenda-form" id="agenda-form">
+                            <!-- 1. Selección elegante por píldoras -->
                             <div class="field">
-                                <label for="agenda-service">Servicio o perforación</label>
-                                <select id="agenda-service" required>
-                                    <optgroup label="Servicios Especiales">
-                                        <option value="Diseño de Oreja (By Vanya G.)">Diseño de Oreja (By Vanya G.)</option>
-                                        <option value="Perforación a Bebés — A un paso de brillar">Perforación a Bebés — A un paso de brillar</option>
-                                        <option value="Promo Lunes — 20% en Titanio">Promo Lunes — 20% en Titanio</option>
-                                        <option value="Promo Martes — 2x1 Estudiantes / Cumpleañeros">Promo Martes — 2x1 Estudiantes / Cumpleañeros</option>
-                                        <option value="Promo Miércoles — 3x2 en Titanio">Promo Miércoles — 3x2 en Titanio</option>
-                                        <option value="Valoración / Cambio de joyería">Valoración / Cambio de joyería</option>
-                                    </optgroup>
-                                    <optgroup label="Selección del Catálogo" id="catalog-optgroup"></optgroup>
-                                </select>
+                                <span class="field-label">1. ¿Qué deseas agendar?</span>
+                                <div class="pill-group" id="booking-category-pills" role="radiogroup" aria-label="Tipo de servicio">
+                                    <button type="button" class="choice-pill active" data-cat="diseno">Diseño de Oreja</button>
+                                    <button type="button" class="choice-pill" data-cat="bebes">Bebés</button>
+                                    <button type="button" class="choice-pill" data-cat="individual">Perforación Individual</button>
+                                    <button type="button" class="choice-pill" data-cat="promos">Promos Titanio</button>
+                                    <button type="button" class="choice-pill" data-cat="valoracion">Valoración / Cambio</button>
+                                </div>
                             </div>
 
+                            <!-- Subpanel limpio: Promos Titanio -->
+                            <div class="sub-options-box" id="sub-promos">
+                                <span class="field-label">Elige tu día de promoción</span>
+                                <div class="mini-pills" id="booking-promo-pills">
+                                    <button type="button" class="mini-pill active" data-promo="lunes">Lunes · 20% Titanio</button>
+                                    <button type="button" class="mini-pill" data-promo="martes">Martes · 2×1 Est. / Cumple</button>
+                                    <button type="button" class="mini-pill" data-promo="miercoles">Miércoles · 3×2 Titanio</button>
+                                </div>
+                            </div>
+
+                            <!-- Subpanel limpio: Perforación Individual -->
+                            <div class="sub-options-box" id="sub-individual">
+                                <div class="field">
+                                    <span class="field-label">Zona</span>
+                                    <div class="mini-pills" id="booking-zone-pills">
+                                        <button type="button" class="mini-pill active" data-bzone="oreja">Oreja</button>
+                                        <button type="button" class="mini-pill" data-bzone="nariz">Nariz</button>
+                                        <button type="button" class="mini-pill" data-bzone="boca">Boca</button>
+                                        <button type="button" class="mini-pill" data-bzone="cuerpo">Ceja y Cuerpo</button>
+                                    </div>
+                                </div>
+
+                                <div class="form-row-2">
+                                    <div class="field">
+                                        <label class="field-label" for="booking-piercing-select">Perforación</label>
+                                        <select id="booking-piercing-select"></select>
+                                    </div>
+                                    <div class="field">
+                                        <span class="field-label">Material</span>
+                                        <div class="mini-pills" id="booking-material-pills">
+                                            <button type="button" class="mini-pill" data-bmat="acero">Acero</button>
+                                            <button type="button" class="mini-pill" data-bmat="color">Color</button>
+                                            <button type="button" class="mini-pill active" data-bmat="titanio">Titanio</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Resumen limpio en vivo -->
+                            <div class="agenda-summary-bar" aria-live="polite">
+                                <span>Selección</span>
+                                <strong id="booking-summary-text">Diseño de Oreja (By Vanya G.)</strong>
+                            </div>
+
+                            <!-- 2. Sucursal por píldoras limpias -->
+                            <div class="field">
+                                <span class="field-label">2. Sucursal</span>
+                                <div class="pill-group" id="booking-branch-pills" role="radiogroup" aria-label="Sucursal">
+                                    <button type="button" class="choice-pill active" data-branch="Carranza">Carranza (Centro)</button>
+                                    <button type="button" class="choice-pill" data-branch="Plaza El Dorado">Plaza El Dorado</button>
+                                    <button type="button" class="choice-pill" data-branch="Ciudad Valles">Ciudad Valles</button>
+                                </div>
+                            </div>
+
+                            <!-- 3. Datos breves -->
                             <div class="form-row-2">
                                 <div class="field">
-                                    <label for="agenda-branch">Sucursal</label>
-                                    <select id="agenda-branch" required>
-                                        <option value="Carranza">Carranza (Centro)</option>
-                                        <option value="Plaza El Dorado">Plaza El Dorado</option>
-                                        <option value="Ciudad Valles">Ciudad Valles</option>
-                                    </select>
+                                    <label class="field-label" for="agenda-name">Tu nombre</label>
+                                    <input type="text" id="agenda-name" placeholder="Escribe tu nombre" required>
                                 </div>
-
                                 <div class="field">
-                                    <label for="agenda-when">Día / Horario tentativo</label>
+                                    <label class="field-label" for="agenda-when">Día / Horario tentativo</label>
                                     <input type="text" id="agenda-when" placeholder="Ej. Sábado por la tarde">
                                 </div>
-                            </div>
-
-                            <div class="field">
-                                <label for="agenda-name">Tu nombre</label>
-                                <input type="text" id="agenda-name" placeholder="Escribe tu nombre" required>
                             </div>
 
                             <button type="submit" class="btn-wa-submit shimmer-btn">
@@ -2223,14 +2606,14 @@
         </section>
 
         <!-- =========================================================
-             VISTA 02 · CATÁLOGO (VISIBLE SOLO AL ELEGIR CATÁLOGO)
+             VISTA · CATÁLOGO
              ========================================================= -->
         <section id="view-catalogo" class="view-section" role="tabpanel" aria-label="Catálogo">
             <div class="container">
                 <div class="section-head">
                     <span class="section-kicker">
-                        <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                        02 · Catálogo de Perforaciones
+                        <svg class="star-ui" width="15" height="15"><use href="#star-metallic-3d"/></svg>
+                        Joyería &amp; Perforaciones
                     </span>
                     <h2 class="section-title">Catálogo</h2>
                     <p class="section-desc">
@@ -2272,14 +2655,14 @@
         </section>
 
         <!-- =========================================================
-             VISTA 03 · SUCURSALES (VISIBLE SOLO AL ELEGIR SUCURSALES)
+             VISTA · SUCURSALES
              ========================================================= -->
         <section id="view-sucursales" class="view-section" role="tabpanel" aria-label="Sucursales">
             <div class="container">
                 <div class="section-head">
                     <span class="section-kicker">
-                        <svg class="star-ui" width="14" height="14"><use href="#star-metallic-3d"/></svg>
-                        03 · Visítanos
+                        <svg class="star-ui" width="15" height="15"><use href="#star-metallic-3d"/></svg>
+                        Visítanos
                     </span>
                     <h2 class="section-title">Sucursales</h2>
                     <p class="section-desc">
@@ -2356,17 +2739,17 @@
         </div>
     </footer>
 
-    <!-- NAVEGACIÓN MÓVIL (3 MENÚS PRINCIPALES) -->
-    <nav class="mobile-nav" aria-label="Navegación móvil">
-        <button type="button" class="mobile-nav-item active" data-view-target="servicios">
+    <!-- ÚNICA BARRA DE NAVEGACIÓN EN LA BASE DE LA PÁGINA -->
+    <nav class="bottom-nav" aria-label="Menú principal">
+        <button type="button" class="bottom-nav-item active" data-view-target="servicios" aria-current="page">
             <svg viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2L12 3z"/></svg>
             <span>Servicios</span>
         </button>
-        <button type="button" class="mobile-nav-item" data-view-target="catalogo">
+        <button type="button" class="bottom-nav-item" data-view-target="catalogo">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.2"/></svg>
             <span>Catálogo</span>
         </button>
-        <button type="button" class="mobile-nav-item" data-view-target="sucursales">
+        <button type="button" class="bottom-nav-item" data-view-target="sucursales">
             <svg viewBox="0 0 24 24"><path d="M12 21s-6-5.2-6-10a6 6 0 1 1 12 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg>
             <span>Sucursales</span>
         </button>
@@ -2391,7 +2774,7 @@
         };
 
         /* =========================================================
-           CONTROL DE VISTA ÚNICA (SOLO EL MENÚ ELEGIDO EN PANTALLA)
+           CONTROL DE VISTA ÚNICA (MENÚ BASE)
            ========================================================= */
         let activeView = "servicios";
 
@@ -2405,9 +2788,8 @@
             document.querySelectorAll("[data-view-target]").forEach(btn => {
                 const isActive = btn.dataset.viewTarget === viewName;
                 btn.classList.toggle("active", isActive);
-                if (btn.getAttribute("role") === "tab") {
-                    btn.setAttribute("aria-selected", isActive);
-                }
+                if (isActive) btn.setAttribute("aria-current", "page");
+                else btn.removeAttribute("aria-current");
             });
 
             if (scrollToSection) {
@@ -2422,8 +2804,7 @@
 
         document.querySelectorAll("[data-view-target]").forEach(btn => {
             btn.addEventListener("click", () => {
-                const fromBottomOrHeader = btn.closest(".mobile-nav") || btn.closest(".desktop-nav");
-                switchView(btn.dataset.viewTarget, { scrollToSection: Boolean(fromBottomOrHeader) });
+                switchView(btn.dataset.viewTarget, { scrollToSection: true });
             });
         });
 
@@ -2433,6 +2814,125 @@
                 document.getElementById("agenda").scrollIntoView({ behavior: "smooth", block: "center" });
             });
         });
+
+        /* =========================================================
+           PESTAÑAS DE SERVICIOS
+           ========================================================= */
+        document.querySelectorAll(".service-tab").forEach(tab => {
+            tab.addEventListener("click", () => {
+                const target = tab.dataset.servicePanel;
+                document.querySelectorAll(".service-tab").forEach(t => {
+                    const active = t === tab;
+                    t.classList.toggle("active", active);
+                    t.setAttribute("aria-selected", active);
+                });
+                document.querySelectorAll(".service-panel").forEach(panel => {
+                    panel.classList.toggle("active", panel.id === `panel-${target}`);
+                });
+            });
+        });
+
+        /* =========================================================
+           ¿QUÉ INCLUYE? — TRANSICIÓN AUTOMÁTICA CON DESVANECIMIENTO
+           ========================================================= */
+        (function initIncludesShowcase() {
+            const showcase = document.getElementById("includes-showcase");
+            const slides = Array.from(document.querySelectorAll(".include-slide"));
+            const dots = Array.from(document.querySelectorAll(".include-dot"));
+            const progressFill = document.getElementById("includes-progress-fill");
+            const prevBtn = document.getElementById("include-prev");
+            const nextBtn = document.getElementById("include-next");
+
+            const DURATION = 4200;
+            let currentIndex = 0;
+            let timerId = null;
+            let isPaused = false;
+
+            showcase.style.setProperty("--slide-dur", `${DURATION}ms`);
+
+            function restartProgress() {
+                progressFill.classList.remove("animating");
+                void progressFill.offsetWidth;
+                progressFill.classList.add("animating");
+            }
+
+            function goToSlide(nextIndex) {
+                const total = slides.length;
+                const normalized = (nextIndex + total) % total;
+                if (normalized === currentIndex) {
+                    restartProgress();
+                    return;
+                }
+
+                const outgoing = slides[currentIndex];
+                const incoming = slides[normalized];
+
+                slides.forEach(s => s.classList.remove("is-leaving"));
+                outgoing.classList.remove("is-active");
+                outgoing.classList.add("is-leaving");
+
+                incoming.classList.remove("is-leaving");
+                incoming.classList.add("is-active");
+
+                dots.forEach((dot, idx) => {
+                    dot.classList.toggle("active", idx === normalized);
+                });
+
+                currentIndex = normalized;
+                restartProgress();
+            }
+
+            function scheduleNext() {
+                clearTimeout(timerId);
+                if (isPaused) return;
+                timerId = setTimeout(() => {
+                    const panelVisible = document.getElementById("panel-diseno").classList.contains("active")
+                        && activeView === "servicios";
+                    if (panelVisible) {
+                        goToSlide(currentIndex + 1);
+                    }
+                    scheduleNext();
+                }, DURATION);
+            }
+
+            function pauseAuto() {
+                isPaused = true;
+                showcase.classList.add("is-paused");
+                clearTimeout(timerId);
+            }
+
+            function resumeAuto() {
+                isPaused = false;
+                showcase.classList.remove("is-paused");
+                restartProgress();
+                scheduleNext();
+            }
+
+            dots.forEach(dot => {
+                dot.addEventListener("click", () => {
+                    goToSlide(Number(dot.dataset.goto));
+                    scheduleNext();
+                });
+            });
+
+            prevBtn.addEventListener("click", () => {
+                goToSlide(currentIndex - 1);
+                scheduleNext();
+            });
+
+            nextBtn.addEventListener("click", () => {
+                goToSlide(currentIndex + 1);
+                scheduleNext();
+            });
+
+            showcase.addEventListener("mouseenter", pauseAuto);
+            showcase.addEventListener("mouseleave", resumeAuto);
+            showcase.addEventListener("focusin", pauseAuto);
+            showcase.addEventListener("focusout", resumeAuto);
+
+            restartProgress();
+            scheduleNext();
+        })();
 
         /* =========================================================
            CATÁLOGO COMPLETO (26 PERFORACIONES)
@@ -2468,7 +2968,6 @@
                 extra: "Diseño (Acero, Titanio u Oro): costo pieza + $120 servicio."
             },
             {
-                // Nota: Valores tal cual aparecen en el PDF ($250 / $380 color / $250 titanio).
                 id: "conch", nombre: "Conch", grupo: "oreja", zona: "Zona interna / media",
                 img: "img/oreja-conch.jpg", pieza: "Recta / Poste", noAros: true,
                 dolor: 4, tiempo: "9–12 meses",
@@ -2636,27 +3135,17 @@
             titanio: "Titanio natural"
         };
 
+        const PROMO_LABELS = {
+            lunes: "Promo Lunes — 20% en Titanio",
+            martes: "Promo Martes — 2x1 Estudiantes / Cumpleañeros",
+            miercoles: "Promo Miércoles — 3x2 en Titanio"
+        };
+
         const catalogState = {
             material: "titanio",
             zone: "oreja"
         };
 
-        /* Módulos internos de Servicios */
-        document.querySelectorAll(".module-tab").forEach(tab => {
-            tab.addEventListener("click", () => {
-                const target = tab.dataset.module;
-                document.querySelectorAll(".module-tab").forEach(t => {
-                    const active = t === tab;
-                    t.classList.toggle("active", active);
-                    t.setAttribute("aria-selected", active);
-                });
-                document.querySelectorAll(".module-panel").forEach(panel => {
-                    panel.classList.toggle("active", panel.id === `panel-${target}`);
-                });
-            });
-        });
-
-        /* Renderizado del Catálogo */
         const catalogGrid = document.getElementById("catalog-grid");
         const materialToggle = document.getElementById("material-toggle");
 
@@ -2676,7 +3165,6 @@
             catalogGrid.innerHTML = items.map(p => {
                 const price = p.precios[catalogState.material];
                 const formattedPrice = price.toLocaleString("es-MX");
-                const selectVal = `${p.nombre} — ${matName} ($${formattedPrice})`;
 
                 return `
                     <article class="piercing-card">
@@ -2685,7 +3173,7 @@
                                 <div class="media-frame piercing-photo">
                                     <img src="${p.img}" alt="Ubicación ${p.nombre}" loading="lazy" onerror="this.classList.add('is-missing')">
                                     <div class="media-fallback">
-                                        <svg class="star-ui" width="20" height="20"><use href="#star-metallic-3d"/></svg>
+                                        <svg class="star-ui" width="22" height="22"><use href="#star-metallic-3d"/></svg>
                                         <span>${p.nombre}</span>
                                     </div>
                                 </div>
@@ -2721,7 +3209,10 @@
                                 <div class="price-val ${animatePrice ? "flash" : ""}">$${formattedPrice}</div>
                                 <span class="price-sub">${matName} + servicio</span>
                             </div>
-                            <button type="button" class="btn-card-book" data-select-service="${selectVal}">
+                            <button type="button" class="btn-card-book"
+                                data-book-piercing-id="${p.id}"
+                                data-book-piercing-zone="${p.grupo}"
+                                data-book-piercing-material="${catalogState.material}">
                                 Agendar →
                             </button>
                         </div>
@@ -2754,23 +3245,24 @@
 
         renderCatalog(false);
 
-        /* Poblar opciones del catálogo en el select de Agenda */
-        const catalogOptgroup = document.getElementById("catalog-optgroup");
-        CATALOG_DATA.forEach(p => {
-            const opt = document.createElement("option");
-            const val = `${p.nombre} — Titanio natural ($${p.precios.titanio.toLocaleString("es-MX")})`;
-            opt.value = val;
-            opt.textContent = val;
-            catalogOptgroup.appendChild(opt);
-        });
-
         /* =========================================================
-           AGENDA INTEGRADA + WHATSAPP (+52 5653317595)
+           AGENDA SIMPLIFICADA Y ELEGANTE + WHATSAPP
            ========================================================= */
+        const bookingState = {
+            category: "diseno",
+            promo: "lunes",
+            zone: "oreja",
+            piercingId: "lobulo",
+            material: "titanio",
+            branch: "Carranza"
+        };
+
         const agendaCard = document.getElementById("agenda-card");
         const agendaForm = document.getElementById("agenda-form");
-        const serviceSelect = document.getElementById("agenda-service");
-        const branchSelect = document.getElementById("agenda-branch");
+        const subPromos = document.getElementById("sub-promos");
+        const subIndividual = document.getElementById("sub-individual");
+        const piercingSelect = document.getElementById("booking-piercing-select");
+        const summaryText = document.getElementById("booking-summary-text");
         const whenInput = document.getElementById("agenda-when");
         const nameInput = document.getElementById("agenda-name");
         const toastEl = document.getElementById("toast");
@@ -2783,25 +3275,113 @@
             toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2600);
         }
 
-        function jumpToAgenda({ service = "", branch = "" }) {
+        function populateBookingPiercings(zone, preferredId = null) {
+            const list = CATALOG_DATA.filter(p => p.grupo === zone);
+            piercingSelect.innerHTML = list.map(p => {
+                const price = p.precios[bookingState.material].toLocaleString("es-MX");
+                return `<option value="${p.id}">${p.nombre} — $${price}</option>`;
+            }).join("");
+
+            const targetId = preferredId && list.some(p => p.id === preferredId)
+                ? preferredId
+                : list[0].id;
+            bookingState.piercingId = targetId;
+            piercingSelect.value = targetId;
+        }
+
+        function getSelectedServiceLabel() {
+            if (bookingState.category === "diseno") return "Diseño de Oreja (By Vanya G.)";
+            if (bookingState.category === "bebes") return "Perforación a Bebés — A un paso de brillar";
+            if (bookingState.category === "valoracion") return "Valoración / Cambio de joyería";
+            if (bookingState.category === "promos") return PROMO_LABELS[bookingState.promo];
+
+            const item = CATALOG_DATA.find(p => p.id === bookingState.piercingId) || CATALOG_DATA[0];
+            const mat = MATERIAL_LABELS[bookingState.material];
+            const price = item.precios[bookingState.material].toLocaleString("es-MX");
+            return `${item.nombre} — ${mat} ($${price})`;
+        }
+
+        function syncBookingUI() {
+            // Categoría activa
+            document.querySelectorAll("#booking-category-pills .choice-pill").forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.cat === bookingState.category);
+            });
+
+            // Subpaneles condicionales
+            subPromos.classList.toggle("is-open", bookingState.category === "promos");
+            subIndividual.classList.toggle("is-open", bookingState.category === "individual");
+
+            // Promos
+            document.querySelectorAll("#booking-promo-pills .mini-pill").forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.promo === bookingState.promo);
+            });
+
+            // Zona & material en individual
+            document.querySelectorAll("#booking-zone-pills .mini-pill").forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.bzone === bookingState.zone);
+            });
+            document.querySelectorAll("#booking-material-pills .mini-pill").forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.bmat === bookingState.material);
+            });
+
+            // Sucursal
+            document.querySelectorAll("#booking-branch-pills .choice-pill").forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.branch === bookingState.branch);
+            });
+
+            // Resumen en vivo
+            summaryText.textContent = getSelectedServiceLabel();
+        }
+
+        populateBookingPiercings(bookingState.zone, bookingState.piercingId);
+        syncBookingUI();
+
+        document.querySelectorAll("#booking-category-pills .choice-pill").forEach(btn => {
+            btn.addEventListener("click", () => {
+                bookingState.category = btn.dataset.cat;
+                syncBookingUI();
+            });
+        });
+
+        document.querySelectorAll("#booking-promo-pills .mini-pill").forEach(btn => {
+            btn.addEventListener("click", () => {
+                bookingState.promo = btn.dataset.promo;
+                syncBookingUI();
+            });
+        });
+
+        document.querySelectorAll("#booking-zone-pills .mini-pill").forEach(btn => {
+            btn.addEventListener("click", () => {
+                bookingState.zone = btn.dataset.bzone;
+                populateBookingPiercings(bookingState.zone);
+                syncBookingUI();
+            });
+        });
+
+        document.querySelectorAll("#booking-material-pills .mini-pill").forEach(btn => {
+            btn.addEventListener("click", () => {
+                bookingState.material = btn.dataset.bmat;
+                populateBookingPiercings(bookingState.zone, bookingState.piercingId);
+                syncBookingUI();
+            });
+        });
+
+        piercingSelect.addEventListener("change", () => {
+            bookingState.piercingId = piercingSelect.value;
+            syncBookingUI();
+        });
+
+        document.querySelectorAll("#booking-branch-pills .choice-pill").forEach(btn => {
+            btn.addEventListener("click", () => {
+                bookingState.branch = btn.dataset.branch;
+                syncBookingUI();
+            });
+        });
+
+        function focusAgenda(toastMsg) {
             if (activeView !== "servicios") {
                 switchView("servicios");
             }
-
-            if (service) {
-                const exists = Array.from(serviceSelect.options).some(opt => opt.value === service);
-                if (!exists) {
-                    const customOpt = document.createElement("option");
-                    customOpt.value = service;
-                    customOpt.textContent = service;
-                    catalogOptgroup.prepend(customOpt);
-                }
-                serviceSelect.value = service;
-            }
-            if (branch) {
-                branchSelect.value = branch;
-            }
-
             requestAnimationFrame(() => {
                 document.getElementById("agenda").scrollIntoView({ behavior: "smooth", block: "center" });
                 agendaCard.classList.remove("pulse-focus");
@@ -2809,30 +3389,46 @@
                 agendaCard.classList.add("pulse-focus");
                 setTimeout(() => agendaCard.classList.remove("pulse-focus"), 1500);
             });
-
-            if (service) showToast(`Seleccionado: ${service}`);
-            else if (branch) showToast(`Sucursal: ${branch}`);
-
+            if (toastMsg) showToast(toastMsg);
             setTimeout(() => nameInput.focus({ preventScroll: true }), 550);
         }
 
         document.addEventListener("click", (e) => {
-            const srv = e.target.closest("[data-select-service]");
-            if (srv) {
-                jumpToAgenda({ service: srv.dataset.selectService });
+            const catBtn = e.target.closest("[data-book-category]");
+            if (catBtn) {
+                bookingState.category = catBtn.dataset.bookCategory;
+                if (catBtn.dataset.bookPromo) {
+                    bookingState.promo = catBtn.dataset.bookPromo;
+                }
+                syncBookingUI();
+                focusAgenda(`Seleccionado: ${getSelectedServiceLabel()}`);
                 return;
             }
-            const br = e.target.closest("[data-select-branch]");
-            if (br) {
-                jumpToAgenda({ branch: br.dataset.selectBranch });
+
+            const pierceBtn = e.target.closest("[data-book-piercing-id]");
+            if (pierceBtn) {
+                bookingState.category = "individual";
+                bookingState.zone = pierceBtn.dataset.bookPiercingZone;
+                bookingState.material = pierceBtn.dataset.bookPiercingMaterial;
+                populateBookingPiercings(bookingState.zone, pierceBtn.dataset.bookPiercingId);
+                syncBookingUI();
+                focusAgenda(`Seleccionado: ${getSelectedServiceLabel()}`);
+                return;
+            }
+
+            const brBtn = e.target.closest("[data-select-branch]");
+            if (brBtn) {
+                bookingState.branch = brBtn.dataset.selectBranch;
+                syncBookingUI();
+                focusAgenda(`Sucursal: ${bookingState.branch}`);
             }
         });
 
         agendaForm.addEventListener("submit", (e) => {
             e.preventDefault();
             const nombre = nameInput.value.trim();
-            const servicio = serviceSelect.value;
-            const sucursal = branchSelect.value;
+            const servicio = getSelectedServiceLabel();
+            const sucursal = bookingState.branch;
             const horario = whenInput.value.trim();
 
             let msg = `Hola Ponte a Brillar, soy ${nombre}. Me gustaría agendar una cita:\n`;
