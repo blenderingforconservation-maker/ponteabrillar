@@ -165,7 +165,7 @@ def extract_all_pdfs() -> list[dict]:
 def write_contact_sheet(records: list[dict]) -> None:
     cards = []
     for index, item in enumerate(records, 1):
-        relative = Path(item["archivo"]).relative_to(IMAGE_ROOT).as_posix()
+        relative = Path(item["archivo"]).relative_to("imagenes").as_posix()
         label = (
             f"{index:03d} · {item['pdf']} · pág. {item['pagina']} · "
             f"{item['ancho']}×{item['alto']} · {item['tipo']}"
